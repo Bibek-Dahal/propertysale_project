@@ -1,0 +1,1 @@
+default_app_config = 'p_sale.apps.PSaleConfig'

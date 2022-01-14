@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;600;800;900&display=swap');
+
+:root{
+    --fs-mini:.9rem;
+    --fs-small:1rem;
+    --fs-medium:1.1rem;
+    --fs-medium2:1.4rem;
+    --fs-large:1.7rem;
+    --fs-largest:2.4rem;
+    --form-bg:#ffffff;
+    /* --body-bg:#051B2C; */
+    --fb-bg:#4267B2;
+    --github-bg:#000;
+    --google-bg:#4285F4;
+
+    --fb-color:#fff;
+    --github-color:#fff;
+    --google-color:#fff;
+
+    --fc-white1:#fff;
+    --fc-white2:rgb(197, 197, 197);
+
+    --body-bg:#22242f;
+    --purple:#7940C2;
+    --dark-purple:#582995;
+    --dark:#1c1e27;
+    --dark-2:#1f202a;
+    --form-btn-bg:#5168F4;
+    --form-btn-bg-dark:#4355cc;
+
+    --form-field:#43475ce3;
+
+    --link-color:#0988ff;
+}   
+
+*{
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+}
+
+a{
+    color:var(--link-color);
+}
+
+html{
+    font-size:14px;
+}
+
+body{
+    font-family: 'Montserrat', sans-serif;
+    background:var(--dark-2)
+}
+
+.fs--small{
+    font-size:var(--fs-small);
+}
+.fs--medium{
+    font-size:var(--fs-medium);
+}
+.fs--large{
+    font-size:var(--fs-large);
+}
+
+@media only screen and (min-width : 700px){
+    html{
+        font-size:16px;
+    }
+    body{
+    background:var(--body-bg);
+    }
+}
