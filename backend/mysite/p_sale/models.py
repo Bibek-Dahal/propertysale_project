@@ -31,7 +31,7 @@ class Seller(models.Model):
         return self.user.username
 
 class Property(models.Model):
-    seller = models.ForeignKey(Seller,on_delete=models.CASCADE)
+    seller = models.ForeignKey(User,on_delete=models.CASCADE)
     title = models.CharField(max_length=300)
     slug = AutoSlugField(populate_from = 'title',null=True)
     description = models.TextField(blank=True)
@@ -95,6 +95,7 @@ class PropertyOwnerCertificate(models.Model):
     image = CloudinaryField('pownImg')
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
+
     
 
 

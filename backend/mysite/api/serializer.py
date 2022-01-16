@@ -58,4 +58,3 @@ class UserPasswordChangeSerializer(PasswordChangeSerializer):
 class UserPasswordResetConfirmSerializer(PasswordResetConfirmSerializer):
     new_password1 = serializers.CharField(max_length=128,validators = [custom_check_pswd])
     new_password2 = serializers.CharField(max_length=128)
-

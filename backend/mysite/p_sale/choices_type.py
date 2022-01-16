@@ -1,8 +1,8 @@
 class Choice:
     listing_type = (
-        ('Top Listing Rs.23600','TL'),
-        ('Premium Listing Rs.17600','PL'),
-        ('Featured Listing Rs.9600','FL'),
+        ('TL','Top Listing Rs.23600'),
+        ('pl','Premium Listing Rs.17600'),
+        ('FL','Featured Listing Rs.9600'),
 
     )
     listing_condition = (
