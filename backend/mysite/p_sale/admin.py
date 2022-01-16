@@ -6,7 +6,7 @@ class PropertyAdmin(admin.ModelAdmin):
     list_display = ('id','title','slug','on_sale','description','listing_type','property_type')
     fieldsets = (
         (None, {
-            'fields': ('title', 'description', 'listing_type','property_type','condition','road_to_property','access_road')
+            'fields': ('seller','title', 'description', 'listing_type','property_type','condition','road_to_property','access_road')
         }),
         ('Location', {
             'fields': ('address', 'district'),
@@ -30,7 +30,7 @@ class PropertyAdmin(admin.ModelAdmin):
             'fields': ('floors','beds','kitchen','living','bath'),
         }),
         (None, {
-            'fields': ('property_main_image','is_active'),
+            'fields': ('property_main_image','no_of_views','is_active'),
         }),
     )
 

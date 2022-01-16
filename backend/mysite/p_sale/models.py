@@ -5,7 +5,7 @@ from cloudinary.models import CloudinaryField
 from user_account.models import MyUser as User
 from autoslug import AutoSlugField
 
-# Create your models here.
+
 class PropertyType(models.Model):
     type = models.CharField(max_length=100)
 
@@ -22,7 +22,16 @@ class Facility(models.Model):
     def __str__(self):
         return self.facility
 
+class Seller(models.Model):
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    address = models.CharField(max_length=200,blank=True)
+    mobile_num = models.PositiveIntegerField()
+
+    def __str__(self):
+        return self.user.username
+
 class Property(models.Model):
+    seller = models.ForeignKey(Seller,on_delete=models.CASCADE)
     title = models.CharField(max_length=300)
     slug = AutoSlugField(populate_from = 'title',null=True)
     description = models.TextField(blank=True)
@@ -53,6 +62,7 @@ class Property(models.Model):
     property_main_image = CloudinaryField('main_image')
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
+    no_of_views = models.PositiveIntegerField(default=0)
     on_sale = models.BooleanField(default=True)
     is_active = models.BooleanField(default=False)
     
@@ -79,11 +89,6 @@ class KYC(models.Model):
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
     status = models.CharField(max_length=60,choices=Choice.kyc_type,default='pending')
-
-class Seller(models.Model):
-    user = models.OneToOneField(User,on_delete=models.CASCADE)
-    address = models.CharField(max_length=200,blank=True)
-    mobile_num = models.PositiveIntegerField()
 
 class PropertyOwnerCertificate(models.Model):
     property = models.ForeignKey(Property,on_delete=models.CASCADE)
