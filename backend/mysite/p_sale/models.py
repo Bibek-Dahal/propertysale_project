@@ -22,9 +22,8 @@ class Facility(models.Model):
     def __str__(self):
         return self.facility
 
-class Seller(models.Model):
+class ContactNum(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
-    address = models.CharField(max_length=200,blank=True)
     mobile_num = models.PositiveIntegerField()
 
     def __str__(self):
@@ -73,7 +72,10 @@ class Property(models.Model):
         verbose_name = 'property'
         verbose_name_plural = 'properties'
 
-class DocumentImage(models.Model):
+class AdditionalPropertyImage(models.Model):
+    """
+    one property can have additional images
+    """
     property = models.ForeignKey(Property,on_delete=models.CASCADE,related_name='documents')
     document_image = CloudinaryField('doc_img')
     created_at = models.DateTimeField(auto_now_add=True)
@@ -91,6 +93,9 @@ class KYC(models.Model):
     status = models.CharField(max_length=60,choices=Choice.kyc_type,default='pending')
 
 class PropertyOwnerCertificate(models.Model):
+    """
+    images like laalpurja naksa
+    """
     property = models.ForeignKey(Property,on_delete=models.CASCADE)
     image = CloudinaryField('pownImg')
     created_at = models.DateTimeField(auto_now_add = True)

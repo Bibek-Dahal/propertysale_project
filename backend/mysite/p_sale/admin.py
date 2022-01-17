@@ -38,8 +38,8 @@ class PropertyAdmin(admin.ModelAdmin):
 class FacilityAdmin(admin.ModelAdmin):
     list_display = ('id','facility')
 
-@admin.register(DocumentImage)
-class DocumentImageAdmin(admin.ModelAdmin):
+@admin.register(AdditionalPropertyImage)
+class AdditionalPropertyImageAdmin(admin.ModelAdmin):
     list_display = ('id','document_image','created_at','updated_at')
 
 @admin.register(PropertyType)
@@ -50,9 +50,9 @@ class PropertyTypeAdmin(admin.ModelAdmin):
 class KYC(admin.ModelAdmin):
     list_display = ('id','user','profile_pic','citizenship_photo_front','citizenship_photo_back','occupation','status')
 
-@admin.register(Seller)
-class SellerAdmin(admin.ModelAdmin):
-    list_display = ('id','user','address','mobile_num')
+@admin.register(ContactNum)
+class ContactNumAdmin(admin.ModelAdmin):
+    list_display = ('id','user','mobile_num')
 
 @admin.register(PropertyOwnerCertificate)
 class PropertyOwnerCertificateAdmin(admin.ModelAdmin):
