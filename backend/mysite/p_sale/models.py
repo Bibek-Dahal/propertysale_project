@@ -41,11 +41,11 @@ class Property(models.Model):
     access_road = models.CharField(max_length=80,blank=True)
     address = models.CharField(max_length=150)
     district = models.CharField(max_length=100)
-    area = models.CharField(max_length=100,choices=Choice.area_type)
-    ropani = models.CharField(max_length=100)
-    aana = models.CharField(max_length=100)
-    paisa = models.CharField(max_length=100)
-    daam = models.CharField(max_length=100)
+    area = models.CharField(max_length=100,choices=Choice.area_type,blank=True)
+    ropani = models.CharField(max_length=100,blank=True)
+    aana = models.CharField(max_length=100,blank=True)
+    paisa = models.CharField(max_length=100,blank=True)
+    daam = models.CharField(max_length=100,blank=True)
     price_in_number = models.IntegerField(default=0)
     price_in_words = models.CharField(max_length=200)
     price_negotiable =  models.CharField(max_length=3,choices=Choice.negotiable_type,default='No')
@@ -76,8 +76,8 @@ class AdditionalPropertyImage(models.Model):
     """
     one property can have additional images
     """
-    property = models.ForeignKey(Property,on_delete=models.CASCADE,related_name='documents')
-    document_image = CloudinaryField('doc_img')
+    property = models.ForeignKey(Property,on_delete=models.CASCADE,related_name='images')
+    image = CloudinaryField('image',null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -97,7 +97,7 @@ class PropertyOwnerCertificate(models.Model):
     images like laalpurja naksa
     """
     property = models.ForeignKey(Property,on_delete=models.CASCADE)
-    image = CloudinaryField('pownImg')
+    image = CloudinaryField('image')
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
 

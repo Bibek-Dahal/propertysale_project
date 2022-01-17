@@ -40,7 +40,7 @@ class FacilityAdmin(admin.ModelAdmin):
 
 @admin.register(AdditionalPropertyImage)
 class AdditionalPropertyImageAdmin(admin.ModelAdmin):
-    list_display = ('id','document_image','created_at','updated_at')
+    list_display = ('id','image','created_at','updated_at')
 
 @admin.register(PropertyType)
 class PropertyTypeAdmin(admin.ModelAdmin):
