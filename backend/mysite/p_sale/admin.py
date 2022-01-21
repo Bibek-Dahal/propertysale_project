@@ -56,4 +56,4 @@ class ContactNumAdmin(admin.ModelAdmin):
 
 @admin.register(PropertyOwnerCertificate)
 class PropertyOwnerCertificateAdmin(admin.ModelAdmin):
-    list_display = ('id','property','image')
+    list_display = ('id','property','certificate_image')

@@ -88,7 +88,7 @@ class AdditionalPropertyImage(models.Model):
     one property can have additional images
     """
     property = models.ForeignKey(Property,on_delete=models.CASCADE,related_name='images')
-    image = CloudinaryField('image')
+    image = CloudinaryField('image',blank=True,null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -108,7 +108,7 @@ class PropertyOwnerCertificate(models.Model):
     images like laalpurja naksa
     """
     property = models.ForeignKey(Property,on_delete=models.CASCADE)
-    image = CloudinaryField('image',blank=True,null=True)
+    certificate_image = CloudinaryField('certificate_image')
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
 
