@@ -4,10 +4,6 @@ from user_account.models import MyUser as User
 from rest_framework.permissions import IsAuthenticated,AllowAny
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from .serializer import *
-from rest_framework.viewsets import ModelViewSet
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -24,6 +20,3 @@ class UserListView(ListAPIView):
     permission_classes = (IsAuthenticated,)
     serializer_class = UserSerializer
 
-class PorpertyView(ModelViewSet):
-    queryset = Property.objects.all()
-    serializer_class = PropertySerializer
