@@ -71,6 +71,17 @@ class Property(models.Model):
     class Meta:
         verbose_name = 'property'
         verbose_name_plural = 'properties'
+    """
+    while saving property obj you should provide value for listing_type is first value of touple not second
+    for example 
+    {
+        "listing_type":"Top Listing"
+    }
+    not {
+        "listing_type":"Top Listing Rs.Top Listing Rs.23600"
+    }
+    always first value of touple is saved in database
+    """
 
 class AdditionalPropertyImage(models.Model):
     """
