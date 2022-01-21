@@ -3,6 +3,11 @@ from django.urls.conf import include
 from .import views
 from dj_rest_auth.registration.views import VerifyEmailView,ConfirmEmailView
 from dj_rest_auth.views import PasswordResetView
+from rest_framework.routers import DefaultRouter
+from .views import PorpertyView
+router = DefaultRouter()
+router.register('',PorpertyView,basename='property')
+
 
 
 app_name = 'api'
@@ -16,5 +21,6 @@ urlpatterns = [
     path('account/registration/', include('dj_rest_auth.registration.urls')),
     path('account/account-confirm-email/',VerifyEmailView.as_view(),name='account_email_verification_sent'),
     path('account/password/reset/', PasswordResetView.as_view(), name='account_password_reset'),  
+    path('property/',include(router.urls))
      
 ]
