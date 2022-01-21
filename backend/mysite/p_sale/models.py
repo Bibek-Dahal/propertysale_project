@@ -108,7 +108,7 @@ class PropertyOwnerCertificate(models.Model):
     images like laalpurja naksa
     """
     property = models.ForeignKey(Property,on_delete=models.CASCADE)
-    image = CloudinaryField('image')
+    image = CloudinaryField('image',blank=True,null=True)
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
 
