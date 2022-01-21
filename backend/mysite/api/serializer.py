@@ -1,4 +1,4 @@
-from msilib.schema import Property
+
 from dj_rest_auth.serializers import PasswordChangeSerializer
 from rest_framework import serializers
 from user_account.models import MyUser as User
@@ -7,7 +7,7 @@ from django.utils.translation import gettext_lazy as _
 from .validators import check_pswd,custom_check_pswd
 from dj_rest_auth.registration.serializers import RegisterSerializer
 from dj_rest_auth.serializers import PasswordResetConfirmSerializer
-
+from p_sale.models import Property
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -61,3 +61,7 @@ class UserPasswordResetConfirmSerializer(PasswordResetConfirmSerializer):
     new_password1 = serializers.CharField(max_length=128,validators = [custom_check_pswd])
     new_password2 = serializers.CharField(max_length=128)
 
+class PropertySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Property
+        fields = "__all__"

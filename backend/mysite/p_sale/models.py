@@ -77,7 +77,7 @@ class AdditionalPropertyImage(models.Model):
     one property can have additional images
     """
     property = models.ForeignKey(Property,on_delete=models.CASCADE,related_name='images')
-    image = CloudinaryField('image',null=True)
+    image = CloudinaryField('image')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
