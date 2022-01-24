@@ -30,7 +30,7 @@ class PropertyAdmin(admin.ModelAdmin):
             'fields': ('floors','beds','kitchen','living','bath'),
         }),
         (None, {
-            'fields': ('property_main_image','no_of_views','is_active'),
+            'fields': ('property_main_image','no_of_views','is_active','is_sold'),
         }),
     )
 
