@@ -62,8 +62,12 @@ class Property(models.Model):
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
     no_of_views = models.PositiveIntegerField(default=0)
-    on_sale = models.BooleanField(default=True)
+    on_sale = models.BooleanField(default=True) #determines whether to show onsale tag or not and if property is for rent this field should be saved as false
     is_active = models.BooleanField(default=False)
+    is_sold = models.BooleanField(default=False)
+    """
+    Note: Only those properties should be shown whose is_active==True and is_sold==False
+    """
     
     def __str__(self):
         return self.title
@@ -78,11 +82,11 @@ class Property(models.Model):
         "listing_type":"Top Listing"
     }
     not {
-        "listing_type":"Top Listing Rs.Top Listing Rs.23600"
+        "listing_type":"Top Listing Rs.Top"
     }
     always first value of touple is saved in database
     """
-
+    
 class AdditionalPropertyImage(models.Model):
     """
     one property can have additional images
