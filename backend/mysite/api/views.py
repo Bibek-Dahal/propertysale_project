@@ -1,4 +1,3 @@
-from msilib.schema import Property
 from .serializer import  UserSerializer
 from rest_framework.generics import ListAPIView
 from user_account.models import MyUser as User
