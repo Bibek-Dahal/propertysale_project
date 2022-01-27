@@ -91,3 +91,7 @@ Note:
 Connecting The Websocket:
 	ws://127.0.0.1:8000/ws/status/<username>/
 	when you update document status you will be notified
+
+For Real Time No of Views of Property:
+	ws://127.0.0.1:8000/ws/property/<id>/
+	each time on Websocket connection no of views of proerty will be increased by 1
