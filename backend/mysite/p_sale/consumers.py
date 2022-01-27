@@ -1,4 +1,3 @@
-from asyncio.windows_events import NULL
 import json
 from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
