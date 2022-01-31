@@ -1,0 +1,5 @@
+the additional field is to be added here is:
+image => which denots one property can have multiple images(multiple=True)
+
+Another field is:
+certificate_image => which includes images like laalpurja,naksa(multiple=True)
