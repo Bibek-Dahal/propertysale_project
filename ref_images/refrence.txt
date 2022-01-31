@@ -3,3 +3,6 @@ image => which denots one property can have multiple images(multiple=True)
 
 Another field is:
 certificate_image => which includes images like laalpurja,naksa(multiple=True)
+
+Api will be provided for Property_Type filed and Facility Field
+
