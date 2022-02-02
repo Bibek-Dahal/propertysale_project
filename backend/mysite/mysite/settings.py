@@ -152,7 +152,14 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         # 'rest_framework_simplejwt.authentication.JWTAuthentication',
         'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
-    )
+    ),
+    #Throtteling
+    'DEFAULT_THROTTLE_CLASSES': [
+        'api.throttles.BurstRateThrottle',
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'dj_rest_auth': '3/min',
+    }
     
 }
 
@@ -192,7 +199,7 @@ SOCIALACCOUNT_PROVIDERS = {
 # from api.views import MyTokenObtainPairSerializer
 
 LOGIN_REDIRECT_URL = 'http://127.0.0.1:3000'
-LOGOUT_REDIRECT_URL = 'http://127.0.0.1:3000/login'
+# LOGOUT_REDIRECT_URL = 'http://127.0.0.1:3000/login'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 SOCIALACCOUNT_LOGIN_ON_GET = True
@@ -204,6 +211,10 @@ ACCOUNT_AUTHENTICATION_METHOD = "email"
 OLD_PASSWORD_FIELD_ENABLED = True
 REST_SESSION_LOGIN = False
 REST_AUTH_PW_RESET_USE_SITES_DOMAIN = True
+
+#Throtteling
+ACCOUNT_LOGIN_ATTEMPTS_LIMIT=3
+ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT=60
 
 
 SOCIALACCOUNT_PROVIDERS = {
