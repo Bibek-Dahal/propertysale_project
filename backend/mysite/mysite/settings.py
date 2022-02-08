@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.facebook',
     'channels',
 
 ]
@@ -183,19 +184,7 @@ AUTHENTICATION_BACKENDS = [
 
 SITE_ID = 1
 
-# Provider specific settings
-SOCIALACCOUNT_PROVIDERS = {
-    'google': {
-        # For each OAuth based provider, either add a ``SocialApp``
-        # (``socialaccount`` app) containing the required client
-        # credentials, or list them here:
-        'APP': {
-            'client_id': '211100097274-8fkbk3jk57sfs0cvn5sd4u4s6vft353q.apps.googleusercontent.com',
-            'secret': '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',
-            'key': ''
-        }
-    }
-}
+
 # from api.views import MyTokenObtainPairSerializer
 
 LOGIN_REDIRECT_URL = 'http://127.0.0.1:3000'
@@ -220,6 +209,18 @@ ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT=60
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
       'SCOPE': ['email','phone']
+    },
+    'facebook':{
+        'SCOPE': ['email', 'public_profile'],
+        'FIELDS': [
+            'first_name',
+            'last_name',
+            'middle_name',
+            'name',
+            'name_format',
+            'picture',
+            'short_name'
+        ],
     }
 }
 
