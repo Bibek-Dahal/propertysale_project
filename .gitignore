@@ -27,3 +27,6 @@ env/
 *.pyc
 *.env
 *.sqlite3
+
+# django-requirement-for-linux
+requirements_for_only_ashish.txt
