@@ -87,3 +87,15 @@ Note:
         "last_name": ""
     }
 }
+
+Connecting The Websocket:
+	ws://127.0.0.1:8000/ws/status/<username>/
+	when you update document status you will be notified
+
+For Real Time No of Views of Property:
+	ws://127.0.0.1:8000/ws/property/<id>/
+	each time on Websocket connection no of views of proerty will be increased by 1
+
+New Item Listed For Sale notification in homepage:
+	ws://127.0.0.1:8000/ws/property/
+	msg will be sent when user post property for sell and and is_active field is made true

@@ -1,3 +1,128 @@
+from email.policy import default
 from django.db import models
+from .choices_type import Choice
+from cloudinary.models import CloudinaryField
+from user_account.models import MyUser as User
+from autoslug import AutoSlugField
 
-# Create your models here.
+
+class PropertyType(models.Model):
+    type = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.type
+
+class Facility(models.Model):
+    facility = models.CharField(max_length=200)
+
+    class Meta:
+        verbose_name = 'facility'
+        verbose_name_plural = 'facilities'
+    
+    def __str__(self):
+        return self.facility
+
+class ContactNum(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    mobile_num = models.PositiveIntegerField()
+
+    def __str__(self):
+        return self.user.username
+
+class Property(models.Model):
+    seller = models.ForeignKey(User,on_delete=models.CASCADE)
+    title = models.CharField(max_length=300)
+    slug = AutoSlugField(populate_from = 'title',null=True)
+    description = models.TextField(blank=True)
+    listing_type = models.CharField(max_length=100,choices=Choice.listing_type)
+    property_type = models.ForeignKey(PropertyType,on_delete=models.CASCADE)
+    condition = models.CharField(max_length=100,choices=Choice.listing_condition,blank=True)
+    road_to_property = models.CharField(max_length=300,blank=True)
+    access_road = models.CharField(max_length=80,blank=True)
+    address = models.CharField(max_length=150)
+    district = models.CharField(max_length=100)
+    area = models.CharField(max_length=100,choices=Choice.area_type,blank=True)
+    ropani = models.PositiveSmallIntegerField(default=0)
+    aana = models.PositiveSmallIntegerField(default=0)
+    paisa = models.PositiveSmallIntegerField(default=0)
+    daam = models.PositiveSmallIntegerField(default=0)
+    price_in_number = models.IntegerField(default=0)
+    price_in_words = models.CharField(max_length=200)
+    price_negotiable =  models.CharField(max_length=3,choices=Choice.negotiable_type,default='No')
+    facility = models.ManyToManyField(Facility,related_name='facilities',blank=True)
+    furnishing = models.CharField(max_length = 50,choices=Choice.furnishing_type,blank=True)
+    house_type = models.CharField(max_length=100,choices=Choice.house_type,blank=True)
+    face_towards = models.CharField(max_length=40,choices=Choice.face_towards,blank=True)
+    floors = models.PositiveSmallIntegerField(blank=True,null=True)
+    beds = models.PositiveSmallIntegerField(blank=True,null=True)
+    kitchen = models.PositiveSmallIntegerField(blank=True,null=True)
+    living = models.PositiveSmallIntegerField(blank=True,null=True)
+    bath = models.PositiveSmallIntegerField(blank=True,null=True)
+    property_main_image = CloudinaryField('main_image')
+    created_at = models.DateTimeField(auto_now_add = True)
+    updated_at = models.DateTimeField(auto_now = True)
+    no_of_views = models.PositiveIntegerField(default=0)
+    on_sale = models.BooleanField(default=True) #determines whether to show onsale tag or not and if property is for rent this field should be saved as false
+    is_active = models.BooleanField(default=False)
+    is_sold = models.BooleanField(default=False)
+    """
+    Note: Only those properties should be shown whose is_active==True and is_sold==False
+    """
+    
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'property'
+        verbose_name_plural = 'properties'
+    """
+    while saving property obj you should provide value for listing_type is first value of touple not second
+    for example 
+    {
+        "listing_type":"Top Listing"
+    }
+    not {
+        "listing_type":"Top Listing Rs.Top"
+    }
+    always first value of touple is saved in database
+    """
+    
+class AdditionalPropertyImage(models.Model):
+    """
+    one property can have additional images
+    """
+    property = models.ForeignKey(Property,on_delete=models.CASCADE,related_name='images')
+    image = CloudinaryField('image',blank=True,null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+class KYC(models.Model):
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    profile_pic = CloudinaryField('profile')
+    citizenship_photo_front = CloudinaryField('citizenship_front')
+    citizenship_photo_back = CloudinaryField('citizenship_back')
+    occupation = models.CharField(max_length=150,blank=True)
+    citizenship_num = models.SlugField(max_length=40)
+    created_at = models.DateTimeField(auto_now_add = True)
+    updated_at = models.DateTimeField(auto_now = True)
+    status = models.CharField(max_length=60,choices=Choice.kyc_type,default='pending')
+
+class PropertyOwnerCertificate(models.Model):
+    """
+    images like laalpurja naksa
+    """
+    property = models.ForeignKey(Property,on_delete=models.CASCADE)
+    certificate_image = CloudinaryField('certificate_image')
+    created_at = models.DateTimeField(auto_now_add = True)
+    updated_at = models.DateTimeField(auto_now = True)
+
+    
+
+
+
+
+
+
+
+
+

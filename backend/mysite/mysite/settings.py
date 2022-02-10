@@ -3,7 +3,8 @@
 from pathlib import Path
 from decouple import config
 from datetime import timedelta
-
+import os
+import cloudinary
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
+    'cloudinary',
     'user_account',
     'p_sale',
     'dj_rest_auth',
@@ -46,6 +48,8 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.facebook',
+    'channels',
 
 ]
 
@@ -79,6 +83,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
+ASGI_APPLICATION = "mysite.asgi.application"
 
 
 # Database
@@ -116,7 +121,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kathmandu'
 
 USE_I18N = True
 
@@ -148,7 +153,14 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         # 'rest_framework_simplejwt.authentication.JWTAuthentication',
         'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
-    )
+    ),
+    #Throtteling
+    'DEFAULT_THROTTLE_CLASSES': [
+        'api.throttles.BurstRateThrottle',
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'dj_rest_auth': '3/min',
+    }
     
 }
 
@@ -172,39 +184,34 @@ AUTHENTICATION_BACKENDS = [
 
 SITE_ID = 1
 
-# Provider specific settings
-SOCIALACCOUNT_PROVIDERS = {
-    'google': {
-        # For each OAuth based provider, either add a ``SocialApp``
-        # (``socialaccount`` app) containing the required client
-        # credentials, or list them here:
-        'APP': {
-            'client_id': '211100097274-8fkbk3jk57sfs0cvn5sd4u4s6vft353q.apps.googleusercontent.com',
-            'secret': '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',
-            'key': ''
-        }
-    }
-}
+
 # from api.views import MyTokenObtainPairSerializer
 
 LOGIN_REDIRECT_URL = 'http://127.0.0.1:3000'
-LOGOUT_REDIRECT_URL = 'http://127.0.0.1:3000/login'
+# LOGOUT_REDIRECT_URL = 'http://127.0.0.1:3000/login'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 SOCIALACCOUNT_LOGIN_ON_GET = True
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 # ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = True
 # ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = "localhost:3000"
-ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = "http://127.0.0.1:3000/login"
+ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = "http://127.0.0.1:3000/form/login"
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 OLD_PASSWORD_FIELD_ENABLED = True
 REST_SESSION_LOGIN = False
 REST_AUTH_PW_RESET_USE_SITES_DOMAIN = True
 
+#Throtteling
+ACCOUNT_LOGIN_ATTEMPTS_LIMIT=3
+ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT=60
+
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
       'SCOPE': ['email','phone']
+    },
+    'facebook':{
+        'SCOPE': ['email', 'public_profile'],
     }
 }
 
@@ -220,3 +227,16 @@ REST_AUTH_REGISTER_SERIALIZERS = {
     
 }
 # ACCOUNT_ADAPTER = 'user_account.adapter.MyAccountAdapter'
+
+#cloudinary config 
+cloudinary.config( 
+  cloud_name = config('cloud_name'), 
+  api_key = config('api_key'), 
+  api_secret = config('api_secret')
+)
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}
