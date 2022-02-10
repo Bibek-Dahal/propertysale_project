@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700;900&display=swap');
+
+*{
+    padding:0;
+    margin:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --ff : 'Roboto', sans-serif;
+    --fs-xxxxl:2.3rem;
+    --fs-xxxl : 1.75rem;
+    --fs-xxl:1.25rem;
+    --fs-xl:1.1rem;
+    --fs-xxxs:.8rem;
+    --fs-xxs:.9rem;
+    --blue : #3752D8;
+    --box-shadow-blue:#3752d8b0;
+    --box-shadow-blue-dark:#2136a1b0;
+    --box-shadow-properties:0px 21px 71px -7px;
+    --fc-white : #ffffff;
+    /* --form-field-bg:#b4c1ff54; */
+    --form-field-bg:#ffffffc7;
+
+    /* --input-border-radius:20px; */
+    --input-border-radius:8px;
+
+    --form-field-focus:rgb(0, 145, 241);
+    --gray: #8F9398;
+    --nav-height:8vh;
+    --body-bg: rgb(228, 228, 228);
+}
+
+body{
+    font-family:var(--ff);
+    position:relative;
+    background:var(--body-bg);
+}
+
+.wrapper{
+    width:90%;
+    max-width:1600px;
+    margin:auto;
+}
+
+.wrapper-2{
+    max-width:1300px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+#root{
+    overflow-x:hidden;
+    min-height:100vh;
+}
+
+html{
+    font-size:14px;
+}
+
+a{
+    text-decoration: none;
+}
+
+@media only screen and (min-width:1000px){
+    :root{
+        --nav-height:10vh;
+    }
+
+    html{
+        font-size:15px;
+    }
+    .wrapper-2{
+        padding:0 2em;
+    }
+}

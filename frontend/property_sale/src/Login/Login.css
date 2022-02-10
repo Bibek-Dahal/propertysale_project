@@ -1,0 +1,14 @@
+form.loginForm >*{
+    grid-column:1/3;
+}
+
+form.loginForm button{
+    margin-top:1.7em;
+}
+
+@media only screen and (min-width : 1000px){
+    .login > .infoPart h1{
+        margin-bottom:1em;
+        margin-top:-2em;
+    }
+}

@@ -1,5 +1,8 @@
 import './App.css';
-import Form from './Form/Form.jsx';
+import Register from './Register/Register';
+import Login from './Login/Login';
+import Home from './Home/Home';
+
 import {
   BrowserRouter as Router,
   Route,
@@ -7,19 +10,15 @@ import {
 } from 'react-router-dom';
 import './fontAwesome';
 
-
 function App() {
   return (
     <div className="App">
-
       <Router>
         <Routes>
-          <Route path="/" element={
-            <>
-              <h1>Hello home</h1>
-            </>
-          } />
-          <Route path='/form/*' element={<Form />} />
+          <Route path = "/" element={<Home />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/login' element={<Login />} />
+
         </Routes>
       </Router>
     </div>
