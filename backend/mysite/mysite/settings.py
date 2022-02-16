@@ -156,7 +156,7 @@ REST_FRAMEWORK = {
     ),
     #Throtteling
     'DEFAULT_THROTTLE_CLASSES': [
-        'api.throttles.BurstRateThrottle',
+        'rest_framework.throttling.ScopedRateThrottle',
     ],
     'DEFAULT_THROTTLE_RATES': {
         'dj_rest_auth': '3/min',
