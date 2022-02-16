@@ -21,6 +21,7 @@ export const authReducer = (state,action) => {
           }
 
         case "logoutUser":
+            console.log('logging out user')
             localStorage.removeItem("access_token");
             localStorage.removeItem("refresh_token");
             return initial_auth_condition

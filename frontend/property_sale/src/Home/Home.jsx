@@ -8,7 +8,7 @@ export default function Home() {
 
   useEffect(() => {
     console.log('Home');
-    // checkAndRemoveToken();
+    checkAndRemoveToken();
   },[])
   
   return <React.Fragment>

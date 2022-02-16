@@ -9,10 +9,10 @@ export default function Nav() {
     const location = useLocation();
     const {checkAndRemoveToken} = useAuth();
   
-    // useEffect(() => {
-    //   console.log('from nav');
-    //   checkAndRemoveToken();
-    // },[])
+    useEffect(() => {
+      console.log('from nav');
+      checkAndRemoveToken();
+    },[])
 
     return(
       <React.Fragment>
