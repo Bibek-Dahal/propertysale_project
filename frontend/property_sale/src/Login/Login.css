@@ -6,6 +6,27 @@ form.loginForm button{
     margin-top:1.7em;
 }
 
+button.inactive.error{
+    background-color:Red;
+}
+
+.form-container span{
+    /* display:block; */
+    /* border: 1px solid red; */
+}
+
+span.sendVerificationMailBtn{
+    padding:.5em 1em;
+    background-color:rgb(16, 117, 212);
+    color:var(--fc-white);
+    font-weight:bold;
+    font-size:var(--fs-xl);
+    cursor:pointer;
+    border-radius:5px;
+    width:fit-content;
+    margin-bottom: 2em;
+}
+
 @media only screen and (min-width : 1000px){
     .login > .infoPart h1{
         margin-bottom:1em;

@@ -1,13 +1,14 @@
 nav {
     height:var(--nav-height);
     /* box-shadow:0px 3px 10px rgb(226, 226, 226); */
-    /* border:1px solid red; */
     /* position:relative; */
     /* z-index: 3; */
     /* background:white; */
     display:flex;
-    align-items: center;
+    align-items:center;
+    /* border:1px solid red; */
 }
+
 
 nav li{
     list-style:none;
@@ -38,10 +39,38 @@ nav ul.rightmost li{
     margin-left:2.5em;
 }
 
+.shadowyBtn.profileIcon {
+    font-weight:bold;
+    font-size:var(--fs-xl);
+    border-radius:5em;
+}
+
+.shadowyBtn.profileIcon a {
+    display:flex;
+    align-items:center;
+    /* border:1px solid red; */
+    gap:.5em;
+    padding:.5em 1em;
+}
 
 .shadowyBtn:hover{
-    box-shadow:var(--box-shadow-properties) gray;
+    box-shadow:var(--box-shadow-properties) rgb(197, 197, 197);
     animation:animateShadowyBtn 200ms cubic-bezier(.45,-0.97,.47,1.69) forwards;
+}
+
+.profile-img-sml img{
+    object-fit:cover;
+}
+
+.profile-img-sml,
+.profile-img-sml img{
+    border-radius:50%;
+    height:var(--profile-image-sml-height);
+    width:var(--profile-image-sml-width);
+}
+
+.profile-img-sml{
+    box-shadow:1px 1px 5px gray;
 }
 
 @keyframes animateShadowyBtn {

@@ -28,13 +28,25 @@
     --form-field-focus:rgb(0, 145, 241);
     --gray: #8F9398;
     --nav-height:8vh;
-    --body-bg: rgb(228, 228, 228);
+    --body-bg: rgb(241, 241, 241);
+
+    --error-form-field:red;
+
+    --profile-image-sml-width : 35px;
+    --profile-image-sml-height : 35px;
 }
 
 body{
     font-family:var(--ff);
     position:relative;
     background:var(--body-bg);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
 
 .wrapper{

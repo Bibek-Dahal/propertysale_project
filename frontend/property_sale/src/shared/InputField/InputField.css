@@ -3,7 +3,16 @@
     background:var(--form-field-bg);
     position:relative;
     padding:.7em 0 0 0;
-    border:2px solid transparent;
+    /* border:2px solid transparent; */
+}
+
+.field.error{
+    border:1px solid var(--error-form-field);
+}
+
+.field.error input,
+.field.error label{
+    color:var(--error-form-field);
 }
 
 .field.focus{
@@ -55,4 +64,39 @@ form.loginForm .eye{
     right:1em;
     transform:translateY(-50%);
     font-size:var(--fs-xxl);
+}
+
+.error-tooltip {
+    position:absolute;
+    right:1em;
+    top:50%;
+    transform:translateY(-50%);
+    cursor: pointer;
+}
+
+.error-tooltip .msg{
+    position:absolute;
+    min-width:250px;
+    max-width:300px;
+    right:100%;
+    /* top:-3.4em; */
+    padding:1em;
+    background-color:rgb(190, 58, 58);
+    color:var(--fc-white);
+    font-weight:bold;
+    border-radius:3px;
+    transform:scale(0);
+    transform-origin:right bottom;
+    transition:transform .2s cubic-bezier(.51,-0.09,.61,1.66);
+    bottom:100%;
+}
+
+.error-tooltip svg{
+    font-size: 1.5rem;
+    color:rgb(255, 0, 0);
+    /* border:1px solid red; */
+}
+
+.error-tooltip svg:hover ~ .msg{
+    transform:scale(1);
 }
