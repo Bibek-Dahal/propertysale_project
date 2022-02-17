@@ -104,3 +104,4 @@ For Google Login:
        Click on login with google. If you are not logged in a popup will appear and choose your mail for login.
        Then you will get reaponse from google which consist of token. If it is first time your account is not created, For creating your account go to url
        dj-rest-auth/google/login and post with access token your account will be created if it is first time and access and refrest token will be received.
+       For the second time on dj-rest-auth/google/login account will not created and access and refrest token will be received
