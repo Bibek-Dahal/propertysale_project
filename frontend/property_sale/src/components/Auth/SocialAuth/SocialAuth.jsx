@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import Icon from '../Icons/Icon';
+import Icon from '../../Icons/Icon';
 import './SocialAuth.css';
 
 export default function SocialAuth() {

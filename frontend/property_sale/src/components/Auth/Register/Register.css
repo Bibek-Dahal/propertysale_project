@@ -5,8 +5,6 @@ form.loginForm{
     grid-template-columns:repeat(2,1fr);
 }
 
-
-
 form.registerForm >*:not(.password1):not(.password2){
     grid-column:1/3;
 }

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import useAuth from '../Hooks/useAuth';
-import Nav from '../Nav/Nav';
+import Modal from '../Modal/Modal';
 
 export default function Home() {
 
@@ -12,7 +12,7 @@ export default function Home() {
   },[])
   
   return <React.Fragment>
-      <Nav />
+      {/* <Modal /> */}
       {/* <h1>hello</h1> */}
       {
         // state.user && <h1>Hello {state.user.username}</h1>

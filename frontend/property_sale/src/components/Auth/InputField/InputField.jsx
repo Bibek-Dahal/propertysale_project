@@ -3,14 +3,14 @@ import React,{useRef} from 'react';
 import { useEffect } from 'react';
 import './InputField.css';
 
-export default function InputField({name,label,type,fieldChangeHandler,error,children,borderColor}) {
+export default function InputField({name,label,type,fieldChangeHandler,error,children,borderColor,setErrors}) {
     const inputRef = useRef(null);
     const labelRef = useRef(null);
     const fieldRef = useRef(null);
 
-
     const onFocusHandler = (e) => {
         fieldRef.current.classList.add('focus');
+        setErrors({});
         labelRef.current.classList.add("move");}
     const onBlurHandler = (e) => {
         fieldRef.current.classList.remove('focus');

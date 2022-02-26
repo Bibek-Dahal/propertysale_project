@@ -6,11 +6,11 @@ import { PopupContextProvider } from './context/PopupContext';
 
 ReactDOM.render(
   <React.StrictMode>
-    <AuthContextProvider>
       <PopupContextProvider>
-          <App />
+        <AuthContextProvider>
+              <App />
+        </AuthContextProvider>
       </PopupContextProvider>
-    </AuthContextProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

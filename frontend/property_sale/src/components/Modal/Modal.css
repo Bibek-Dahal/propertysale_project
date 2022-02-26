@@ -1,0 +1,15 @@
+.popup{
+    /* transition:all .5s ease; */
+    /* transform:translateX(-100px); */
+}
+
+.popup.appear{
+    /* transform:translateX(0); */
+    /* animation:animate .5s ease; */
+}
+
+@keyframes animate {
+    to{
+        transform:translateX(200px);
+    }
+}

@@ -1,31 +1,20 @@
 .register-login-container{
-    /* border:1px solid green; */
     width:100%;
     margin-top:3em;
 }
 
 .register-login-container{
-    /* border:1px solid blue; */
     display:grid;
-    /* grid-template-columns:2.5fr 2fr; */
     grid-template-columns: 1fr;
     text-align:center;
     align-items: center;
-    /* margin-top:1em; */
 }
 
 .register-login-container >*:first-child{
-    /* background:pink; */
-    /* border:1px solid red; */
-    /* margin:4.93rem auto 3.75rem; */
     margin:3rem auto 0;
     position:relative;
-    /* display:none; */
 }
-.register-login-container >*:first-child > div.text{
-    /* background:pink; */
-    /* backdrop-filter: blur(20px); */
-}
+
 .register-login-container >*:first-child h1{
     width:85%;
     margin:0 auto;
@@ -39,9 +28,6 @@
 }
 
 .register-login-container >*:last-child{
-    /* justify-self:end; */
-    /* border:1px solid red; */
-    /* background:red; */
     width:90%;
     max-width:500px;
     margin: 0 auto;
@@ -85,7 +71,6 @@
     border-radius:50%;
     z-index:-1;
     filter:blur(40px);
-    /* bordeR:1px solid red; */
 }
 
 .register-login-container svg[data-icon^="eye"]{
@@ -95,7 +80,6 @@
 }
 
 .register-login-container .form-container{
-    /* border:1px solid red; */
     margin:6em auto 2em;
 }
 
@@ -103,17 +87,6 @@
     position:relative;
     z-index:1;
 }
-
-/* .register-login-container .infoPart h1:before,
-.register-login-container .infoPart h1:after{
-    content:"";
-    position:absolute;
-    height:200px;
-    width:200px;
-    border-radius:50%;
-    filter:blur(60px);
-    z-index:-1;
-} */
 
 .register-login-container .infoPart h1:after{
     background-color:#2dd8ff23;

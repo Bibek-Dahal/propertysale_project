@@ -14,7 +14,7 @@
     --fs-xl:1.1rem;
     --fs-xxxs:.8rem;
     --fs-xxs:.9rem;
-    --blue : #3752D8;
+    --blue : #008cff;
     --box-shadow-blue:#3752d8b0;
     --box-shadow-blue-dark:#2136a1b0;
     --box-shadow-properties:0px 21px 71px -7px;
@@ -27,11 +27,11 @@
 
     --form-field-focus:rgb(0, 145, 241);
     --gray: #8F9398;
-    --nav-height:8vh;
+    --nav-height:10vh;
     --body-bg: rgb(241, 241, 241);
-
+    
     --error-form-field:red;
-
+    
     --profile-image-sml-width : 35px;
     --profile-image-sml-height : 35px;
 }
@@ -72,6 +72,29 @@ html{
 
 a{
     text-decoration: none;
+}
+
+#portal{
+    position:fixed;
+    z-index:999;
+}
+
+#portal .popup{
+    position: fixed;
+    top: 2em;
+    font-weight: bold;
+    left: 50%;
+    transform:translateX(-50%);
+    padding: 1em;
+    border-radius: 5px;
+    background: white;
+    min-height:100px;
+    color: black;
+    font-size: 1.3rem;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: var(--box-shadow-properties) #c0c0c061;
 }
 
 @media only screen and (min-width:1000px){

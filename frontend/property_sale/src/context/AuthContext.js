@@ -1,19 +1,21 @@
 import axios from "axios";
 import { createContext,useReducer } from "react";
+import usePopup from "../Hooks/usePopup";
 import { authReducer, initial_auth_condition } from "../reducers/authReducer";
 
 export const AuthContext = createContext();
 
 export const AuthContextProvider = ({children}) => {
     const [state,dispatch] = useReducer(authReducer,initial_auth_condition);
-
+    const {showPopup} = usePopup();
+    
     function verifyRefreshToken(){
         return new Promise((resolve,reject) => {
             console.log('verifuing refresh token');
             async function verify(){
                 try{
                     let res = await axios.post('http://127.0.0.1:8000/api/account/token/refresh/',
-                        {token : state.refresh_token});
+                        {refresh : state.refresh_token});
                         console.log(res);
                     dispatch({type : "updateAccessToken",token:res.data.access})
                     return resolve('token refreshed');
@@ -58,6 +60,8 @@ export const AuthContextProvider = ({children}) => {
                     console.log('failure',err)
                     console.log('so removing tokens');
                     dispatch({type:"logoutUser"})
+                    showPopup('session expired login again');
+                    console.log('session expired login again')
                 })
         }
        

@@ -1,15 +1,14 @@
 import React,{useEffect, useState} from 'react';
-import InputField from '../shared/InputField/InputField';
+import InputField from '../InputField/InputField';
 import '../form.css';
 import './Login.css';
 import SocialAuth from '../SocialAuth/SocialAuth';
 import axios from 'axios';
 import {FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Nav from '../Nav/Nav';
 import { Link,useNavigate,useLocation } from 'react-router-dom';
-import Timer from '../shared/Timer/Timer';
-import usePopup from '../Hooks/usePopup';
-import useAuth from '../Hooks/useAuth';
+import Timer from '../../shared/Timer/Timer';
+import usePopup from '../../../Hooks/usePopup';
+import useAuth from '../../../Hooks/useAuth';
 
 export default function Login() {
     const {dispatch} = useAuth();
@@ -50,6 +49,7 @@ export default function Login() {
                 try{
                     res.status == 200 
                         && dispatch({type : "logUser",data : res.data}) 
+                    showPopup('successfully logged in')
                 }catch(err){
                     console.log(err);
                 }
@@ -101,14 +101,11 @@ export default function Login() {
             }
          }
         }
-
-
         sendMail();
     }
 
     return(
         <React.Fragment>
-            <Nav />
             <div className='wrapper'>
                 <div className="login register-login-container wrapper-2">
                     <div className="infoPart loginInfoPart">
@@ -122,7 +119,6 @@ export default function Login() {
                         </div>
                     </div>
                     <div className="form-container">
-                       
                          {
                             errors?.status != "429" && errors.non_field_errors ? 
                                 <div className = "wholeFormError">
@@ -137,6 +133,7 @@ export default function Login() {
                         }
                         <form onSubmit={loginHandler} className = "loginForm">
                             <InputField 
+                                setErrors = {setErrors}
                                 fieldChangeHandler={fieldChangeHandler} 
                                 type="text" 
                                 name="email" 
@@ -145,6 +142,7 @@ export default function Login() {
                                 borderColor = {errors?.non_field_errors && errors.status !="429" ? "red":""}
                             />
                             <InputField 
+                                setErrors = {setErrors}
                                 fieldChangeHandler={fieldChangeHandler} 
                                 name="password" 
                                 label="Password"

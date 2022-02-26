@@ -1,8 +1,6 @@
 import React from 'react';
 
 export default function Icon({icon,height}) {
-
-
     const getIcon = () => {
         switch(icon.toLowerCase()){
             case "google":
@@ -17,7 +15,6 @@ export default function Icon({icon,height}) {
                 return null;
         }
     }
-
   return(
         getIcon()
   );
