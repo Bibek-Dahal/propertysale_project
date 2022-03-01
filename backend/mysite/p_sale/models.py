@@ -6,13 +6,13 @@ from user_account.models import MyUser as User
 from autoslug import AutoSlugField
 
 class PropertyType(models.Model):
-    type = models.CharField(max_length=100,unique=True)
+    type = models.CharField(max_length=100,unique=True,primary_key=True)
 
     def __str__(self):
         return self.type
 
 class Facility(models.Model):
-    facility = models.CharField(max_length=200,unique=True)
+    facility = models.CharField(max_length=200,unique=True,primary_key=True)
 
     class Meta:
         verbose_name = 'facility'
@@ -29,7 +29,7 @@ class ContactNum(models.Model):
         return self.user.username
 
 class KYCStatus(models.Model):
-    kyc_status = models.CharField(max_length=40,unique=True)
+    kyc_status = models.CharField(max_length=40,unique=True,primary_key=True)
     
     """pending,verifying"""
 
@@ -54,7 +54,7 @@ class KYC(models.Model):
 
 #Table Modification
 class PropertyStatus(models.Model):
-    status = models.CharField(max_length=40,unique=True)
+    status = models.CharField(max_length=40,unique=True,primary_key=True)
 
     def __str__(self):
         return self.status
@@ -64,7 +64,7 @@ class PropertyStatus(models.Model):
         verbose_name_plural = 'property status'
 
 class AreaType(models.Model):
-    area = models.CharField(max_length=30,unique=True)
+    area = models.CharField(max_length=30,unique=True,primary_key=True)
 
     def __str__(self):
         return self.area
@@ -72,7 +72,7 @@ class AreaType(models.Model):
     """specifies ropani dhur kathha"""
 
 class ListingType(models.Model):
-    listing_type = models.CharField(max_length=100,unique=True)
+    listing_type = models.CharField(max_length=100,unique=True,primary_key=True)
 
     def __str__(self):
         return self.listing_type
@@ -80,14 +80,14 @@ class ListingType(models.Model):
     """top_listing,premium_listing....."""
 
 class ListingConditioin(models.Model):
-    listing_condition = models.CharField(max_length=100,unique=True)
+    listing_condition = models.CharField(max_length=100,unique=True,primary_key=True)
 
     def __str__(self):
         return self.listing_condition
     """Brand new, Used"""
 
 class FurnishingType(models.Model):
-    furnishing_type = models.CharField(max_length=150,unique=True)
+    furnishing_type = models.CharField(max_length=150,unique=True,primary_key=True)
 
     def __str__(self):
         return self.furnishing_type
@@ -95,7 +95,7 @@ class FurnishingType(models.Model):
     """fully_furnished,semi_furnished"""
 
 class HouseType(models.Model):
-    house_type = models.CharField(max_length=100,unique=True)
+    house_type = models.CharField(max_length=100,unique=True,primary_key=True)
 
     def __str__(self):
         return self.house_type
@@ -103,7 +103,7 @@ class HouseType(models.Model):
     """flat_system,appartment"""
 
 class FaceTowards(models.Model):
-    face_towards = models.CharField(max_length=100,unique=True)
+    face_towards = models.CharField(max_length=100,unique=True,primary_key=True)
     
     def __str__(self):
         return self.face_towards

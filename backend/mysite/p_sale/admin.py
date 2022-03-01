@@ -3,40 +3,40 @@ from .models import *
 
 @admin.register(Facility)
 class FacilityAdmin(admin.ModelAdmin):
-    list_display = ('id','facility')
+    list_display = ('facility',)
 
 @admin.register(PropertyType)
 class PropertyTypeAdmin(admin.ModelAdmin):
-    list_display = ('id','type')
+    list_display = ('type',)
 
 @admin.register(AreaType)
 class PropertyTypeAdmin(admin.ModelAdmin):
-    list_display = ('id','area')
+    list_display = ('area',)
 
 @admin.register(ListingType)
 class PropertyTypeAdmin(admin.ModelAdmin):
-    list_display = ('id','listing_type')
+    list_display = ('listing_type',)
 
 @admin.register(ListingConditioin)
 class PropertyTypeAdmin(admin.ModelAdmin):
-    list_display = ('id','listing_condition')
+    list_display = ('listing_condition',)
 
 
 @admin.register(FurnishingType)
 class PropertyTypeAdmin(admin.ModelAdmin):
-    list_display = ('id','furnishing_type')
+    list_display = ('furnishing_type',)
 
 @admin.register(HouseType)
 class PropertyTypeAdmin(admin.ModelAdmin):
-    list_display = ('id','house_type')
+    list_display = ('house_type',)
 
 @admin.register(FaceTowards)
 class PropertyTypeAdmin(admin.ModelAdmin):
-    list_display = ('id','face_towards')
+    list_display = ('face_towards',)
 
 @admin.register(ContactNum)
 class FacilityTypeAdmin(admin.ModelAdmin):
-    list_display = ('id','mobile_num')
+    list_display = ('id','user','mobile_num')
 
 @admin.register(KYC)
 class KYC(admin.ModelAdmin):
@@ -44,11 +44,11 @@ class KYC(admin.ModelAdmin):
 
 @admin.register(KYCStatus)
 class PropertyTypeAdmin(admin.ModelAdmin):
-    list_display = ('id','kyc_status')
+    list_display = ('kyc_status',)
 
 @admin.register(PropertyStatus)
 class PropertyTypeAdmin(admin.ModelAdmin):
-    list_display = ('id','status')
+    list_display = ('status',)
 
 @admin.register(House)
 class PropertyAdmin(admin.ModelAdmin):
@@ -93,7 +93,7 @@ class PropertyTypeAdmin(admin.ModelAdmin):
 
 @admin.register(Land)
 class PropertyAdmin(admin.ModelAdmin):
-    list_display = ('id','title','slug','description','listing_type')
+    list_display = ('id','seller','title','slug','description','listing_type')
     fieldsets = (
         (None, {
             'fields': ('seller','title', 'description', 'listing_type','road_to_property','access_road')
