@@ -93,9 +93,16 @@ Connecting The Websocket:
 	when you update document status you will be notified
 
 For Real Time No of Views of Property:
-	ws://127.0.0.1:8000/ws/property/<id>/
+	ws://127.0.0.1:8000/ws/house/<int:id>/',consumers.IncreaseHouseViews
+    ws://127.0.0.1:8000/ws/land/<int:id>/',consumers.IncreaseLandViews
 	each time on Websocket connection no of views of proerty will be increased by 1
 
 New Item Listed For Sale notification in homepage:
 	ws://127.0.0.1:8000/ws/property/
 	msg will be sent when user post property for sell and and is_active field is made true
+
+For Google Login:
+       Click on login with google. If you are not logged in a popup will appear and choose your mail for login.
+       Then you will get reaponse from google which consist of token. If it is first time your account is not created, For creating your account go to url
+       dj-rest-auth/google/login and post with access token your account will be created if it is first time and access and refrest token will be received.
+       For the second time on dj-rest-auth/google/login account will not created and access and refrest token will be received
