@@ -22,6 +22,7 @@ urlpatterns = [
     path('dj-rest-auth/google/', GoogleLogin.as_view(), name='google_login'),
     path("login/cancelled/",login_cancelled,name="socialaccount_login_cancelled",),
     path("login/error/", login_error, name="socialaccount_login_error"),
-    
+    path("signup/", signup, name="socialaccount_signup")
 ]
+
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
