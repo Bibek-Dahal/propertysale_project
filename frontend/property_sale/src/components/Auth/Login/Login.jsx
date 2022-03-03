@@ -9,6 +9,7 @@ import { Link,useNavigate,useLocation } from 'react-router-dom';
 import Timer from '../../shared/Timer/Timer';
 import usePopup from '../../../Hooks/usePopup';
 import useAuth from '../../../Hooks/useAuth';
+import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
 
 export default function Login() {
     const {dispatch} = useAuth();
@@ -151,7 +152,7 @@ export default function Login() {
                             >
                             <div className="eye">
                                 <FontAwesomeIcon 
-                                    icon = {pwdVisible ? ["fas","eye"] : ["fas","eye-slash"]} 
+                                    icon = {pwdVisible ? solid('eye') :  solid('eye-slash')} 
                                     onClick = {eyeClickHandler}
                                 />
                             </div>
@@ -171,7 +172,7 @@ export default function Login() {
                             <button type="submit" className = {` ${isSubmitting ? "inactive" : ""}  ${throttleTime > 0  ? "inactive error" : "" }`}>
                                 {   throttleTime > 0 
                                         ? <div className = "insideBtnContents">
-                                            <FontAwesomeIcon  icon = {["fas","exclamation"]}/>
+                                            <FontAwesomeIcon  icon = {solid("exclamation")}/>
                                             <Timer length={throttleTime} removeTimer={removeTimer}/>
                                         </div>
                                         : isSubmitting ? 

@@ -34,6 +34,8 @@
     
     --profile-image-sml-width : 35px;
     --profile-image-sml-height : 35px;
+
+    --success : green;
 }
 
 body{
@@ -74,27 +76,8 @@ a{
     text-decoration: none;
 }
 
-#portal{
-    position:fixed;
-    z-index:999;
-}
-
-#portal .popup{
-    position: fixed;
-    top: 2em;
-    font-weight: bold;
-    left: 50%;
-    transform:translateX(-50%);
-    padding: 1em;
-    border-radius: 5px;
-    background: white;
-    min-height:100px;
-    color: black;
-    font-size: 1.3rem;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: var(--box-shadow-properties) #c0c0c061;
+nav a{
+    text-decoration: underline;
 }
 
 @media only screen and (min-width:1000px){

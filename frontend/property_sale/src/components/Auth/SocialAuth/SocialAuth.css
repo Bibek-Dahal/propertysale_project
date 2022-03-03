@@ -40,23 +40,27 @@
 
 .socialAuthContainer .auth-icons >*{
     display:inline-flex;
-    border:2px solid rgba(175, 175, 175, 0.507);
     font-size:var(--fs-xxxl);
-    padding:.2em .8em;
+    padding:.3em .8em;
     border-radius:.7em;
-    display:block;
     transition:all 150ms ease-in-out;
+    cursor:pointer;
+}
+.socialAuthContainer .auth-icons >*:not(.fa-spin){
+    border:2px solid rgba(175, 175, 175, 0.507);
     background:var(--fc-white);
-
 }
 
+
+.socialAuthContainer .auth-icons .fa-spin{
+    font-size:2rem;
+}
 .socialAuthContainer .auth-icons >* >*{
     pointer-events: none;
 }
 
 .socialAuthContainer .auth-icons >*:hover{
     border:2px solid transparent;
-    transform:Scale(1.05);
     box-shadow:var(--box-shadow-properties) rgba(138, 138, 138, 0.507);
     transform:Scale(1.1);
 }

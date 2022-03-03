@@ -1,4 +1,6 @@
+import axios from 'axios';
 import jwt_decode from 'jwt-decode';
+import Logout from '../components/Auth/Logout';
 
 export const initial_auth_condition = {
     access_token: localStorage.getItem('access_token') ? localStorage.getItem('access_token') : null,
@@ -24,13 +26,28 @@ export const authReducer = (state,action) => {
             console.log('logging out user')
             localStorage.removeItem("access_token");
             localStorage.removeItem("refresh_token");
-            return initial_auth_condition
+            return {
+                access_token : null,
+                refresh_token : null,
+                user : null
+            }
 
         case "updateAccessToken":
             return {
                 ...state,
                 access_token:action.token
             }    
+        
+        case "logout":
+
+
+            
+
+            return {
+                access_token : null,
+                refresh_token : null,
+                user : null
+            }
 
       default:
           throw(`unknown action type ${action.type}`)

@@ -7,6 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Timer from '../../shared/Timer/Timer';
 import usePopup from '../../../Hooks/usePopup';
+import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
 
 export default function Register() {
     const [isSubmitting,setIsSubmitting] = useState(0);
@@ -96,7 +97,7 @@ export default function Register() {
                         <InputField error = {errors?.password2 && errors.password2} label="Repeat pwd" name = "password2" type={pwdVisible ? "text" : "password"}  setErrors = {setErrors} fieldChangeHandler={fieldChangeHandler}/>
                         <div className="eye">
                             <FontAwesomeIcon 
-                                icon = {pwdVisible ? ["fas","eye"] : ["fas","eye-slash"]} 
+                                icon = {pwdVisible ? solid('eye') : solid('eye-slash')} 
                                 onClick = {eyeClickHandler}
                             />
                         </div>

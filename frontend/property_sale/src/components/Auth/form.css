@@ -38,7 +38,7 @@
     font-size:var(--fs-xxxxl);
 }
 
-.register-login-container button{
+.register-login-container button[type="submit"]{
     border:none;
     background:var(--blue);
     color:var(--fc-white);

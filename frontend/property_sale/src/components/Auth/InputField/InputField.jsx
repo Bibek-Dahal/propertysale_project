@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React,{useRef} from 'react';
 import { useEffect } from 'react';
 import './InputField.css';
+import {solid} from '@fortawesome/fontawesome-svg-core/import.macro';
 
 export default function InputField({name,label,type,fieldChangeHandler,error,children,borderColor,setErrors}) {
     const inputRef = useRef(null);
@@ -29,7 +30,7 @@ export default function InputField({name,label,type,fieldChangeHandler,error,chi
             {
                 error && 
                 <div className="error-tooltip">
-                    <FontAwesomeIcon icon={['fas','info-circle']} />
+                    <FontAwesomeIcon icon={solid('info-circle')} />
                     <div className="msg">{error}</div>
                 </div>
             }
