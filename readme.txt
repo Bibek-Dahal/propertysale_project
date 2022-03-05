@@ -93,8 +93,8 @@ Connecting The Websocket:
 	when you update document status you will be notified
 
 For Real Time No of Views of Property:
-	ws://127.0.0.1:8000/ws/house/<int:id>/',consumers.IncreaseHouseViews
-    ws://127.0.0.1:8000/ws/land/<int:id>/',consumers.IncreaseLandViews
+	ws://127.0.0.1:8000/ws/house/<int:id>/
+    	ws://127.0.0.1:8000/ws/land/<int:id>/
 	each time on Websocket connection no of views of proerty will be increased by 1
 
 New Item Listed For Sale notification in homepage:
