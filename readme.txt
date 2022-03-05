@@ -57,7 +57,7 @@ Note:
 6.Logout
 	data = {
 		"username":"",
-		"refresf":`${refrest_token}`
+		"refresh":`${refresh_token}`
 	}
 	axios.post('/api/account/logout/',data)
 
