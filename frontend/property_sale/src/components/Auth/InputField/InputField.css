@@ -56,7 +56,9 @@
     position:relative;
 }
 
-form.loginForm .eye{
+/* form.loginForm .eye{ */
+form .eye{
+
     position:absolute;
     top:50%;
     right:1em;

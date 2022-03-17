@@ -1,0 +1,158 @@
+nav{
+    /* border:1px solid red; */
+    display:flex;
+    height:var(--nav-height);
+    align-items: center;
+}
+
+.desktopNav{
+    display:none;
+}
+
+.profile{
+    margin-left:auto;
+    margin-right:0;
+}
+
+.homeBtn{
+    margin-right:auto;
+    position:relative;
+    z-index:999;
+    margin-left:0;
+}
+
+#burger{
+    display:flex;
+    flex-direction: column;
+    gap:.3em;
+    position:fixed;
+    bottom:2em;
+    right:2em;
+    cursor:pointer;
+}
+
+#burger >*{
+    height:5px;
+    width:35px;
+    background:black;
+    border-radius:5em;
+}
+
+.mobileNav{
+    position:fixed;
+    top:0;
+    bottom:0;
+    /* background:red; */
+    background:white;
+    box-shadow:var(--box-shadow-properties) rgb(187, 187, 187);
+    left:0;
+    min-width:60vw;
+    padding:var(--nav-height) 2em 0;
+    left:-100%;
+    transition:left .2s ease-in-out;
+}
+
+#burgerCheckBox:checked + .mobileNav{
+    left:0;
+
+}
+
+#burgerCheckBox:checked ~ #burger:before{
+    display:block;
+}
+
+#burgerCheckBox{
+    display:none;
+}
+
+#burger:before{
+    content:"";
+    position:fixed;
+    top:0;
+    right:0;
+    bottom:0;
+    width:40vw;
+    display:none;
+}
+
+#burger >*{
+    transition:transform 200ms ease;
+}
+
+#burgerCheckBox:checked ~ #burger >:nth-child(2){
+    transform:translateX(-50px)scaleX(0);
+}
+#burgerCheckBox:checked ~ #burger >:first-child{
+    transform:rotate(45deg)translate(-3px,-3px);
+    transform-origin:top left;
+}
+#burgerCheckBox:checked ~ #burger >:last-child{
+    transform:rotate(-45deg);
+    transform-origin:bottom left;
+}
+.mobileNav li{
+    list-style: none;
+}
+
+.mobileNav >*{
+    display:flex;
+    flex-direction: column;
+    font-size:var(--fs-xxl);
+    padding:1em 0;
+}
+
+@media only screen and (min-width : 800px){
+    .desktopNav{
+        display:flex;
+    }
+    .mobileNav{
+        display:none;
+    }
+   
+    #burger{
+        /* border:1px solid red; */
+        display:none;
+    }
+    
+}
+
+a.active{
+    position:relative;
+}
+
+a.active:before{
+    content : "";
+    position:absolute;
+    height:5px;
+    width:30px;
+    border-radius:5em;
+    background:var(--blue);
+    bottom:-1em;
+    left:50%;
+    transform:translateX(-50%);
+}
+
+a.navBtnStyle{
+    padding:.7em 2em;
+    border-radius:5em;
+    background:white;
+}
+a.navBtnStyle:hover{
+    box-shadow: var(--box-shadow-properties) rgb(202, 202, 202);
+}
+nav a{
+    font-size:var(--fs-xl);
+    text-decoration: none;
+    font-weight:bold;
+    margin:0 1em;
+    color:var(--blue);
+}
+
+.mobileNav a{
+    margin-left:0;
+}
+
+nav a[href="/register"],
+nav a[href="/user"]{
+    margin-right:0;
+}

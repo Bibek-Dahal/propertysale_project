@@ -2,6 +2,7 @@ import axios from "axios";
 import { createContext,useReducer } from "react";
 import usePopup from "../Hooks/usePopup";
 import { authReducer, initial_auth_condition } from "../reducers/authReducer";
+import links from "../axiosLinks";
 
 export const AuthContext = createContext();
 
@@ -14,7 +15,7 @@ export const AuthContextProvider = ({children}) => {
             console.log('verifuing refresh token');
             async function verify(){
                 try{
-                    let res = await axios.post('http://127.0.0.1:8000/api/account/token/refresh/',
+                    let res = await axios.post(`${links.refreshTokenVerify}`,
                         {refresh : state.refresh_token});
                         console.log(res);
                     dispatch({type : "updateAccessToken",token:res.data.access})
@@ -32,7 +33,7 @@ export const AuthContextProvider = ({children}) => {
             console.log('inside promise for verifying access token');
             async function verify(){
                 try{
-                    let res = await axios.post('http://127.0.0.1:8000/api/account/token/verify/',
+                    let res = await axios.post(`${links.tokenVerify}`,
                     {token : state.access_token});
                     return resolve('token is valid');
                 }catch(err){

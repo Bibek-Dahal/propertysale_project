@@ -15,13 +15,13 @@ export default function Modal() {
         switch(PopupType){
             case "success":
                 return <FontAwesomeIcon icon={solid('circle-check')}/>
+            case "error":
+                return <FontAwesomeIcon icon={solid('exclamation')}/>
             default:
                 return "";
         }
     }
 
-
-    // if(!PopupVisible) return null;
     return(
         ReactDom.createPortal(
                 <React.Fragment>
@@ -45,11 +45,3 @@ export default function Modal() {
     )
 }
 
-// ReactDom.createPortal(
-//     <React.Fragment>
-//         <div className="popup " >
-//             {PopupMsg}
-//         </div> )
-//     </React.Fragment>
-// ,document.getElementById('portal') 
-// )

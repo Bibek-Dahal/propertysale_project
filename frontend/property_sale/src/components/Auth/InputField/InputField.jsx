@@ -26,7 +26,6 @@ export default function InputField({name,label,type,fieldChangeHandler,error,chi
         <div className={`field ${name} ${error || borderColor == "red" ? "error" : ""}`} ref = {fieldRef}>
             <label htmlFor="" ref = {labelRef}>{label}</label>
             <input type={type}  name = {name} ref = {inputRef} onBlur={onBlurHandler} onFocus={onFocusHandler} onChange = {onChangeHandler} required/>
-
             {
                 error && 
                 <div className="error-tooltip">
@@ -34,7 +33,6 @@ export default function InputField({name,label,type,fieldChangeHandler,error,chi
                     <div className="msg">{error}</div>
                 </div>
             }
-
             {/* see what is this for not, sure forgot */}
             {children}
         </div>

@@ -39,10 +39,6 @@ export const authReducer = (state,action) => {
             }    
         
         case "logout":
-
-
-            
-
             return {
                 access_token : null,
                 refresh_token : null,

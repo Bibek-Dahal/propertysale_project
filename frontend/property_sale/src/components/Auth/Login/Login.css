@@ -27,6 +27,15 @@ span.sendVerificationMailBtn{
     margin-bottom: 2em;
 }
 
+a[href = "/password-reset"]{
+    /* border:1px solid red; */
+    text-align:left;
+    font-weight:bold;
+    color:var(--blue);
+    padding-left:.2em;
+}
+
+
 @media only screen and (min-width : 1000px){
     .login > .infoPart h1{
         margin-bottom:1em;

@@ -10,6 +10,7 @@ import {useLocation,useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import {brands,solid} from '@fortawesome/fontawesome-svg-core/import.macro';
 import Timer from '../../shared/Timer/Timer';
+import links from '../../../axiosLinks';
 
 export default function SocialAuth() {
     const [isLoading,setLoading] = useState(false);
@@ -20,6 +21,12 @@ export default function SocialAuth() {
     const from = location.state?.from?.pathname || "/";
     const [throttleTime,setThrottleTime] = useState(0);
 
+    const domain = "https://accounts.google.com/o/oauth2/v2/auth";
+    const scope = "https%3A//www.googleapis.com/auth/drive.metadata.readonly";
+    const state = "state_parameter_passthrough_value";
+    const redirect_uri = "storage_relay";
+    const client_id = "211100097274-8fkbk3jk57sfs0cvn5sd4u4s6vft353q.apps.googleusercontent.com";
+
     function responseGoogle(response){
         console.log(response)
         const accessToken = response.accessToken;
@@ -27,29 +34,27 @@ export default function SocialAuth() {
         async function getAccessToken(){
             try{
                 setLoading(true);
-                const res = await axios.post('http://127.0.0.1:8000/dj-rest-auth/google/',
+                const res = await axios.post(`${links.googleLogin}`,
                 {
                     access_token: accessToken,
                 }
-            )
-                try{
+                )
                     setLoading(false);
                     if(res.status == 200){
                         dispatch({type : "logUser",data : res.data}) 
                         showPopup(`successfully logged in as ${res.data.user.first_name}`,'success')
                     } 
                     navigate(from,{replace:true});
-                }catch(err){
-                    setLoading(false);
-                    console.log(err);
-                    if(err.response.status == "429"){
+            }catch(err){
+                console.log('eror occured: ',err)
+                setLoading(false);
+                    console.log(err.response);
+                    if(err.response.status === 429){
                         const errString = err.response.data.detail;
                         const timeLeft = errString.match(/\d+/);
                         setThrottleTime(timeLeft[0])
+                        showPopup(`Too many requests `,"error")
                     }
-                }
-            }catch(err){
-                console.log('eror occured: ',err)
             }
 
         }
@@ -67,7 +72,7 @@ export default function SocialAuth() {
               isLoading
           }
             {   throttleTime > 0 
-                    ? <div >
+                    ? <div className = "timer" >
                         <FontAwesomeIcon  icon = {solid("exclamation")}/>
                         <Timer length={throttleTime} removeTimer={removeTimer}/>
                     </div>
@@ -80,16 +85,23 @@ export default function SocialAuth() {
                             clientId = "211100097274-8fkbk3jk57sfs0cvn5sd4u4s6vft353q.apps.googleusercontent.com"
                             render={renderProps => (
                                 <button onClick={renderProps.onClick} disabled={renderProps.disabled}>
-                                    <Icon icon="google" height = "23"/>                           
+                                    <Icon icon="google" height = "23"/>       
+                                    <span className="text">Continue with google</span>                    
                                 </button>
                             )}
                             onSuccess={responseGoogle}
-                            onFailure={responseGoogle}
+                            // onFailure={responseGoogle}
                             cookiePolicy={'single_host_origin'}
                         />  
-                         <a href="#" >
+                        {/* <a 
+                            href={`${domain}?scope=${scope}&include_granted_scopes=true&response_type=token&state=${state}&redirect_uri=${redirect_uri}&client_id=${client_id}`}
+                            
+                            target = "_blank">
+                            <Icon icon="google" height = "23"/>                           
+                        </a> */}
+                        {/* <a href="#" >
                             <FontAwesomeIcon icon = {brands('facebook')} />
-                        </a>
+                        </a> */}
                   </div>
             }
           

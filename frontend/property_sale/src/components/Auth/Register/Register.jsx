@@ -8,6 +8,8 @@ import axios from 'axios';
 import Timer from '../../shared/Timer/Timer';
 import usePopup from '../../../Hooks/usePopup';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
+import links from '../../../axiosLinks';
+import { Nav } from '../..';
 
 export default function Register() {
     const [isSubmitting,setIsSubmitting] = useState(0);
@@ -33,10 +35,10 @@ export default function Register() {
         setIsSubmitting(1);
         const LogInUser = async () => {
             try{
-                const res = await axios.post('http://127.0.0.1:8000/api/account/registration/',
+                const res = await axios.post(`${links.registration}`,
                 formData)
                 setIsSubmitting(0);
-                showPopup('successfully signed up');
+                showPopup('successfully signed up\nPlease check verification email');
                 navigate("/login");
             }catch(err){
                 setIsSubmitting(0);
@@ -44,8 +46,8 @@ export default function Register() {
                 console.log(errBody)
                 setErrors((prevErr) => (prevErr = errBody));
                 console.log('error = ',errors)
-                console.log(errBody.non_field_errors == "E-mail is not verified.")
-                if(err.response.status == "429"){
+                console.log(err.response)
+                if(err.response.status === 429){
                     const errString = err.response.data.detail;
                     const timeLeft = errString.match(/\d+/);
                     console.log('setting throttle time to ',timeLeft[0])
@@ -68,7 +70,7 @@ export default function Register() {
     
     return(
         <React.Fragment>
-            {console.log('inside return errors = ',errors)}
+            <Nav />
             <div className='wrapper'>
             <div className="register register-login-container wrapper-2">
                 <div className="infoPart registerInfoPart">
@@ -83,41 +85,56 @@ export default function Register() {
                 </div>
                 <div className="form-container">
                         {
-                            errors?.status != "429" && errors.non_field_errors ? 
+                            errors?.status != 429 && errors.non_field_errors ? 
                                 <div className = "wholeFormError">
                                     {errors.non_field_errors}
-                                   
                                 </div>
                                 :null
                         }
                     <form onSubmit={registerHandler} className = "registerForm">
                         <InputField error = {errors?.username && errors.username} label="Username" name = "username" type="text"  setErrors = {setErrors} fieldChangeHandler={fieldChangeHandler}/>
                         <InputField error = {errors?.email && errors.email} label="Email address" name = "email" type="text" setErrors = {setErrors} fieldChangeHandler={fieldChangeHandler}/>
-                        <InputField error = {errors?.password1 && errors.password1}  label="Password" name = "password1" type={pwdVisible ?"text" : "password"}  setErrors = {setErrors} fieldChangeHandler={fieldChangeHandler}/>
-                        <InputField error = {errors?.password2 && errors.password2} label="Repeat pwd" name = "password2" type={pwdVisible ? "text" : "password"}  setErrors = {setErrors} fieldChangeHandler={fieldChangeHandler}/>
+                        <InputField error = {errors?.password1 && errors.password1}  label="Password" name = "password1" type={pwdVisible ?"text" : "password"}  setErrors = {setErrors} fieldChangeHandler={fieldChangeHandler}>
                         <div className="eye">
+                                    <FontAwesomeIcon 
+                                        icon = {pwdVisible ? solid('eye') :  solid('eye-slash')} 
+                                        onClick = {eyeClickHandler}
+                                    />
+                                </div>
+                            </InputField>
+                        <InputField error = {errors?.password2 && errors.password2} label="Repeat Password" name = "password2" type={pwdVisible ? "text" : "password"}  setErrors = {setErrors} fieldChangeHandler={fieldChangeHandler}>
+                                <div className="eye">
+                                    <FontAwesomeIcon 
+                                        icon = {pwdVisible ? solid('eye') :  solid('eye-slash')} 
+                                        onClick = {eyeClickHandler}
+                                    />
+                                </div>
+                        </InputField>
+                        {/* <div className="eye">
                             <FontAwesomeIcon 
                                 icon = {pwdVisible ? solid('eye') : solid('eye-slash')} 
                                 onClick = {eyeClickHandler}
                             />
-                        </div>
+                        </div> */}
                         <div className="terms-conditions">
-                            <input type="checkbox" name = "aggreed" required/>
-                            I agree with the 
-                            <a href = "#">terms and conditions</a>
+                            <input type="checkbox" name = "aggreed" id = "terms" required/>
+                            <label htmlFor="terms">
+                                I agree with the 
+                                <a href = "#">terms and conditions</a>  
+                            </label>
                         </div>
                         <button type="submit"
                                 className = {` ${isSubmitting ? "inactive" : ""}  ${throttleTime > 0  ? "inactive error" : "" }`}
                             >
                               {   throttleTime > 0 
-                                            ? <div className = "insideBtnContents">
-                                                <FontAwesomeIcon  icon = {["fas","exclamation"]}/>
-                                                <Timer length={throttleTime} removeTimer={removeTimer}/>
-                                            </div>
-                                            : isSubmitting ? 
-                                                <FontAwesomeIcon className ="fa-spin" icon = {["fas","circle-notch"]}/>:
-                                                "Sign Up"
-                                    }
+                                    ? <div className = "insideBtnContents">
+                                        <FontAwesomeIcon  icon = {["fas","exclamation"]}/>
+                                        <Timer length={throttleTime} removeTimer={removeTimer}/>
+                                    </div>
+                                    : isSubmitting ? 
+                                        <FontAwesomeIcon className ="fa-spin" icon = {solid('circle-notch')}/>:
+                                        "Sign Up"
+                                }
                             </button>
                     </form>
                 </div>

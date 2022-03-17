@@ -6,14 +6,13 @@ import {
 } from 'react-router-dom';
 
 import Modal from './components/Modal/Modal';
-import usePopup from './Hooks/usePopup';
-import Login from './components/Auth/Login/Login'
-import Register from './components/Auth/Register/Register';
+import {usePopup} from './Hooks/index';
+import {Login, PasswordReset} from './components/index'
+import {Register} from './components/index';
 import Home from './components/Home/Home';
 import User from './components/User/User';
 import PrivateRoute from './components/utils/PrivateRoute';
 import Logout from './components/Auth/Logout';
-
 
 function App() {
   const {PopupVisible} = usePopup();
@@ -34,6 +33,7 @@ function App() {
           <Route path = "/login" element = {<Login />}/>
           <Route path = "/logout" element = {<Logout />}/>
           <Route path = "/register" element = {<Register />}/>
+          <Route path = "/password-reset" element = {<PasswordReset />}/>
         </Routes>
       </Router>
     </div>

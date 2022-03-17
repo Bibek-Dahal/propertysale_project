@@ -1,8 +1,7 @@
 import React,{useEffect} from 'react'
 import useAuth from '../../Hooks/useAuth';
-import Nav from '../Nav/Nav';
 import { Link } from 'react-router-dom';
-
+import { Nav } from '../index';
 export default function User() {
 
     const {state,checkAndRemoveToken} = useAuth(); 
@@ -16,12 +15,9 @@ export default function User() {
     <>
         <Nav />
         <h1>User</h1>
-        <h2>
                 {state.user ? <h1>
                     This is a profile of {state.user.username} 
                 </h1>: ""}
-        </h2>
-       
     </>
   )
 }

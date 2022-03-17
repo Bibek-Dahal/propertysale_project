@@ -107,3 +107,11 @@
         transform:translateX(200px);
     }
 }
+
+.popup.error{
+    color:Red;
+}
+
+.popup.error:before{
+    background:Red;
+}

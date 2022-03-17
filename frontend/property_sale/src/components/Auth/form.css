@@ -28,8 +28,8 @@
 }
 
 .register-login-container >*:last-child{
-    width:90%;
-    max-width:500px;
+    width:95%;
+    max-width:550px;
     margin: 0 auto;
     justify-self:end;
 }

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import useAuth from '../../Hooks/useAuth';
 import axios from 'axios';
 import usePopup from '../../Hooks/usePopup';
+import links from '../../axiosLinks';
 
 export default function Logout() {
     const navigate = useNavigate();
@@ -12,7 +13,7 @@ export default function Logout() {
         console.log('logging out');
         async function logout(){
             try{
-             const res = await axios.post('http://127.0.0.1:8000/api/account/logout/',{
+             const res = await axios.post(`${links.logout}`,{
                  refresh : state.refresh_token
              })
              console.log(res);
