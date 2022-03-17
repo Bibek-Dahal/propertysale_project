@@ -1,5 +1,3 @@
-
-
 from pathlib import Path
 from decouple import config
 from datetime import timedelta
@@ -21,7 +19,10 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '192.168.1.70',
+    '127.0.0.1'
+]
 
 
 # Application definition
@@ -147,6 +148,9 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3000",
     "http://localhost:3000",
+    "http://192.168.1.70", # for local testing,
+    "http://192.168.1.70:3000", # for local testing,
+
 ]
 
 REST_FRAMEWORK = {
@@ -195,7 +199,8 @@ SOCIALACCOUNT_LOGIN_ON_GET = True
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 # ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = True
 # ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = "localhost:3000"
-ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = "http://127.0.0.1:3000/form/login"
+# ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = "http://127.0.0.1:3000/form/login"
+
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 OLD_PASSWORD_FIELD_ENABLED = True
 REST_SESSION_LOGIN = False
