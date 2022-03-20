@@ -14,7 +14,9 @@ from dj_rest_auth.views import (
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/',include('api.urls',namespace='api')),
-    path('account/password/reset/confirm/<uidb64>/<token>/', PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    # path('account/password/reset/confirm/<uidb64>/<token>/', PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    # the above line must be replaced by below line
+    path('password-reset/confirm/<uidb64>/<token>/', PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     path('confirm-email/<str:key>/',ConfirmEmailView.as_view(),name="account_confirm_email",),
     path('confirm-email/',VerifyEmailView.as_view(),name='account_email_verification_sent'),
     # social account
