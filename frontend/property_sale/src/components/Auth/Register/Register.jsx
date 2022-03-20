@@ -10,6 +10,7 @@ import usePopup from '../../../Hooks/usePopup';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
 import links from '../../../axiosLinks';
 import { Nav } from '../..';
+import useNumExtracter from 'num-extracter';
 
 export default function Register() {
     const [isSubmitting,setIsSubmitting] = useState(0);
@@ -24,6 +25,7 @@ export default function Register() {
     const [errors,setErrors] = useState({});
     const navigate = useNavigate();
     const [throttleTime,setThrottleTime] = useState(0);
+    const {number} = useNumExtracter();
 
     const removeTimer = () => {
         setThrottleTime(0);
@@ -49,9 +51,9 @@ export default function Register() {
                 console.log(err.response)
                 if(err.response.status === 429){
                     const errString = err.response.data.detail;
-                    const timeLeft = errString.match(/\d+/);
-                    console.log('setting throttle time to ',timeLeft[0])
-                    setThrottleTime(timeLeft)
+                    // const timeLeft = errString.match(/\d+/);
+                    // console.log('setting throttle time to ',timeLeft[0])
+                    setThrottleTime(number(errString)[0])
                     setErrors(prevData => ({...prevData,status:err.response.status}))
                 }
                 console.log('error = ',errors)

@@ -1,0 +1,14 @@
+#full-screen-loading{
+    /* border:1px solid red; */
+    height:calc(100vh - var(--nav-height));
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    gap:1em;
+    align-items: center;
+}
+
+#full-screen-loading svg{
+    font-size:var(--fs-xxxxl);
+    color:var(--blue);
+}

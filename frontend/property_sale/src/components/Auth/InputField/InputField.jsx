@@ -11,7 +11,6 @@ export default function InputField({name,label,type,fieldChangeHandler,error,chi
 
     const onFocusHandler = (e) => {
         fieldRef.current.classList.add('focus');
-        setErrors({});
         labelRef.current.classList.add("move");}
     const onBlurHandler = (e) => {
         fieldRef.current.classList.remove('focus');

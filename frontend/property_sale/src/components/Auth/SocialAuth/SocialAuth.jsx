@@ -11,6 +11,7 @@ import { useState } from 'react';
 import {brands,solid} from '@fortawesome/fontawesome-svg-core/import.macro';
 import Timer from '../../shared/Timer/Timer';
 import links from '../../../axiosLinks';
+import useNumExtracter from 'num-extracter';
 
 export default function SocialAuth() {
     const [isLoading,setLoading] = useState(false);
@@ -21,11 +22,13 @@ export default function SocialAuth() {
     const from = location.state?.from?.pathname || "/";
     const [throttleTime,setThrottleTime] = useState(0);
 
-    const domain = "https://accounts.google.com/o/oauth2/v2/auth";
-    const scope = "https%3A//www.googleapis.com/auth/drive.metadata.readonly";
-    const state = "state_parameter_passthrough_value";
-    const redirect_uri = "storage_relay";
-    const client_id = "211100097274-8fkbk3jk57sfs0cvn5sd4u4s6vft353q.apps.googleusercontent.com";
+    const {number} = useNumExtracter();
+
+    // const domain = "https://accounts.google.com/o/oauth2/v2/auth";
+    // const scope = "https%3A//www.googleapis.com/auth/drive.metadata.readonly";
+    // const state = "state_parameter_passthrough_value";
+    // const redirect_uri = "storage_relay";
+    // const client_id = "211100097274-8fkbk3jk57sfs0cvn5sd4u4s6vft353q.apps.googleusercontent.com";
 
     function responseGoogle(response){
         console.log(response)
@@ -51,8 +54,8 @@ export default function SocialAuth() {
                     console.log(err.response);
                     if(err.response.status === 429){
                         const errString = err.response.data.detail;
-                        const timeLeft = errString.match(/\d+/);
-                        setThrottleTime(timeLeft[0])
+                        // const timeLeft = errString.match(/\d+/);
+                        setThrottleTime(number(errString)[0])
                         showPopup(`Too many requests `,"error")
                     }
             }
