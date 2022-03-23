@@ -185,10 +185,10 @@ class House(Property):
     furnishing = models.ForeignKey(FurnishingType,on_delete=models.PROTECT)
     on_sale = models.BooleanField(default=True) #determines whether to show onsale tag or not and if property is for rent this field should be saved as false
     house_type = models.ForeignKey(HouseType,on_delete=models.PROTECT,blank=True,null=True)
-    floors = models.CharField(default=0,max_length=3)
-    beds = models.CharField(default=0,max_length=3)
-    kitchen = models.CharField(default=0,max_length=3)
-    living = models.CharField(default=0,max_length=3)
+    floors = models.CharField(default=1,max_length=3)
+    beds = models.CharField(default=1,max_length=3)
+    kitchen = models.CharField(default=1,max_length=3)
+    living = models.CharField(default=1,max_length=3)
     parking = models.CharField(default=0,max_length=2)
     bath = models.CharField(default=0,max_length=2)
 
