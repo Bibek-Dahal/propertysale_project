@@ -58,7 +58,7 @@ class PropertyAdmin(admin.ModelAdmin):
             'fields': ('seller','title', 'description', 'listing_type','house_type','property_type','condition','road_to_property','access_road')
         }),
         ('Location', {
-            'fields': ('district','zone','landmark','zip'),
+            'fields': ('district','zone','province','landmark','zip'),
         }),
         ('Land Area', {
             'fields': ('area', 'ropani','aana','paisa','daam'),
@@ -79,7 +79,7 @@ class PropertyAdmin(admin.ModelAdmin):
             'fields': ('floors','beds','kitchen','living','bath'),
         }),
         (None, {
-            'fields': ('main_image','no_of_views','longitude','latitude','is_active','status'),
+            'fields': ('main_image','url','no_of_views','longitude','latitude','is_active','status'),
         }),
     )
 
@@ -99,7 +99,7 @@ class PropertyAdmin(admin.ModelAdmin):
             'fields': ('seller','title', 'description', 'listing_type','road_to_property','access_road')
         }),
         ('Location', {
-            'fields': ('district','zone','landmark','zip'),
+            'fields': ('district','zone','province','landmark','zip'),
         }),
         ('Land Area', {
             'fields': ('area', 'ropani','aana','paisa','daam'),
@@ -111,7 +111,7 @@ class PropertyAdmin(admin.ModelAdmin):
             'fields': ('face_towards',),
         }),
         (None, {
-            'fields': ('main_image','no_of_views','longitude','latitude','is_active','status'),
+            'fields': ('main_image','url','no_of_views','longitude','latitude','is_active','status'),
         }),
     )
 

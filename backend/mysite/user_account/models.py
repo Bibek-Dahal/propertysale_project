@@ -7,10 +7,17 @@ from .customUserManager import CustomUserManager
 from django.contrib.auth.validators import UnicodeUsernameValidator
 
 class MyUser(AbstractBaseUser,PermissionsMixin):
+    gender_choices = (
+        ('Male','Male'),
+        ('Female','Female'),
+        ('Others','Others')
+    )
     username = models.CharField(_('username'),max_length = 50,unique = True)
     email = models.EmailField(_('email address'), max_length = 40, unique= True)
     first_name = models.CharField(_('first name'),max_length= 50,blank = True)
     last_name = models.CharField(_('last name'),max_length=50,blank = True)
+    gender = models.CharField(choices=gender_choices,null=True,max_length=10)
+    date_of_birth = models.DateField(null=True)
     date_joined = models.DateTimeField(_('date joined'),default= timezone.now)
     last_login = models.DateTimeField(_('last login'),auto_now_add=True)
     is_staff = models.BooleanField(_('staff status'),default = False)

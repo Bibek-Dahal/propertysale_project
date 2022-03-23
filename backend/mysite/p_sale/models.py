@@ -23,7 +23,8 @@ class Facility(models.Model):
 
 class ContactNum(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
-    mobile_num = models.PositiveIntegerField()
+    country_code = models.CharField(max_length=4,default='+977')
+    mobile_num = models.CharField(max_length=10)
 
     def __str__(self):
         return self.user.username
@@ -121,6 +122,7 @@ class Property(models.Model):
     road_to_property = models.CharField(max_length=300,blank=True)
     access_road = models.CharField(max_length=80,blank=True)
     district = models.CharField(max_length=30)
+    province = models.CharField(max_length=1,choices=Choice.province,null=True)
     zone = models.CharField(max_length=30)
     zip = models.PositiveIntegerField(default=0,blank=True)
     landmark = models.CharField(max_length=200,blank=True)
@@ -134,6 +136,7 @@ class Property(models.Model):
     price_negotiable =  models.CharField(max_length=3,choices=Choice.negotiable_type,default='No')
     face_towards = models.ForeignKey(FaceTowards,on_delete=models.PROTECT)
     main_image = CloudinaryField('main_image')
+    url = models.URLField(null=True)
     latitude = models.FloatField()
     longitude = models.FloatField()
     created_at = models.DateTimeField(auto_now_add = True)
@@ -167,6 +170,7 @@ class LandOwnerCertificate(models.Model):
     images like laalpurja naksa
     """
     land = models.ForeignKey(Land,on_delete=models.CASCADE)
+    certificate_name = models.CharField(max_length=30,null=True)
     certificate_image = CloudinaryField('certificate_image')
     created_at = models.DateTimeField(auto_now_add = True)
 
@@ -204,6 +208,7 @@ class HouseOwnerCertificate(models.Model):
     images like laalpurja naksa
     """
     house = models.ForeignKey(House,on_delete=models.CASCADE)
+    certificate_name = models.CharField(max_length=30,null=True)
     certificate_image = CloudinaryField('certificate_image')
     created_at = models.DateTimeField(auto_now_add = True)
    
