@@ -21,7 +21,7 @@ export default function Modal() {
                 return "";
         }
     }
-
+    
     return(
         ReactDom.createPortal(
                 <React.Fragment>

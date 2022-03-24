@@ -3,12 +3,13 @@ import DesktopNav from './DesktopNav'
 import MyLink from './MyLink';
 import MobileNav from './MobileNav'
 import './Nav.css';
-import { useAuth } from '../../Hooks';
+import { useAuth, useWindowSize } from '../../Hooks';
 import { useLocation } from 'react-router-dom';
 
 export default function Nav() {
     const {state} = useAuth();
     const location = useLocation();
+    const {size} = useWindowSize();
 
     return (    
     <>
@@ -47,7 +48,10 @@ export default function Nav() {
             {
                 !state?.user &&
                     <MyLink to = "/register"  className = "navBtnStyle">
-                        Sign In
+                        Sign Up
+                        {
+                            
+                        }
                     </MyLink>
             }
         </nav>

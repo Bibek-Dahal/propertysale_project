@@ -1,0 +1,21 @@
+.input-field-profile input,
+.input-field-profile select,
+.profile-container input[type = "submit"]{
+    /* border:1px solid red; */
+    font-size:var(--fs-xxl);
+    padding:.7em 1em;
+    outline:none;
+    border:1px solid rgba(85, 85, 85, 0.226);
+    background:#b4c1ff3b;
+    border-radius:5px;
+}
+
+.input-field-profile{
+    gap:1em;
+    margin-bottom:2em;
+}
+
+.input-field-profile label{
+    opacity:.6;
+    /* font-weight: bold; */
+}

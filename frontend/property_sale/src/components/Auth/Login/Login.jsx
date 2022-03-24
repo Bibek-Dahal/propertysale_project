@@ -169,7 +169,7 @@ export default function Login() {
                                                     }
                                                 </span>
                                     }
-                                    <a href="/password-reset">
+                                    <a className = "small-links align-left" href="/password-reset">
                                         Forgot password?
                                     </a>
                                     <button type="submit" className = {` ${isSubmitting ? "inactive" : ""}  ${throttleTime > 0  ? "inactive error" : "" }`}>

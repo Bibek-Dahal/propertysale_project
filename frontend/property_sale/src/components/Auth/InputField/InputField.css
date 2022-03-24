@@ -54,6 +54,7 @@
 
 .field{
     position:relative;
+    border:2px solid rgb(238, 238, 238);
 }
 
 /* form.loginForm .eye{ */

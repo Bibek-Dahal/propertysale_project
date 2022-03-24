@@ -5,7 +5,7 @@ import './PasswordReset.css';
 import MobileIllustration from './BeforeEmailSent';
 import EmailSent from './EmailSent';
 import {FullScreenLoading} from '../shared/index.js';
-import {  usePopup, useWindowSize } from '../../Hooks';
+import {  useAuth, usePopup, useWindowSize } from '../../Hooks';
 import useSendMail from '../../Hooks/useSendMail';
 import useNumExtracter from 'num-extracter';
 
@@ -18,7 +18,8 @@ export default function PasswordReset() {
     const {sendPasswordResetMail} = useSendMail();
     const {showPopup} = usePopup();
     const {number} = useNumExtracter();
-
+    const {state} = useAuth();
+    
     function passwordChangeHandler(e){
         e.preventDefault();
         console.log(email);
@@ -113,6 +114,7 @@ export default function PasswordReset() {
                                         name="email" 
                                         label="Email address"
                                         type="text"
+                                        // value = {state?.user.email}
                                         fieldChangeHandler={fieldChangeHandler}
                                         error = {errors && errors.email}
                                         setErrors = {setErrors}

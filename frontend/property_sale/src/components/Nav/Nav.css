@@ -29,32 +29,39 @@ nav{
     bottom:2em;
     right:2em;
     cursor:pointer;
+    z-index:999;
 }
 
 #burger >*{
-    height:5px;
-    width:35px;
-    background:black;
+    height:4px;
+    width:30px;
+    background:rgb(0, 0, 0);
     border-radius:5em;
+}
+
+#burger >*:hover{
+    /* background:red; */
 }
 
 .mobileNav{
     position:fixed;
-    top:0;
-    bottom:0;
-    /* background:red; */
-    background:white;
-    box-shadow:var(--box-shadow-properties) rgb(187, 187, 187);
-    left:0;
-    min-width:60vw;
-    padding:var(--nav-height) 2em 0;
-    left:-100%;
-    transition:left .2s ease-in-out;
+    top:1em;
+    bottom:1em;
+    background:rgb(0, 87, 168);
+    /* box-shadow:var(--box-shadow-properties) rgb(187, 187, 187); */
+    min-width:300px;
+    border-radius:8px;
+    /* padding:var(--nav-height) 2em 0; */
+    right:-100%;
+    transition:right .2s ease-in-out;
+    display:flex;
+    flex-direction:column;
+    gap:1em;
+    padding:4em 2em 0 2em;
 }
 
 #burgerCheckBox:checked + .mobileNav{
-    left:0;
-
+    right:1em;
 }
 
 #burgerCheckBox:checked ~ #burger:before{
@@ -69,10 +76,12 @@ nav{
     content:"";
     position:fixed;
     top:0;
-    right:0;
     bottom:0;
-    width:40vw;
+    width:100vw;
     display:none;
+    /* background: #06060638; */
+    width:calc(100vw - 300px - 1.5em);
+    left:0;
 }
 
 #burger >*{
@@ -90,15 +99,17 @@ nav{
     transform:rotate(-45deg);
     transform-origin:bottom left;
 }
-.mobileNav li{
-    list-style: none;
+
+#burgerCheckBox:checked ~ #burger >*{
+    background:white;
 }
 
+/* .mobileNav li{
+    list-style: none;
+} */
+
 .mobileNav >*{
-    display:flex;
-    flex-direction: column;
-    font-size:var(--fs-xxl);
-    padding:1em 0;
+    /* border:1px solid red; */
 }
 
 @media only screen and (min-width : 800px){
@@ -136,11 +147,12 @@ a.navBtnStyle{
     padding:.7em 2em;
     border-radius:5em;
     background:white;
+    box-shadow:1px 1px 20px rgb(231, 231, 231);
 }
 a.navBtnStyle:hover{
     box-shadow: var(--box-shadow-properties) rgb(202, 202, 202);
 }
-nav a{
+nav > a{
     font-size:var(--fs-xl);
     text-decoration: none;
     font-weight:bold;
@@ -149,10 +161,41 @@ nav a{
 }
 
 .mobileNav a{
-    margin-left:0;
+    text-decoration: none;
+    /* font-weight:bold; */
+    /* color:var(--blue); */
+    color:white;
+    padding:.5em 0;
+    font-size:var(--fs-xl);
+    display:flex;
+    gap:1.5em;
+    flex-direction: row;
+    align-items:Center;
+    transition:all 200ms ease-in-out;
+    opacity:.8;
+}
+
+.mobileNav a:hover{
+    opacity:1;
+    /* transform:scale(.98); */
+    transform-origin:center left;
+}
+
+.mobileNav a svg{
+    font-size:var(--fs-xxxl);
 }
 
 nav a[href="/register"],
 nav a[href="/user"]{
     margin-right:0;
 }
+
+
+
+
+
+
+
+
+
+

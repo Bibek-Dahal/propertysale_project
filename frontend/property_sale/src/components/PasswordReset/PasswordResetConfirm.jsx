@@ -44,7 +44,9 @@ export default function PasswordResetConfirm() {
         }
       }catch(err){
         setIsLoading(0);
-        console.log(err);
+        console.log(err.response);
+        
+        showPopup(err.response.data.new_password1 ? err.response.data.new_password1 : err.response.data.new_password2,'error')
       }
     }
 
@@ -53,7 +55,7 @@ export default function PasswordResetConfirm() {
   }
 
   function fieldChangeHandler(e){
-    console.log(e);
+    // console.log(e);
     setFormData(prev => {
       return{
         ...prev,

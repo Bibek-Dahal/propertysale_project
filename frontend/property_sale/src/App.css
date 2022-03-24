@@ -28,7 +28,9 @@
     --form-field-focus:rgb(0, 145, 241);
     --gray: #8F9398;
     --nav-height:10vh;
-    --body-bg: rgb(241, 241, 241);
+    /* --body-bg: rgb(241, 241, 241); */
+    --body-bg: rgb(255, 255, 255);
+
     
     --error-form-field:red;
     
@@ -78,6 +80,24 @@ a{
 
 nav a{
     text-decoration: underline;
+}
+
+.small-links{
+    font-weight:bold;
+    color:var(--blue);
+    padding-left:.2em;
+}
+
+.small-links .link{
+    color:red;
+    cursor:pointer;
+}
+
+.small-links.align-left{
+    text-align:left;
+}
+.small-links.align-right{
+    text-align:right;
 }
 
 @media only screen and (min-width:1000px){

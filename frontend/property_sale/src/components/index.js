@@ -6,7 +6,7 @@ import Timer from './shared/Timer/Timer';
 import Nav from './Nav/Nav';
 import PasswordReset from './PasswordReset/PasswordReset';
 import PasswordResetConfirm from './PasswordReset/PasswordResetConfirm';
-
+import Profile from './Profile/Profile';
 
 export {
     Login,
@@ -16,5 +16,6 @@ export {
     Timer,
     Nav,
     PasswordReset,
-    PasswordResetConfirm
+    PasswordResetConfirm,
+    Profile
 }

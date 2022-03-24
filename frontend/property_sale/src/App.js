@@ -7,7 +7,7 @@ import {
 
 import Modal from './components/Modal/Modal';
 import {usePopup} from './Hooks/index';
-import {Login, PasswordReset,Register,User,Home,PasswordResetConfirm} from './components/index'
+import {Login, PasswordReset,Register,User,Home,PasswordResetConfirm, Profile} from './components/index'
 
 // import Home from './components/Home/Home';
 // import User from './components/User/User';
@@ -41,6 +41,7 @@ function App() {
                 <Register />
               </ProtectedRoute>
           }/>
+          <Route path = "user/profile" element = {<Profile />}/>
           <Route path = "/password-reset" element = {<PasswordReset />} />
           <Route path = "/password-reset/confirm/:uid/:token" element = {<PasswordResetConfirm />} />
         </Routes>
