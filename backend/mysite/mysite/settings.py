@@ -20,11 +20,9 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    # '192.168.1.70', 
+    '192.168.1.70', 
     # is my IP for local testing you can change it to your pc's ip
-
     '127.0.0.1',
-    
 ]
 
 
@@ -151,8 +149,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3000",
     "http://localhost:3000",
-    # "http://192.168.1.70", # for local testing,
-    # "http://192.168.1.70:3000", # for local testing,
+    "http://192.168.1.70", # for local testing,
+    "http://192.168.1.70:3000", # for local testing,
 
 ]
 
@@ -196,6 +194,8 @@ SITE_ID = 1
 
 LOGIN_REDIRECT_URL = 'http://127.0.0.1:3000'
 # LOGOUT_REDIRECT_URL = 'http://127.0.0.1:3000/login'
+LOGOUT_REDIRECT_URL = 'http://127.0.0.1:3000'
+
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 SOCIALACCOUNT_LOGIN_ON_GET = True
