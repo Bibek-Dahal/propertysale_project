@@ -1,3 +1,4 @@
+from typing_extensions import Required
 from dj_rest_auth.serializers import PasswordChangeSerializer
 from rest_framework import serializers
 from user_account.models import MyUser as User
@@ -63,7 +64,7 @@ class UserPasswordResetConfirmSerializer(PasswordResetConfirmSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     date_of_birth = serializers.DateField(required=True)
-    gender = serializers.ChoiceField(choices=Choice.gender)
+    gender = serializers.ChoiceField(choices=Choice.gender,required=True)
     class Meta:
         model = User
         fields = ('id','username','email','first_name','last_name','date_of_birth','gender')
