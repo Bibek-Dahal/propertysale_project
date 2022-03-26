@@ -5,9 +5,9 @@ import { Nav } from '..';
 import { useWindowSize } from '../../Hooks';
 import './Profile.css';
 import { useEffect } from 'react';
+import { FullScreenLoading } from '../shared';
 
 export default function Profile() {
-    
     const [kyc,setKyc] = useState(0);
     const size = useWindowSize();
 
@@ -15,22 +15,15 @@ export default function Profile() {
         setKyc(setTo);
     }
 
-    useEffect(() => {
-        return () => {
-            setKyc(0);
-        }
-    },[])
-
-
     return (
         <React.Fragment>
-            <Nav />
+                <Nav />
                 <div className="profile-container wrapper">
                     {   
                         size.width < 800 && kyc === 1 && <Kyc />
                     }
                     {
-                        size.width < 800 && kyc === 0 && <Personal setKycHandler={setKycHandler} />
+                        size.width < 800 && kyc === 0 && <Personal setKycHandler={setKycHandler} setIsLoading = {setIsLoading}/>
                     }  
                     {
                         size.width > 800 && <Personal kyc = {kyc}/>
