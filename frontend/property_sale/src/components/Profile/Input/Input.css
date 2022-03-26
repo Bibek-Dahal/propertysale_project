@@ -2,12 +2,13 @@
 .input-field-profile select,
 .profile-container input[type = "submit"]{
     /* border:1px solid red; */
-    font-size:var(--fs-xxl);
+    font-size:var(--fs-xl);
     padding:.7em 1em;
     outline:none;
     border:1px solid rgba(85, 85, 85, 0.226);
-    background:#b4c1ff3b;
+    /* background:#b4c1ff3b; */
     border-radius:5px;
+    background:white;
 }
 
 .input-field-profile{

@@ -1,7 +1,9 @@
 import React from 'react'
+import { useState } from 'react';
 import './Input.css';
 
-export default function Input({label,type,children,fieldHandler}) {
+export default function Input({name,value,label,type,children,fieldHandler}) {
+
   function changeHandler(e){
     fieldHandler(e);
   }
@@ -12,7 +14,12 @@ export default function Input({label,type,children,fieldHandler}) {
               <label>{label}</label>
               {
                 type !== 'select' ?
-                  <input type = {type} onChange = {changeHandler}/>:
+                  <input 
+                    type = {type} 
+                    onChange = {changeHandler}
+                    value = {value}
+                    name = {name}
+                  />:
                   <select>
                     {children}
                   </select>

@@ -2,10 +2,12 @@ import React,{useState} from 'react'
 import { useWindowSize } from '../../../Hooks';
 import Input from '../Input/Input';
 import './Personal.css';
+import { useAuth } from '../../../Hooks';
 
 export default function Personal({setKycHandler}) {
+    const {state} = useAuth();
     const [formData,setFormData] = useState({
-        first_name : '',
+        first_name : state?.user.username,
         last_name : '',
         dob : '',
         gender : ''
@@ -20,7 +22,6 @@ export default function Personal({setKycHandler}) {
     function formHandler(e){
         e.preventDefault();
         console.log('submitted',formData);
-
     }
     
     function fieldHandler(e){
@@ -42,12 +43,15 @@ export default function Personal({setKycHandler}) {
             name = "first_name"
             label = "First name"
             type = "text"
+            value = {formData.first_name}
             fieldHandler = {fieldHandler}
         />
         <Input 
             name = "last_name"
             label = "Last name"
             type = "text"
+            value = {formData.last_name}
+            fieldHandler = {fieldHandler}
         />
         <Input 
             name = "dob"
