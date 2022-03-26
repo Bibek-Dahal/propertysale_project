@@ -14,5 +14,8 @@ urlpatterns = [
     #user registration
     path('account/registration/', include('dj_rest_auth.registration.urls')),
     path('account/password/reset/', PasswordResetView.as_view(), name='account_password_reset'), 
+
+    path('retrive-user/',views.RetriveUserView.as_view(),name='retrive_user'),
+    path('update-user/',views.UpdateUserView.as_view(),name='update_user'),
      
 ]

@@ -6,12 +6,13 @@ from django.utils.translation import gettext_lazy as _
 from .validators import check_pswd,custom_check_pswd
 from dj_rest_auth.registration.serializers import RegisterSerializer
 from dj_rest_auth.serializers import PasswordResetConfirmSerializer
+from p_sale.choices_type import Choice
 
 
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ('username','email','first_name','last_name')
+# class UserSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = User
+#         fields = ('username','email','first_name','last_name')
 
 
 # class ChangePasswordSerializer(serializers.ModelSerializer):
@@ -59,3 +60,11 @@ class UserPasswordChangeSerializer(PasswordChangeSerializer):
 class UserPasswordResetConfirmSerializer(PasswordResetConfirmSerializer):
     new_password1 = serializers.CharField(max_length=128,validators = [custom_check_pswd])
     new_password2 = serializers.CharField(max_length=128)
+
+class UserSerializer(serializers.ModelSerializer):
+    date_of_birth = serializers.DateField(required=True)
+    gender = serializers.ChoiceField(choices=Choice.gender)
+    class Meta:
+        model = User
+        fields = ('id','username','email','first_name','last_name','date_of_birth','gender')
+        read_only_fields = ('id','email',)

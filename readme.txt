@@ -57,7 +57,7 @@ Note:
 6.Logout
 	data = {
 		"username":"",
-		"refresf":`${refrest_token}`
+		"refresh":`${refresh_token}`
 	}
 	axios.post('/api/account/logout/',data)
 
@@ -93,8 +93,8 @@ Connecting The Websocket:
 	when you update document status you will be notified
 
 For Real Time No of Views of Property:
-	ws://127.0.0.1:8000/ws/house/<int:id>/',consumers.IncreaseHouseViews
-    ws://127.0.0.1:8000/ws/land/<int:id>/',consumers.IncreaseLandViews
+	ws://127.0.0.1:8000/ws/house/<int:id>/
+    	ws://127.0.0.1:8000/ws/land/<int:id>/
 	each time on Websocket connection no of views of proerty will be increased by 1
 
 New Item Listed For Sale notification in homepage:
@@ -107,4 +107,25 @@ For Google Login:
        dj-rest-auth/google/login and post with access token your account will be created if it is first time and access and refrest token will be received.
        For the second time on dj-rest-auth/google/login account will not created and access and refrest token will be received
 
-// just checking out if git password is saved globally or not
+Retrive User:
+	options = {
+		headers:{ 'Content-Type':'application/json','Authorization':`Bearer ${res.data.access_token}`}
+	}
+	axios.get('/api/retrive-user/',options)
+
+Update User:
+	options = {
+		headers:{ 'Content-Type':'application/json','Authorization':`Bearer ${res.data.access_token}`}
+	}
+	data = {
+		"first_name":"",
+		"last_name":"",
+		"date_of_birth":"2000-03-06",
+		"gender":"Male", 
+		"username":"bibek"
+	}
+	axios.patch('/api/update-user/',data,options)
+
+	gender_choices = ['Male','Female','Others']
+
+	If get request is send on '/api/update-user/' then also user will be retrived
