@@ -106,3 +106,26 @@ For Google Login:
        Then you will get reaponse from google which consist of token. If it is first time your account is not created, For creating your account go to url
        dj-rest-auth/google/login and post with access token your account will be created if it is first time and access and refrest token will be received.
        For the second time on dj-rest-auth/google/login account will not created and access and refrest token will be received
+
+Retrive User:
+	options = {
+		headers:{ 'Content-Type':'application/json','Authorization':`Bearer ${res.data.access_token}`}
+	}
+	axios.get('/api/retrive-user/',options)
+
+Update User:
+	options = {
+		headers:{ 'Content-Type':'application/json','Authorization':`Bearer ${res.data.access_token}`}
+	}
+	data = {
+		"first_name":"",
+		"last_name":"",
+		"date_of_birth":"2000-03-06",
+		"gender":"Male", 
+		"username":"bibek"
+	}
+	axios.patch('/api/update-user/',data,options)
+
+	gender_choices = ['Male','Female','Others']
+
+	If get request is send on '/api/update-user/' then also user will be retrived
