@@ -50,7 +50,7 @@ class KYC(models.Model):
     citizenship_num = models.SlugField(max_length=40)
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
-    status = models.ForeignKey(KYCStatus,on_delete=models.PROTECT)
+    status = models.ForeignKey(KYCStatus,on_delete=models.PROTECT,default="pending")
 
 
 #Table Modification
