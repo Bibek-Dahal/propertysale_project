@@ -4,11 +4,11 @@ from rest_framework import serializers
 from user_account.models import MyUser as User
 import re
 from django.utils.translation import gettext_lazy as _
-from .validators import check_pswd,custom_check_pswd
+from .validators import check_pswd,custom_check_pswd,check_mobile_num
 from dj_rest_auth.registration.serializers import RegisterSerializer
 from dj_rest_auth.serializers import PasswordResetConfirmSerializer
 from p_sale.choices_type import Choice
-
+from p_sale.models import KYC,KYCStatus,ContactNum
 
 # class UserSerializer(serializers.ModelSerializer):
 #     class Meta:
@@ -69,3 +69,33 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id','username','email','first_name','last_name','date_of_birth','gender')
         read_only_fields = ('id','email',)
+
+class KycSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = KYC
+        fields = ('user','profile_pic','citizenship_photo_front','citizenship_photo_back','occupation','citizenship_num','status')
+        
+    # def create(self, validated_data):
+    #     return KYC.objects.create(**validated_data)
+
+class UpdateKycSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = KYC
+        fields = ('profile_pic','citizenship_photo_front','citizenship_photo_back','occupation')
+
+    def update(self, instance, validated_data):
+        
+        instance.status = KYCStatus.objects.get(kyc_status='pending')
+        instance.citizenship_photo_front = validated_data.get('citizenship_photo_front', instance.citizenship_photo_front)
+        instance.citizenship_photo_back = validated_data.get('citizenship_photo_back', instance.citizenship_photo_back)
+        instance.profile_pic = validated_data.get('profile_pic', instance.profile_pic)
+        instance.save()
+        return instance
+        
+
+class UserContactSerializer(serializers.ModelSerializer):
+    mobile_num = serializers.CharField(max_length=10,validators=[check_mobile_num])
+    class Meta:
+        model = ContactNum
+        fields = ('id','user','mobile_num')
+        

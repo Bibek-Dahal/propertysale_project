@@ -129,3 +129,38 @@ Update User:
 	gender_choices = ['Male','Female','Others']
 
 	If get request is send on '/api/update-user/' then also user will be retrived
+
+Retrive KYC:
+	options = {
+		headers:{ 'Content-Type':'application/json','Authorization':`Bearer ${res.data.access_token}`}
+	}
+	axios.get('/api/kyc-retrive/',options)
+
+Create KYC:
+	data = {
+		"user": 1,
+		"profile_pic": "",
+		"citizenship_photo_front": "",
+		"citizenship_photo_back": "",
+		"occupation": "",
+		"citizenship_num": "2222-3333-334",
+		"status": "pending"
+	}
+	options = {
+		headers:{ 'Content-Type':'application/json','Authorization':`Bearer ${res.data.access_token}`}
+	}
+	axios.post('/api/kyc-create/',data,options)
+
+Update KYC:
+	data = {
+		"profile_pic": "",
+		"citizenship_photo_front": "",
+		"citizenship_photo_back": "",
+		"occupation": ""
+	}
+
+	options = {
+		headers:{ 'Content-Type':'application/json','Authorization':`Bearer ${res.data.access_token}`}
+	}
+	axios.patch('/api/kyc-update/',data,options)
+
