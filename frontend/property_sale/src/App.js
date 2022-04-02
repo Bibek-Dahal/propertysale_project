@@ -55,7 +55,11 @@ function App() {
                 <Register />
               </ProtectedRoute>
           }/>
-          <Route path = "/user/" element = {<User />}>
+          <Route path = "/user/" element = {
+            <PrivateRoute>
+              <User />
+            </PrivateRoute>
+          }>
             <Route path = "profile" element = {<Profile />} />
             <Route path = "my-properties" element = {<MyProperties />} />
             <Route path = "post-properties" element = {<PostProperties />} />
