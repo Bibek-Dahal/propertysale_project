@@ -8,37 +8,45 @@
 
 :root{
     --ff : 'Roboto', sans-serif;
-    --fs-xxxxl:2.3rem;
-    --fs-xxxl : 1.75rem;
-    --fs-xxl:1.25rem;
-    --fs-xl:1.1rem;
-    --fs-xxxs:.8rem;
-    --fs-xxs:.9rem;
+    --fs-largest : 2.5rem;
+    --fs-xl:1rem;
+    --fs-xxl:1.2rem;
+    --fs-xxxl:1.3rem;
+    --fs-xs : .8rem;
+    --fs-xxxl:1.8rem;
+
     --blue : #008cff;
     --box-shadow-blue:#3752d852;
     --box-shadow-blue-dark:#2136a1b0;
     --box-shadow-properties:0px 21px 71px -7px;
     --fc-white : #ffffff;
     /* --form-field-bg:#b4c1ff54; */
-    --form-field-bg:#ffffffc7;
+    --form-field-bg:#ffffff;
 
     /* --input-border-radius:20px; */
-    --input-border-radius:8px;
+    --input-border-radius:5px;
 
     --form-field-focus:rgb(0, 145, 241);
     --gray: #8F9398;
     --nav-height:10vh;
     /* --body-bg: rgb(241, 241, 241); */
-    --body-bg: rgb(255, 255, 255);
-
+    /* --body-bg: rgb(255, 255, 255); */
+    --body-bg : rgba(241, 241, 241, 0.808);
+    /* --nav-margin-top : 2em; */
     
     --error-form-field:red;
     
     --profile-image-sml-width : 35px;
     --profile-image-sml-height : 35px;
 
-    --success : green;
+    --success : rgb(0, 184, 0);
+    --error : rgb(243, 40, 40);
+
+    --profile-image-large:8rem;
+    --label-color : #62676bc5;
 }
+
+
 
 body{
     font-family:var(--ff);
@@ -57,10 +65,20 @@ input:-webkit-autofill:active{
     width:90%;
     max-width:1600px;
     margin:auto;
+    /* margin-bottom:2em; */
 }
 
 .wrapper-2{
     max-width:1300px;
+    width:80%;
+    margin-left:auto;
+    margin-right:auto;
+    /* border:1px solid red; */
+}
+
+.wrapper-3{
+    max-width:1300px;
+    width:90%;
     margin-left:auto;
     margin-right:auto;
 }
@@ -68,6 +86,10 @@ input:-webkit-autofill:active{
 #root{
     overflow-x:hidden;
     min-height:100vh;
+}
+
+li{
+    list-style: none;
 }
 
 html{
@@ -101,14 +123,31 @@ nav a{
 }
 
 @media only screen and (min-width:1000px){
+    html{
+        /* font-size:11px; */
+    }
     :root{
-        --nav-height:10vh;
+        --profile-image-large:13rem;
+    }
+
+}
+
+@media only screen and (min-width:1000px){
+    :root{
     }
 
     html{
-        font-size:15px;
+        /* font-size:12px; */
+    }
+
+    .wrapper-3{
+        width:80%;
+        /* border:1px solid red; */
     }
     .wrapper-2{
-        padding:0 2em;
+        position:absolute;
+        left:50%;
+        top:50%;
+        transform:translate(-50%,-50%);
     }
 }

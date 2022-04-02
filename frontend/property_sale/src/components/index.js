@@ -7,8 +7,13 @@ import Nav from './Nav/Nav';
 import PasswordReset from './PasswordReset/PasswordReset';
 import PasswordResetConfirm from './PasswordReset/PasswordResetConfirm';
 import Profile from './Profile/Profile';
+import PostProperties from './PostProperties/PostProperties';
+import MyProperties from './MyProperties/MyProperties';
+import ChangePassword from './ChangePassword/ChangePassword';
+import InputField from './Auth/InputField/InputField';
 
 export {
+    InputField,
     Login,
     Register,
     Home,
@@ -17,5 +22,8 @@ export {
     Nav,
     PasswordReset,
     PasswordResetConfirm,
-    Profile
+    Profile,
+    PostProperties,
+    MyProperties,
+    ChangePassword
 }

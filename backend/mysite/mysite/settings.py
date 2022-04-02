@@ -151,7 +151,6 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://192.168.1.70", # for local testing,
     "http://192.168.1.70:3000", # for local testing,
-
 ]
 
 REST_FRAMEWORK = {
@@ -173,7 +172,7 @@ REST_USE_JWT = True
 # JWT_AUTH_COOKIE = 'my-app-auth'
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
+    'ACCESS_TOKEN_LIFETIME': timedelta(seconds=15),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=15),
     'ROTATE_REFRESH_TOKENS': False,
     'BLACKLIST_AFTER_ROTATION': True,

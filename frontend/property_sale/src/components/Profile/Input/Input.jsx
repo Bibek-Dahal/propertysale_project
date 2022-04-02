@@ -1,32 +1,28 @@
 import React from 'react'
-import { useState } from 'react';
 import './Input.css';
 
-export default function Input({name,value,label,type,children,fieldHandler}) {
+export default function Input({type,label,onChange,name,value,children}) {
 
-  function changeHandler(e){
-    fieldHandler(e);
-  }
- 
-  return (
-    <React.Fragment>
-            <div className="input-field-profile">
-              <label>{label}</label>
-              {
-                type !== 'select' ?
-                  <input 
-                    type = {type} 
-                    onChange = {changeHandler}
-                    value = {value}
-                    name = {name}
-                  />:
-                  <select>
-                    {children}
-                  </select>
-              }
-            </div>  
-            
-          
-    </React.Fragment>
-  )
+    function ChangeHandler(e){
+        console.log(e);
+        onChange(e);
+    }
+
+    return (
+        <div className="userField">
+            <label htmlFor="">{label}</label>
+            {
+                type != "select" ? 
+                    <input 
+                        type = {type}
+                        onChange = {ChangeHandler}
+                        name = {name}
+                        value = {value}
+                    />:
+                    <select name = {name} value = {value} onChange = {ChangeHandler}>
+                        {children}
+                    </select>
+            }
+        </div>
+    )
 }

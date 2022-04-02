@@ -1,26 +1,18 @@
 import React from 'react'
-import Input from '../Input/Input'
-import {solid} from '@fortawesome/fontawesome-svg-core/import.macro';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import './Kyc.css';
 
 export default function Kyc() {
   return (
-    <div className="kyc-conatiner">
+    <div className="kyc">
       <h1>KYC</h1>
-      <div className="profile-image profile-image-changable">
-        <img src="" alt="" />
-        <div className="change-camera-svg">
-          <FontAwesomeIcon icon = {solid('camera')} />
-        </div>
-      </div>
-      <Input 
-        type = "text"
-        label = "Citizenship number"
-        name = "citizenship_number"
-      />
-      <input type="submit" 
-        value = "Update Kyc"
-      />
+      <form>
+        <label>Profile image</label>
+        <input type="file" name = "profile_image" />
+        <label>Citizenship front</label>
+        <input type="file" name = "citizenship_front" />
+        <label>citizenship back</label>
+        <input type="file" name = "citizenship_back" />
+      </form>
     </div>
   )
 }

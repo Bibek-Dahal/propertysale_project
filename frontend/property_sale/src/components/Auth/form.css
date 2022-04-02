@@ -1,18 +1,20 @@
 .register-login-container{
     width:100%;
-    margin-top:3em;
+    /* min-height : calc(100vh - var(--nav-height)); */
+    margin-top:4em;
 }
 
 .register-login-container{
     display:grid;
     grid-template-columns: 1fr;
     text-align:center;
-    align-items: center;
+    place-content:center;
 }
 
 .register-login-container >*:first-child{
-    margin:3rem auto 0;
     position:relative;
+    margin:auto;
+    max-width:500px;
 }
 
 .register-login-container >*:first-child h1{
@@ -23,27 +25,30 @@
 .register-login-container >*:first-child p{
     width:62%;
     margin:0.68rem auto 0; 
-    font-size:var(--fs-xl);
+    /* font-size:var(--fs-xl); */
     line-height:1.5;
 }
 
 .register-login-container >*:last-child{
     width:95%;
-    max-width:550px;
-    margin: 0 auto;
-    justify-self:end;
+    max-width:500px;
+}
+
+
+.register-login-container >*{
+    /* border:1px solid red; */
 }
 
 .register-login-container >*:first-child h1{
-    font-size:var(--fs-xxxxl);
+    font-size:var(--fs-largest);
 }
 
 .register-login-container button[type="submit"]{
     border:none;
     background:var(--blue);
     color:var(--fc-white);
-    font-size:var(--fs-xxl);
-    padding:1em 0;
+    /* font-size:var(--fs-xl); */
+    padding:1.3rem 0;
     border-radius:var(--input-border-radius);
     width:100%;
     box-shadow:var(--box-shadow-properties) var(--box-shadow-blue);
@@ -80,12 +85,13 @@
 }
 
 .register-login-container .form-container{
-    margin:6em auto 2em;
+    /* margin:6em auto 2em; */
+    margin:3em auto;
 }
 
 .register-login-container .infoPart{
     position:relative;
-    z-index:1;
+    /* z-index:1; */
 }
 
 .register-login-container .infoPart h1:after{
@@ -107,8 +113,8 @@
 .register-login-container button.inactive{
     pointer-events: none;
     opacity:.7;
+    background:var(--error)
 }
-
 
 
 .form-container .wholeFormError{
@@ -129,9 +135,9 @@
 
 @media only screen and (min-width:500px){
     :root{
-        --fs-xxxxl:2.6rem;
+        /* --fs-xxxxl:2.6rem;
         --fs-xl:1.2rem;
-        --fs-xxl:1.3rem;
+        --fs-xxl:1.3rem; */
     }
     .register-login-container >*:first-child h1{
         width:75%;
@@ -143,7 +149,8 @@
 }
 
 @media only screen and (min-width:600px){
-    
+  
+
     .register-login-container >*:first-child h1{
         width:65%;
     }
@@ -158,18 +165,23 @@
 
 }
 
-@media only screen and (min-width:1000px){
+@media only screen and (min-width : 800px){
+      
+    .register-login-container{
+        width:80%;
+
+    }
+}
+
+@media only screen and (min-width:1050px){
     :root{
         --fs-xxxxl:3.2rem;
     }
     .register-login-container{
         grid-template-columns: 1fr 1fr;
-        /* margin-top:5em; */
-        gap:3em;
-        height:calc(80vh - var(--nav-height));
-    }
-    .register-login-container{
+        min-height:calc(100vh - var(--nav-height) - var(--nav-margin-top));
         text-align:left;
+        margin-top:unset;
     }
     .register-login-container >*:first-child{
         display:block;

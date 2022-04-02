@@ -1,86 +1,160 @@
-import React,{useState} from 'react'
-import { useWindowSize } from '../../../Hooks';
-import Input from '../Input/Input';
+import React,{useState,useEffect} from 'react'
+import Image from '../image.png';
 import './Personal.css';
+import  InputField  from '../Input/Input';
+import axios from 'axios';
+import axiosLinks from '../../../axiosLinks';
 import { useAuth } from '../../../Hooks';
-import { useEffect } from 'react';
-import { FullScreenLoading } from '../../shared';
+import Input from '../Input/Input';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {solid} from '@fortawesome/fontawesome-svg-core/import.macro';
 
-
-export default function Personal({setKycHandler,setIsLoading}) {
+export default function Personal() {
     const {state} = useAuth();
-    const [formData,setFormData] = useState({
-        first_name : state?.user.username,
-        last_name : '',
-        dob : '',
-        gender : ''
+    const [info,setInfo] = useState({
+        username:"",
+        first_name:"",
+        last_name:"",
+        date_of_birth:"",
+        gender:""
     })
-
-    const size = useWindowSize();
-
-    function onClickHandler(){
-        setKycHandler(1);
-    }
-
-    function formHandler(e){
-        e.preventDefault();
-        console.log('submitted',formData);
-    }
-    
-    function fieldHandler(e){
-        setFormData(prev => {
-            return {
+    const verified = 0;
+    function fieldChangeHandler(e){
+        setInfo(prev => {
+            return{
                 ...prev,
-                [e.target.name]: e.target.value
+                [e.target.name] : e.target.value
             }
         })
     }
 
-  return (
-        <form className = "personal_details" onSubmit = {formHandler}>
-            <h1>Personal details</h1>
-            <div className="profile-image">
-                <img src="" alt="" />
-            </div>
-            <Input 
-                name = "first_name"
-                label = "First name"
-                type = "text"
-                value = {formData.first_name}
-                fieldHandler = {fieldHandler}
-            />
-            <Input 
-                name = "last_name"
-                label = "Last name"
-                type = "text"
-                value = {formData.last_name}
-                fieldHandler = {fieldHandler}
-            />
-            <Input 
-                name = "dob"
-                label = "Date of Birth"
-                type = "date"
-            />
-            <Input 
-                name = "gender"
-                label = "Gender"
-                type = "select"
-            >
-                <option value = "male">Male</option>
-                <option value = "female">female</option>
-                <option value = "other">Other</option>
-            </Input>
-            <button type="submit" >
-                Update details
-            </button>
-        {
-            size.width < 800 &&
-                <span className="kyc small-links">
-                    Haven't updated kyc? <span className="link" onClick = {onClickHandler}>
-                        Update kyc
-                    </span>
-                </span>
+    function onSubmitHandler(e){
+        e.preventDefault();
+        console.log(info)
+        
+        async function update(){
+            try{
+                const res = await axios.patch(axiosLinks.updateUser,
+                    info,
+                    {
+                        headers : {
+                            Authorization : `Bearer ${state.access_token}`
+                    }
+                })
+                console.log(res);
+
+            }catch(err){
+                console.log(err);
             }
+        }
+
+        update();
+    }
+
+    useEffect(() => {
+        console.log(localStorage.getItem('access_token'))
+        async function getUserDetail(){
+            try{
+                const res = await axios.get(axiosLinks.retriveUser,{
+                    headers : {
+                        Authorization : `Bearer ${localStorage.getItem('access_token')}`
+                    }
+                })
+                console.log(res);
+                const data = res.data;
+                for(let i in data){
+                    setInfo(prev => {
+                        return{
+                            ...prev,
+                            [i] : data[i] ? data[i] : ""  
+                        }
+                    })
+                }
+            }catch(err){
+                console.log(err);
+            }
+        }
+
+        getUserDetail();
+    
+      return () => {
+      }
+    }, [])
+    
+
+
+  return (
+    <div className="personal">
+        <h1>Personal Details</h1>
+        <div className="profile-image large">
+            <div className="image">
+                 <img src="https://picsum.photos/200" alt="" />
+                 <div className={`icon ${!verified ? "not-verified" : "verified"}`}>
+                     {
+                         !verified ? 
+                            <FontAwesomeIcon icon = {solid('exclamation')} />:
+                            <FontAwesomeIcon icon = {solid('check')} />
+                     }
+                     {
+                         !verified ? 
+                            (
+                                <div className="tooltip-info">
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae, aperiam.
+                                </div>
+                            ):
+                            (
+                                <div className="tooltip-info">
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae, aperiam.
+                                </div>
+                            )
+                     }
+                 </div>
+            </div>
+            <h2>@{info.username}</h2>
+        </div>
+        <form onSubmit = {onSubmitHandler}>
+            <Input
+                type = "text"
+                value = {info.first_name}
+                name = "first_name"
+                onChange = {fieldChangeHandler}
+                label = "First name"
+            />
+              <Input
+                type = "text"
+                value = {info.last_name}
+                name = "last_name"
+                onChange = {fieldChangeHandler}
+                label = "Last name"
+            />
+             <Input
+                type = "text"
+                value = {info.username}
+                name = "username"
+                onChange = {fieldChangeHandler}
+                label = "Username"
+            />
+            <Input
+                type = "date"
+                value = {info.date_of_birth}
+                name = "date_of_birth"
+                onChange = {fieldChangeHandler}
+                label = "Date of Birth"
+            />
+            <Input 
+                type = "select"
+                value = {info.gender}
+                name = "gender"
+                onChange = {fieldChangeHandler}
+                label = "Gender"
+            >
+                <option value="select">----------</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Others">Other</option>
+            </Input>
+            <input type="submit" />
         </form>
+    </div>
   )
 }

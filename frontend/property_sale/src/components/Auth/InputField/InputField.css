@@ -35,41 +35,42 @@
 
 .field input{
     width:100%;
-    /* padding:.8em 1.5em .5em; */
-    padding:1em 1em .4em;
+    padding:.8em 1.5em .5em;
     font-size:var(--fs-xl);
     background: transparent;
     border:none;
+    /* border:1px solid red; */
     outline:none;
 }
 
 .field label.move{
-    transform:translate(-.5em,-1.8em);
+    transform:translate(-.2em,-2.8em);
     /* border:1px solid red; */
-    padding:0 1em;
-    font-size:var(--fs-xxxs);
+    font-size:var(--fs-xs);
+    padding:0 .5em;
     font-weight:normal;
     /* background-color:var(--form-bg-color); */
+    background:var(--body-bg);
 }
 
 .field{
     position:relative;
     border:2px solid rgb(238, 238, 238);
+    padding:.5em 0;
 }
 
 /* form.loginForm .eye{ */
 form .eye{
-
     position:absolute;
     top:50%;
-    right:1em;
+    right:.5em;
     transform:translateY(-50%);
     font-size:var(--fs-xxl);
 }
 
 .error-tooltip {
     position:absolute;
-    right:1em;
+    right:4em;
     top:50%;
     transform:translateY(-50%);
     cursor: pointer;
@@ -86,10 +87,12 @@ form .eye{
     color:var(--fc-white);
     font-weight:bold;
     border-radius:3px;
+    line-height:1.5;
     transform:scale(0);
     transform-origin:right bottom;
     transition:transform .2s cubic-bezier(.51,-0.09,.61,1.66);
     bottom:100%;
+    /* z-index:1; */
 }
 
 .error-tooltip svg{

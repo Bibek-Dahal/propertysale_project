@@ -1,18 +1,19 @@
-import React from 'react'
+import React,{useState} from 'react'
 import DesktopNav from './DesktopNav'
 import MyLink from './MyLink';
 import MobileNav from './MobileNav'
 import './Nav.css';
-import { useAuth, useWindowSize } from '../../Hooks';
+import { useAuth } from '../../Hooks';
 import { useLocation } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {solid} from '@fortawesome/fontawesome-svg-core/import.macro';
 
 export default function Nav() {
     const {state} = useAuth();
     const location = useLocation();
-    const {size} = useWindowSize();
-
+    
     return (    
-    <>
+    <div className="nav_wrapper">
         <nav className = "wrapper">
             {/* <a href="#" className = "homeBtn">Home</a> */}
             <MyLink to = "/" className = "homeBtn">
@@ -20,19 +21,16 @@ export default function Nav() {
             </MyLink>
             <DesktopNav />
             <input type="checkbox" id = "burgerCheckBox" />
-            <MobileNav />
+                    <MobileNav/>
             {   
                 location.pathname === '/' && 
-                <label htmlFor='burgerCheckBox' id="burger">
-                    <div className="line line1"></div>
-                    <div className="line line2"></div>
-                    <div className="line line3"></div>
+                <label htmlFor='burgerCheckBox' id="burger" >
+                    <FontAwesomeIcon icon = {solid('bars')}/>
                 </label>
             }
-            
            {
                state.user && 
-                    <MyLink to = "/user" className = "profileIcon navBtnStyle">
+                    <MyLink to = "/user/profile" className = "profileIcon navBtnStyle">
                         <img src="" alt="" />
                         <span className="userName">
                             {state.user.username}
@@ -55,6 +53,6 @@ export default function Nav() {
                     </MyLink>
             }
         </nav>
-    </>
+    </div>
   )
 }

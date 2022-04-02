@@ -7,13 +7,23 @@ import {
 
 import Modal from './components/Modal/Modal';
 import {usePopup} from './Hooks/index';
-import {Login, PasswordReset,Register,User,Home,PasswordResetConfirm, Profile} from './components/index'
+import {
+  Login, 
+  PasswordReset,
+  Register,
+  User,
+  Home,
+  PasswordResetConfirm,
+  Profile,
+  PostProperties,
+  MyProperties,
+  ChangePassword
+} from './components/index'
 
-// import Home from './components/Home/Home';
-// import User from './components/User/User';
 import PrivateRoute from './components/utils/PrivateRoute';
 import Logout from './components/Auth/Logout';
 import ProtectedRoute from './components/utils/ProtectedRoute';
+
 function App() {
   const {PopupVisible} = usePopup();
   
@@ -35,13 +45,22 @@ function App() {
               <Login />
             </ProtectedRoute>
           }/>
-          <Route path = "/logout" element = {<Logout />}/>
+          <Route path = "/logout" element = {
+            <PrivateRoute>
+                <Logout />
+            </PrivateRoute>
+          }/>
           <Route path = "/register" element = {
               <ProtectedRoute>
                 <Register />
               </ProtectedRoute>
           }/>
-          <Route path = "user/profile" element = {<Profile />}/>
+          <Route path = "/user/" element = {<User />}>
+            <Route path = "profile" element = {<Profile />} />
+            <Route path = "my-properties" element = {<MyProperties />} />
+            <Route path = "post-properties" element = {<PostProperties />} />
+            <Route path = "change-password" element = {<ChangePassword />} />
+          </Route>
           <Route path = "/password-reset" element = {<PasswordReset />} />
           <Route path = "/password-reset/confirm/:uid/:token" element = {<PasswordResetConfirm />} />
         </Routes>

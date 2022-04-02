@@ -14,6 +14,7 @@ import  links from '../../../axiosLinks';
 import useSendMail from '../../../Hooks/useSendMail';
 import { FullScreenLoading } from '../../shared';
 import useNumExtracter from 'num-extracter';
+import {motion} from 'framer-motion';
 
 export default function Login() {
     const {dispatch} = useAuth();
@@ -28,6 +29,8 @@ export default function Login() {
     const [throttleTime,setThrottleTime] = useState(0);
     const [throttleTimeVerifyBtn,setThrottleTimeVerifyBtn] = useState(0);
     const {number} = useNumExtracter();
+
+    // console.log('location:',location)
 
     useEffect(() => {   
         console.log('login rendered')
@@ -107,7 +110,10 @@ export default function Login() {
             {   isLoading ? 
                     <FullScreenLoading />:
 
-                    <div className='wrapper'>
+                    <motion.div className='wrapper'
+                        
+                        
+                    >
                         <div className="login register-login-container wrapper-2">
                             <div className="infoPart loginInfoPart">
                                 <div className = "text">
@@ -187,7 +193,7 @@ export default function Login() {
                                 <SocialAuth />
                             </div>
                     </div>
-            </div>}
+            </motion.div>}
         </React.Fragment>
     );
 }

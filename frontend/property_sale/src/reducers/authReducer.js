@@ -33,6 +33,7 @@ export const authReducer = (state,action) => {
             }
 
         case "updateAccessToken":
+            localStorage.setItem('access_token',action.token)
             return {
                 ...state,
                 access_token:action.token

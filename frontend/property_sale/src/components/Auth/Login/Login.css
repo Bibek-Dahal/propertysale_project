@@ -3,11 +3,11 @@ form.loginForm >*{
 }
 
 form.loginForm button{
-    margin-top:1.7em;
+    margin-top:1.7rem;
 }
 
 button.inactive.error{
-    background-color:Red;
+    /* background-color:Red; */
 }
 
 .form-container span{
@@ -20,7 +20,7 @@ span.sendVerificationMailBtn{
     background-color:rgb(16, 117, 212);
     color:var(--fc-white);
     font-weight:bold;
-    font-size:var(--fs-xl);
+    /* font-size:var(--fs-xl); */
     cursor:pointer;
     border-radius:5px;
     width:fit-content;
@@ -36,8 +36,8 @@ span.sendVerificationMailBtn{
 
 
 @media only screen and (min-width : 1000px){
-    .login > .infoPart h1{
+    /* .login > .infoPart h1{
         margin-bottom:1em;
         margin-top:-2em;
-    }
+    } */
 }

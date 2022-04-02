@@ -17,7 +17,7 @@ export default function InputField({name,label,type,fieldChangeHandler,error,chi
         e.target.value == '' && labelRef.current.classList.remove("move");
     }
     const onChangeHandler = (e) => {
-        fieldRef.current.classList.remove('error')
+        // fieldRef.current.classList.remove('error')
         fieldChangeHandler(e);
     }
 

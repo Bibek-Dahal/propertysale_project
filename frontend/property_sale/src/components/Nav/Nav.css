@@ -5,6 +5,13 @@ nav{
     align-items: center;
 }
 
+.nav_wrapper{
+    /* border:1px solid red; */
+    box-shadow:0px 2px 5px rgb(241, 241, 241);
+    margin-bottom:2em;
+    background:white;
+}
+
 .desktopNav{
     display:none;
 }
@@ -17,7 +24,6 @@ nav{
 .homeBtn{
     margin-right:auto;
     position:relative;
-    z-index:999;
     margin-left:0;
 }
 
@@ -32,40 +38,34 @@ nav{
     z-index:999;
 }
 
-#burger >*{
-    height:4px;
-    width:30px;
-    background:rgb(0, 0, 0);
-    border-radius:5em;
-}
-
-#burger >*:hover{
-    /* background:red; */
+#burger > svg{
+    /* border:1px solid red; */
+    font-size:var(--fs-xxxl);
 }
 
 .mobileNav{
     position:fixed;
-    top:1em;
-    bottom:1em;
-    background:rgb(0, 87, 168);
-    /* box-shadow:var(--box-shadow-properties) rgb(187, 187, 187); */
-    min-width:300px;
-    border-radius:8px;
-    /* padding:var(--nav-height) 2em 0; */
-    right:-100%;
-    transition:right .2s ease-in-out;
+    top:0;
+    left:0;
+    transform:translateY(-100%);
+    background:white;
+    width:100%;
+    border-radius:0 0 var(--input-border-radius) var(--input-border-radius);
+    min-height:50vh;
+    transition-delay: 1800ms;
+    transition:transform .5s cubic-bezier(0.4, 0, 0.2, 1);
     display:flex;
     flex-direction:column;
+    align-items: center;
     gap:1em;
+    /* box-shadow:5px 5px 30px rgb(219, 219, 219); */
     padding:4em 2em 0 2em;
+    z-index:999;
 }
 
 #burgerCheckBox:checked + .mobileNav{
-    right:1em;
-}
-
-#burgerCheckBox:checked ~ #burger:before{
-    display:block;
+    /* top:-1em; */
+    transform:translateY(0);
 }
 
 #burgerCheckBox{
@@ -75,46 +75,45 @@ nav{
 #burger:before{
     content:"";
     position:fixed;
-    top:0;
-    bottom:0;
     width:100vw;
-    display:none;
-    /* background: #06060638; */
-    width:calc(100vw - 300px - 1.5em);
+    height:100vh;
     left:0;
+    top:0;
+    opacity:0;
+    visibility: hidden;
+    background: rgba(126, 125, 125, 0.24);
+    transition:opacity 500ms ease-in-out;
+    transition-delay: 50ms;
 }
 
-#burger >*{
-    transition:transform 200ms ease;
+#burgerCheckBox:checked ~ #burger:before{
+    visibility: visible;
+    opacity:1;
 }
 
-#burgerCheckBox:checked ~ #burger >:nth-child(2){
-    transform:translateX(-50px)scaleX(0);
-}
-#burgerCheckBox:checked ~ #burger >:first-child{
-    transform:rotate(45deg)translate(-3px,-3px);
-    transform-origin:top left;
-}
-#burgerCheckBox:checked ~ #burger >:last-child{
-    transform:rotate(-45deg);
-    transform-origin:bottom left;
+#burger{
+    z-index:2;
 }
 
-#burgerCheckBox:checked ~ #burger >*{
-    background:white;
+#burgerCheckBox:checked ~ #burger:before {
+    display:block;
 }
 
-/* .mobileNav li{
-    list-style: none;
-} */
-
-.mobileNav >*{
-    /* border:1px solid red; */
+@keyframes visible {
+    to{
+        visibility: visible;
+        opacity:1;
+    }
 }
+
+
 
 @media only screen and (min-width : 800px){
     .desktopNav{
         display:flex;
+    }
+    .nav_wrapper{
+        margin-bottom:2em;
     }
     .mobileNav{
         display:none;
@@ -123,6 +122,14 @@ nav{
     #burger{
         /* border:1px solid red; */
         display:none;
+    }
+
+}
+
+@media only screen and (min-width : 1000px){
+   
+    nav{
+        /* margin-top:var(--nav-margin-top) !important; */
     }
     
 }
@@ -162,17 +169,25 @@ nav > a{
 
 .mobileNav a{
     text-decoration: none;
-    /* font-weight:bold; */
-    /* color:var(--blue); */
-    color:white;
     padding:.5em 0;
-    font-size:var(--fs-xl);
+    color:black;
     display:flex;
-    gap:1.5em;
     flex-direction: row;
-    align-items:Center;
     transition:all 200ms ease-in-out;
-    opacity:.8;
+    /* border:1px solid red; */
+    width:90%;
+    gap:2em;
+}
+
+.mobileNav a>*{
+    /* border:1px solid red; */
+    display:flex;
+    align-items: center;
+}
+
+.mobileNav a span:first-child{
+    width:30px;
+    /* border:1px solid red; */
 }
 
 .mobileNav a:hover{
@@ -190,7 +205,10 @@ nav a[href="/user"]{
     margin-right:0;
 }
 
-
+nav >*:last-child{
+    border-radius:5em 0 0 5em;
+    margin-right:0;
+}
 
 
 

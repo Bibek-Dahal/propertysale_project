@@ -52,7 +52,7 @@ export const AuthContextProvider = ({children}) => {
 
     const checkAndRemoveToken = async () => {
         console.log('checkAndremovetoken called');
-        if(state.user ){
+        if(state.user){
             verifyAccessToken()
                 .then((msg) => {
                     console.log('success',msg)
