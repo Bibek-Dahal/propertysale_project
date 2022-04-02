@@ -31,7 +31,15 @@ class RetriveUserView(APIView):
     def get(self,request):
         queryset = User.objects.get(username=self.request.user)
         serializer = UserSerializer(queryset)
-        return Response(serializer.data)
+        if KYC.objects.filter(user=self.request.user).exists():
+            kyc_status = KYC.objects.get(user=self.request.user).status.kyc_status
+            new_serializer = serializer.data
+            new_serializer['kyc_status']=kyc_status
+            print(new_serializer)
+            return Response(new_serializer)
+        new_serializer = serializer.data
+        new_serializer['kyc_status']=None
+        return Response(new_serializer,status=status.HTTP_200_OK)
 
 class UpdateUserView(APIView):
     permission_classes = [IsAuthenticated]
