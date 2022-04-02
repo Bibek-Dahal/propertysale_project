@@ -12,7 +12,7 @@ export default function Kyc() {
   const formRef = useRef(null);
 
   const [kycData,setKycData] = useState({
-    "user":state.user.user_id,
+    "user":state ? state.user.user_id : "",
     "profile_pic": "",
 		"citizenship_photo_front": "",
 		"citizenship_photo_back": "",
