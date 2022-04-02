@@ -18,7 +18,7 @@ export default function Personal() {
         date_of_birth:"",
         gender:""
     })
-    const verified = 0;
+    const [kyc_status,setKycStatus] = useState(0);
     function fieldChangeHandler(e){
         setInfo(prev => {
             return{
@@ -70,6 +70,9 @@ export default function Personal() {
                         }
                     })
                 }
+                if(res.data.kyc_status != null){
+                    setKycStatus(1);
+                }
             }catch(err){
                 console.log(err);
             }
@@ -99,14 +102,14 @@ export default function Personal() {
         <div className="profile-image large">
             <div className="image">
                  <img src="https://picsum.photos/200" alt="" />
-                 <div className={`icon ${!verified ? "not-verified" : "verified"}`}>
+                 <div className={`icon ${!kyc_status ? "not-verified" : "verified"}`}>
                      {
-                         !verified ? 
+                         !kyc_status ? 
                             <FontAwesomeIcon icon = {solid('exclamation')} />:
                             <FontAwesomeIcon icon = {solid('check')} />
                      }
                      {
-                         !verified ? 
+                         !kyc_status ? 
                             (
                                 <div className="tooltip-info">
                                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae, aperiam.

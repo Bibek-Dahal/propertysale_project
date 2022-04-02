@@ -140,7 +140,8 @@
     border:none;
     background:var(--blue);
     color:white;
-    border-radius:var(--input-border-radius)
+    border-radius:var(--input-border-radius);
+    cursor:pointer;
 }
 
 

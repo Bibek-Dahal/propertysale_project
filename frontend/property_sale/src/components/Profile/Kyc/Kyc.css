@@ -1,3 +1,7 @@
 .kyc{
     /* background:white; */
 }
+
+input.disabled{
+    pointer-events:none;
+}
