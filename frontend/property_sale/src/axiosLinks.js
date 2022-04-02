@@ -14,7 +14,10 @@ const links = {
     sendPasswordResetMail : `${baseURL}/api/account/password/reset/`,
     passwordChange : `${baseURL}/password-reset/confirm`,
     retriveUser : `${baseURL}/api/retrive-user`,
-    updateUser : `${baseURL}/api/update-user/`
+    updateUser : `${baseURL}/api/update-user/`,
+    retriveKyc : `${baseURL}/api/kyc-retrive`,
+    createKyc : `${baseURL}/api/kyc-create/`,
+    updateKyc : `${baseURL}/api/kyc-update/`
 }
 
 export default links;

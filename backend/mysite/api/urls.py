@@ -17,5 +17,8 @@ urlpatterns = [
 
     path('retrive-user/',views.RetriveUserView.as_view(),name='retrive_user'),
     path('update-user/',views.UpdateUserView.as_view(),name='update_user'),
-     
+    #KYC
+    path('kyc-create/',views.CreateKycView.as_view(),name="create_kyc"),
+    path('kyc-retrive/',views.RetriveKycView.as_view(),name="retrive_kyc"),
+    path('kyc-update/',views.UpdateUserKycView.as_view(),name="update_kyc"),
 ]

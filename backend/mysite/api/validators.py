@@ -22,3 +22,15 @@ def custom_check_pswd(value):
             raise serializers.ValidationError('Password must contain atleats one digit, one special characters and one uppercase letter')
             # return pwd
         return value
+
+def check_int(attrs):
+    if attrs.isnumeric():
+        return str(attrs)
+    else:
+        raise serializers.ValidationError("Ensure this field is numeric.")
+
+def check_mobile_num(attrs):
+    if attrs.isnumeric():
+        if len(attrs) == 10:
+            return str(attrs)
+    raise serializers.ValidationError("Enter a valid phone number")

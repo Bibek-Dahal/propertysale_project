@@ -76,6 +76,16 @@ export default function Personal() {
         }
 
         getUserDetail();
+
+        // async function isKycVerified(){
+        //     try{
+        //         const res = await axios.get(`${axiosLinks.retriveKyc}`,{
+        //             headers
+        //         })
+        //     }
+        // }
+
+        // isKycVerified();
     
       return () => {
       }
