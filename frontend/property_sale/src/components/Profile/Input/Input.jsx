@@ -18,6 +18,7 @@ export default function Input({type,label,onChange,name,value,children}) {
                         onChange = {ChangeHandler}
                         name = {name}
                         value = {value}
+                        // required
                     />:
                     <select name = {name} value = {value} onChange = {ChangeHandler}>
                         {children}

@@ -1,0 +1,28 @@
+.dropzone{
+    border:2px dotted rgb(0, 0, 0);
+    height:100%;
+    min-height:150px;
+    position:relative;
+}
+
+.dropzone:hover,
+.dropzone.hover{
+    background:rgba(0, 0, 0, 0.137);
+}
+
+.dropzone:before{
+    content : "drop an image here to change";
+    position:absolute;
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
+    /* display:none; */
+    justify-content: center;
+    align-items: center;
+    opacity:.5;    
+    display:flex;
+}
+
+.dropzone:hover:before{
+}

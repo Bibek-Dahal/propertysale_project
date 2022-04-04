@@ -1,5 +1,4 @@
 nav{
-    /* border:1px solid red; */
     display:flex;
     height:var(--nav-height);
     align-items: center;
@@ -20,6 +19,7 @@ nav{
     margin-left:auto;
     margin-right:0;
 }
+
 
 .homeBtn{
     margin-right:auto;
@@ -45,12 +45,13 @@ nav{
 
 .mobileNav{
     position:fixed;
-    top:0;
-    left:0;
-    transform:translateY(-100%);
+    top:1em;
+    left:50%;
+    transform:translate(-50%,-120%);
     background:white;
-    width:100%;
-    border-radius:0 0 var(--input-border-radius) var(--input-border-radius);
+    border-radius:5px;
+    width:calc(100vw - 2em);
+    /* border-radius:0 0 var(--input-border-radius) var(--input-border-radius); */
     min-height:50vh;
     transition-delay: 1800ms;
     transition:transform .5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -58,14 +59,14 @@ nav{
     flex-direction:column;
     align-items: center;
     gap:1em;
-    /* box-shadow:5px 5px 30px rgb(219, 219, 219); */
     padding:4em 2em 0 2em;
     z-index:999;
+    border:2px solid rgb(212, 212, 212);
 }
 
 #burgerCheckBox:checked + .mobileNav{
-    /* top:-1em; */
-    transform:translateY(0);
+    transform:translate(-50%,0%);
+    box-shadow:5px 5px 30px rgb(219, 219, 219);
 }
 
 #burgerCheckBox{
@@ -107,32 +108,6 @@ nav{
 }
 
 
-
-@media only screen and (min-width : 800px){
-    .desktopNav{
-        display:flex;
-    }
-    .nav_wrapper{
-        margin-bottom:2em;
-    }
-    .mobileNav{
-        display:none;
-    }
-   
-    #burger{
-        /* border:1px solid red; */
-        display:none;
-    }
-
-}
-
-@media only screen and (min-width : 1000px){
-   
-    nav{
-        /* margin-top:var(--nav-margin-top) !important; */
-    }
-    
-}
 
 a.active{
     position:relative;
@@ -177,6 +152,7 @@ nav > a{
     /* border:1px solid red; */
     width:90%;
     gap:2em;
+
 }
 
 .mobileNav a>*{
@@ -189,6 +165,8 @@ nav > a{
     width:30px;
     /* border:1px solid red; */
 }
+
+
 
 .mobileNav a:hover{
     opacity:1;
@@ -212,8 +190,33 @@ nav >*:last-child{
 
 
 
+@media only screen and (min-width : 800px){
+    .desktopNav{
+        display:flex;
+    }
+    .nav_wrapper{
+        margin-bottom:2em;
+    }
 
+   
+   
 
+    #burger{
+        /* border:1px solid red; */
+        display:none;
+    }
 
+    .mobileNav a:hover{
+        background:var(--blue);
+        color:white;
+    }
 
+}
 
+@media only screen and (min-width : 1000px){
+   
+    nav{
+        /* margin-top:var(--nav-margin-top) !important; */
+    }
+    
+}

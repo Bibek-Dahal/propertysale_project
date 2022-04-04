@@ -1,5 +1,5 @@
-const baseURL = 'http://192.168.1.70:8000';
-// const baseURL = 'http://127.0.0.1:8000';
+// const baseURL = 'http://192.168.1.70:8000';
+const baseURL = 'http://127.0.0.1:8000';
 
 const links = {
     googleLogin : `${baseURL}/dj-rest-auth/google/`,

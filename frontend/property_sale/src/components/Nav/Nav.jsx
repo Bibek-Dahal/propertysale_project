@@ -21,7 +21,7 @@ export default function Nav() {
             </MyLink>
             <DesktopNav />
             <input type="checkbox" id = "burgerCheckBox" />
-                    <MobileNav/>
+            <MobileNav/>
             {   
                 location.pathname === '/' && 
                 <label htmlFor='burgerCheckBox' id="burger" >
@@ -35,6 +35,7 @@ export default function Nav() {
                         <span className="userName">
                             {state.user.username}
                         </span>
+
                     </MyLink>}
             
             {

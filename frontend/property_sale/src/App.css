@@ -6,6 +6,10 @@
     box-sizing:border-box;
 }
 
+html{
+    scroll-behavior: smooth;
+}
+
 :root{
     --ff : 'Roboto', sans-serif;
     --fs-largest : 2.5rem;

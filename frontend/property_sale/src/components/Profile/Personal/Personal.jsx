@@ -1,16 +1,19 @@
 import React,{useState,useEffect} from 'react'
-import Image from '../image.png';
+// import Image from '../image.png';
 import './Personal.css';
 import  InputField  from '../Input/Input';
 import axios from 'axios';
 import axiosLinks from '../../../axiosLinks';
-import { useAuth } from '../../../Hooks';
+import { useAuth, usePopup } from '../../../Hooks';
 import Input from '../Input/Input';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {solid} from '@fortawesome/fontawesome-svg-core/import.macro';
+import getImage from '../../../impLinks';
 
 export default function Personal() {
     const {state} = useAuth();
+    const {showPopup} = usePopup();
+
     const [info,setInfo] = useState({
         username:"",
         first_name:"",
@@ -18,7 +21,9 @@ export default function Personal() {
         date_of_birth:"",
         gender:""
     })
-    const [kyc_status,setKycStatus] = useState(0);
+    const [profile_image , setProfileImage] = useState("");
+
+    const [kyc_status,setKycStatus] = useState(null);
     function fieldChangeHandler(e){
         setInfo(prev => {
             return{
@@ -27,7 +32,6 @@ export default function Personal() {
             }
         })
     }
-
     function onSubmitHandler(e){
         e.preventDefault();
         console.log(info)
@@ -42,12 +46,12 @@ export default function Personal() {
                     }
                 })
                 console.log(res);
-
+                showPopup('Profile Updated successfully')
+                window.scroll(0,0);
             }catch(err){
                 console.log(err);
             }
         }
-
         update();
     }
 
@@ -70,8 +74,23 @@ export default function Personal() {
                         }
                     })
                 }
-                if(res.data.kyc_status != null){
-                    setKycStatus(1);
+                if(res.data.kyc_status === 'verified' ){
+                    setKycStatus("verified");
+                }else if(res.data.kyc_status === 'pending'){
+                    setKycStatus("pending");
+                }
+
+                if(res.data.kyc_status !== null){
+                    console.log('insdide')
+                        axios.get(axiosLinks.retriveKyc,{
+                            headers : {
+                              Authorization : `Bearer ${state.access_token}`
+                            }
+                          })
+                          .then(res => {
+                              setProfileImage(res.data.profile_pic)
+                          })
+                          .catch(err => console.log(err))
                 }
             }catch(err){
                 console.log(err);
@@ -101,26 +120,18 @@ export default function Personal() {
         <h1>Personal Details</h1>
         <div className="profile-image large">
             <div className="image">
-                 <img src="https://picsum.photos/200" alt="" />
-                 <div className={`icon ${!kyc_status ? "not-verified" : "verified"}`}>
-                     {
-                         !kyc_status ? 
-                            <FontAwesomeIcon icon = {solid('exclamation')} />:
-                            <FontAwesomeIcon icon = {solid('check')} />
-                     }
-                     {
-                         !kyc_status ? 
-                            (
-                                <div className="tooltip-info">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae, aperiam.
-                                </div>
-                            ):
-                            (
-                                <div className="tooltip-info">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae, aperiam.
-                                </div>
-                            )
-                     }
+                {
+                    profile_image ? 
+                        <img src={`${getImage}${profile_image}`} alt="" />:
+                        "no profile image set"
+                }
+                 <div className={`icon ${kyc_status}`}>
+                    {kyc_status === null &&  <FontAwesomeIcon icon = {solid('exclamation')} />}
+                    {kyc_status === "pending" &&   <FontAwesomeIcon icon = {solid('question')} />}
+                    {kyc_status === "verified" &&   <FontAwesomeIcon icon = {solid('check')} />}
+                    {kyc_status === "pending" &&   <div className = "tooltip-info">kyc verification in progress</div>}
+                    {kyc_status === null &&   <div className = "tooltip-info">kyc is not verified</div>}
+                    {kyc_status === "verified" &&   <div className = "tooltip-info">kyc is verified</div>}
                  </div>
             </div>
             <h2>@{info.username}</h2>

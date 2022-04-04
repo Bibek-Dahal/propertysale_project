@@ -10,9 +10,13 @@
     padding:2em;
 }
 
+.profile-container >* h1{
+    /* margin-bottom:5em; */
+}
+
 @media only screen and (min-width : 800px){
 
     .profile-container >*{
-        padding:2em 5em;
+        padding:2em 3em;
     }
 }
