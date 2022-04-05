@@ -5,9 +5,13 @@
     width:100vw;
     position:fixed;
     /* top:0; */
+    top:0;
+    left:0;
+    height:100vh;
     justify-content: center;
     flex-direction: column;
     gap:1em;
+    background:white;
     align-items: center;
 }
 

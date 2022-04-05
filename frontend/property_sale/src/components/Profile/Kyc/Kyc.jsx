@@ -12,7 +12,7 @@ import FileField from './FileField';
 import Input from '../Input/Input';
 import { useNavigate } from 'react-router-dom';
 
-export default function Kyc() {
+export default function Kyc({setLoading,setIsLoading}) {
   const {state} = useAuth();
   const [kycExists,setKycExists] = useState(0);
   const formRef = useRef(null);
@@ -42,7 +42,7 @@ export default function Kyc() {
   const updateKyc = (e) => {
     e.preventDefault();
     console.log('updating kyc',newkycData)
-
+    setIsLoading(1);
     const formData = new FormData();
     for(let i in newkycData){
       if(newkycData[i] === ""){
@@ -79,7 +79,8 @@ export default function Kyc() {
         })
         console.log(res)
         showPopup(`kyc updated successfully`)
-        navigate('/');
+        setIsLoading(0);
+        // navigate('/');
       }catch(err){
         console.log(err)
       }
@@ -106,6 +107,7 @@ export default function Kyc() {
     e.preventDefault();
     console.log('creating kyc')
     const formData = new FormData();
+    setIsLoading(1);
     for(let i in newkycData){
       if(
         i === 'profile_pic' || 
@@ -131,7 +133,7 @@ export default function Kyc() {
         console.log('submitted kyc')
         console.log(res);
         showPopup('kyc submitted successfully')
-        navigate('/');
+        setIsLoading(0);
       }catch(err){
         console.log(err)
       }

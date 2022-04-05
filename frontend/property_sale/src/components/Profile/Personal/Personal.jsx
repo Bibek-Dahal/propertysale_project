@@ -10,7 +10,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {solid} from '@fortawesome/fontawesome-svg-core/import.macro';
 import getImage from '../../../impLinks';
 
-export default function Personal() {
+export default function Personal({setIsLoading}) {
     const {state} = useAuth();
     const {showPopup} = usePopup();
 
@@ -35,7 +35,7 @@ export default function Personal() {
     function onSubmitHandler(e){
         e.preventDefault();
         console.log(info)
-        
+        setIsLoading(1);
         async function update(){
             try{
                 const res = await axios.patch(axiosLinks.updateUser,
@@ -47,7 +47,8 @@ export default function Personal() {
                 })
                 console.log(res);
                 showPopup('Profile Updated successfully')
-                window.scroll(0,0);
+                // window.scroll(0,0);
+                setIsLoading(0);
             }catch(err){
                 console.log(err);
             }
