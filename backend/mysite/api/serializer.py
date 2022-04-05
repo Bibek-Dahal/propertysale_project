@@ -70,13 +70,18 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('id','username','email','first_name','last_name','date_of_birth','gender')
         read_only_fields = ('id','email',)
 
+class UserContactSerializer(serializers.ModelSerializer):
+    mobile_num = serializers.CharField(max_length=10,validators=[check_mobile_num])
+    class Meta:
+        model = ContactNum
+        fields = ('id','kyc_id','mobile_num')
+        read_only_fields = ('kyc_id',)
+
 class KycSerializer(serializers.ModelSerializer):
+    contact_nums = UserContactSerializer(many=True,read_only=True)
     class Meta:
         model = KYC
-        fields = ('user','profile_pic','citizenship_photo_front','citizenship_photo_back','occupation','citizenship_num','status')
-        
-    # def create(self, validated_data):
-    #     return KYC.objects.create(**validated_data)
+        fields = ('user','profile_pic','citizenship_photo_front','citizenship_photo_back','occupation','contact_nums','citizenship_num','status')
 
 class UpdateKycSerializer(serializers.ModelSerializer):
     class Meta:
@@ -93,9 +98,4 @@ class UpdateKycSerializer(serializers.ModelSerializer):
         return instance
         
 
-class UserContactSerializer(serializers.ModelSerializer):
-    mobile_num = serializers.CharField(max_length=10,validators=[check_mobile_num])
-    class Meta:
-        model = ContactNum
-        fields = ('id','user','mobile_num')
         
