@@ -36,7 +36,7 @@ class PropertyTypeAdmin(admin.ModelAdmin):
 
 @admin.register(ContactNum)
 class FacilityTypeAdmin(admin.ModelAdmin):
-    list_display = ('id','user','mobile_num')
+    list_display = ('id','kyc_id','mobile_num')
 
 @admin.register(KYC)
 class KYC(admin.ModelAdmin):

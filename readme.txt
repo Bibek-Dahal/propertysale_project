@@ -147,7 +147,7 @@ Create KYC:
         "mobile_num":""
 	}
 	options = {
-		headers:{ 'Content-Type':'application/json','Authorization':`Bearer ${res.data.access_token}`}
+		headers:{ 'Content-Type':'multipart/form-data','Authorization':`Bearer ${res.data.access_token}`}
 	}
 	axios.post('/api/kyc-create/',data,options)
 
@@ -160,7 +160,7 @@ Update KYC:
 	}
 
 	options = {
-		headers:{ 'Content-Type':'application/json','Authorization':`Bearer ${res.data.access_token}`}
+		headers:{ 'Content-Type':'multipart/form-data','Authorization':`Bearer ${res.data.access_token}`}
 	}
 	axios.patch('/api/kyc-update/',data,options)
 

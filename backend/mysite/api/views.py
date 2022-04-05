@@ -7,7 +7,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.parsers import FormParser,MultiPartParser
+from rest_framework.parsers import FormParser,MultiPartParser,JSONParser
 from p_sale.models import KYC
 
 
@@ -66,8 +66,9 @@ class CreateKycView(APIView):
         
         if kyc_serializer.is_valid():
             if contact_serializer.is_valid():
-                kyc_serializer.save()
-                contact_serializer.save()
+                kyc_obj = kyc_serializer.save()
+                print(kyc_obj)
+                contact_serializer.save(kyc_id=kyc_obj)
                 return Response(kyc_serializer.data,status=status.HTTP_201_CREATED)
             return Response(contact_serializer.errors,status=status.HTTP_400_BAD_REQUEST)
         return Response(kyc_serializer.errors,status=status.HTTP_400_BAD_REQUEST)
@@ -86,7 +87,8 @@ class RetriveKycView(APIView):
 
 class UpdateUserKycView(APIView):
     permission_classes = [IsAuthenticated]
-        
+    parser_classes = [MultiPartParser,FormParser]
+    
     def patch(self, request, format=None):
         try:
             user = KYC.objects.get(user=self.request.user)
