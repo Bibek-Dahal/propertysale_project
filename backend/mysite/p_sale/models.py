@@ -21,14 +21,6 @@ class Facility(models.Model):
     def __str__(self):
         return self.facility
 
-class ContactNum(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
-    country_code = models.CharField(max_length=4,default='+977')
-    mobile_num = models.CharField(max_length=10)
-
-    def __str__(self):
-        return self.user.username
-
 class KYCStatus(models.Model):
     kyc_status = models.CharField(max_length=40,unique=True,primary_key=True)
     
@@ -51,6 +43,17 @@ class KYC(models.Model):
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
     status = models.ForeignKey(KYCStatus,on_delete=models.PROTECT,default="pending")
+
+    def __str__(self):
+        return self.user.username
+
+class ContactNum(models.Model):
+    kyc_id = models.ForeignKey(KYC,related_name='contact_nums',on_delete=models.CASCADE)
+    country_code = models.CharField(max_length=4,default='+977')
+    mobile_num = models.CharField(max_length=10)
+
+    # def __str__(self):
+    #     return self.user.user.username
 
 
 #Table Modification
