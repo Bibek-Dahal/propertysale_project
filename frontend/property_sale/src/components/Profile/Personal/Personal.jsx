@@ -100,6 +100,9 @@ export default function Personal({setIsLoading}) {
 
         getUserDetail();
 
+
+
+
         // async function isKycVerified(){
         //     try{
         //         const res = await axios.get(`${axiosLinks.retriveKyc}`,{
