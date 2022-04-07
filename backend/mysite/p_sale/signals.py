@@ -4,6 +4,8 @@ from django.dispatch import receiver
 from asgiref.sync import async_to_sync
 from channels.layers import get_channel_layer
 from .models import KYC,House,Land
+from django.core.mail import send_mail
+from user_account.models import MyUser as User
 
 # async_to_sync(channel_layer.group_send)("chat", {"type": "chat.force_disconnect"})
 @receiver(post_save,sender= KYC)
@@ -15,6 +17,15 @@ def send_signal(sender,instance,created,**kwargs):
                 'type': 'status_message',
                 'message': instance.status.kyc_status
             })
+        """
+        send mail when KYC status has been verified
+        """
+        if instance.status.kyc_status == 'verified':
+            subject = 'KYC Status Verification.'
+            message = 'Hi %s your KYC has been successfully verified. Feel free to post your property. Thank You!' % instance.user.username
+            from_email = 'bibek123@gmail.com'
+            to_email = (User.objects.get(username=instance.user.username).email,)
+            send_mail(subject,message,from_email,to_email)
         
         
 """
