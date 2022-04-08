@@ -155,7 +155,15 @@ class Property(models.Model):
     """
 
 class Land(Property):
-    pass
+    objects = models.Manager()
+    """
+    Model Manager
+    """
+    class PropertyManager(models.Manager):
+        def get_queryset(self):
+            return super().get_queryset().filter(status='Up',is_active=True)
+            
+    properties = PropertyManager()
 
     def __str__(self):
         return f"{self.id}-{self.title}"
@@ -173,7 +181,6 @@ class LandOwnerCertificate(models.Model):
     images like laalpurja naksa
     """
     land = models.ForeignKey(Land,on_delete=models.CASCADE)
-    certificate_name = models.CharField(max_length=30,null=True)
     certificate_image = CloudinaryField('certificate_image')
     created_at = models.DateTimeField(auto_now_add = True)
 
@@ -195,6 +202,16 @@ class House(Property):
     parking = models.CharField(default=0,max_length=2)
     bath = models.CharField(default=0,max_length=2)
 
+    objects = models.Manager()
+    """
+    Model Manager
+    """
+    class PropertyManager(models.Manager):
+        def get_queryset(self):
+            return super().get_queryset().filter(status='Up',is_active=True)
+            
+    properties = PropertyManager()
+
     def __str__(self):
         return f"{self.id}-{self.title}"
 
@@ -212,7 +229,6 @@ class HouseOwnerCertificate(models.Model):
     images like laalpurja naksa
     """
     house = models.ForeignKey(House,on_delete=models.CASCADE)
-    certificate_name = models.CharField(max_length=30,null=True)
     certificate_image = CloudinaryField('certificate_image')
     created_at = models.DateTimeField(auto_now_add = True)
    
