@@ -1,4 +1,6 @@
-Django Installation Guide:
+
+# Propert Sale
+# Django Installation Guide
 first move to the directory name PS C:\4th_sem_project\property_sale\backend> 
 Command to create virtual env => python -m venv env
 command to activate virtual env => env\Scripts\activate
@@ -13,10 +15,10 @@ Installation Guide for React:
 move to the directory => PS C:\4th_sem_project\property_sale\frontend\property_sale>
 run the command=> npm install
 
-Note:
+# Note
 	Dont forgot to append slash at end of the url for the post request
 
-1.Registration:
+# 1.Registration
 	data = {
     		"username": "",
     		"email": "",
@@ -25,14 +27,14 @@ Note:
 	}
 	axios.post('http://127.0.0.1:8000/api/account/registration/',data)
 
-2.Login:
+# 2.Login
 	data = {
     		"email": "",
     		"password": ""
 	}
 	axios.post('/api/account/login/',data)
 
-3.Password Change:
+# 3.Password Change
 	data = {
 		"old_password":"",
     		"new_password1": "",
@@ -45,16 +47,16 @@ Note:
 	axios.post('/api/account/password/change/',data,options)
 	
 
-5.Retrive all user For Testing:
+# 4.Retrive all user For Testing
 	options = {
 		headers:{ 'Content-Type':'application/json','Authorization':`Bearer ${res.data.access_token}`}
 	}
 	axios.get('/api/user',options)
 
-5.Resend Email Verification:
+# 5.Resend Email Verification
 	http://127.0.0.1:8000/api/account/registration/resend-email/
 
-6.Logout
+# 6.Logout
 	data = {
 		"username":"",
 		"refresh":`${refresh_token}`
@@ -62,13 +64,13 @@ Note:
 	axios.post('/api/account/logout/',data)
 
 
-7.Refresh Token:
+# 7.Refresh Token
 	data = {
     		"refresh": ""
 	}
 	axios.post('/api/account/token/refresh/',data)
 
-8.Password Reset:
+# 8.Password Reset
 	data = {
     		"email": ""
 	}
@@ -76,7 +78,7 @@ Note:
 
 
 
-8.Response After Successful Login:
+# 9.Response After Successful Login
 {
     "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQyMDY3MzE1LCJpYXQiOjE2NDIwNjQwMTUsImp0aSI6IjhmZDFkMjFmMGQxNjQxZGVhN2VmNjQzMjJkZjZkMWMxIiwidXNlcl9pZCI6MSwidXNlcm5hbWUiOiJiaWJlayJ9.LtI6lJyK1XKSYde91U4Fy0kBvzSuwezq9BVRgT8lhrU",
     "refresh_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTY0MzM2MDAxNSwiaWF0IjoxNjQyMDY0MDE1LCJqdGkiOiI3NzljZjQ3ZDNmOTk0OTIzYTQ0YTQ1OGMxOTYxYWQwMCIsInVzZXJfaWQiOjEsInVzZXJuYW1lIjoiYmliZWsifQ.e3OS1QVYMuFrlrlqnCBsQfaqwp6w_UQlreuZguQgtuE",
@@ -88,16 +90,16 @@ Note:
     }
 }
 
-Connecting The Websocket:
+# Connecting The Websocket
 	ws://127.0.0.1:8000/ws/status/<username>/
 	when you update document status you will be notified
 
-For Real Time No of Views of Property:
+# For Real Time No of Views of Property:
 	ws://127.0.0.1:8000/ws/house/<int:id>/
     	ws://127.0.0.1:8000/ws/land/<int:id>/
 	each time on Websocket connection no of views of proerty will be increased by 1
 
-New Item Listed For Sale notification in homepage:
+# New Item Listed For Sale notification in homepage
 	ws://127.0.0.1:8000/ws/property/
 	msg will be sent when user post property for sell and and is_active field is made true
 
@@ -107,13 +109,13 @@ For Google Login:
        dj-rest-auth/google/login and post with access token your account will be created if it is first time and access and refrest token will be received.
        For the second time on dj-rest-auth/google/login account will not created and access and refrest token will be received
 
-Retrive User:
+# Retrive User
 	options = {
 		headers:{ 'Content-Type':'application/json','Authorization':`Bearer ${res.data.access_token}`}
 	}
 	axios.get('/api/retrive-user/',options)
 
-Update User:
+# Update User
 	options = {
 		headers:{ 'Content-Type':'application/json','Authorization':`Bearer ${res.data.access_token}`}
 	}
@@ -130,13 +132,13 @@ Update User:
 
 	If get request is send on '/api/update-user/' then also user will be retrived
 
-Retrive KYC:
+# Retrive KYC
 	options = {
 		headers:{ 'Content-Type':'application/json','Authorization':`Bearer ${res.data.access_token}`}
 	}
 	axios.get('/api/kyc-retrive/',options)
 
-Create KYC:
+# Create KYC
 	data = {
 		"user": 1,
 		"profile_pic": "",
@@ -151,7 +153,7 @@ Create KYC:
 	}
 	axios.post('/api/kyc-create/',data,options)
 
-Update KYC:
+# Update KYC
 	data = {
 		"profile_pic": "",
 		"citizenship_photo_front": "",
@@ -164,7 +166,7 @@ Update KYC:
 	}
 	axios.patch('/api/kyc-update/',data,options)
 
-POST LAND:
+# POST LAND
 	 data = {
 		 "seller":"<id>",
 		 "title":"",
@@ -200,7 +202,7 @@ POST LAND:
 	}
 	axios.post('/api/property/post-land/',data,options)
 
-POST HOUSE:
+# POST HOUSE
 	data = {
 		 "seller":"<id>",
 		 "title":"",
@@ -246,43 +248,43 @@ POST HOUSE:
 	}
 	axios.post('/api/property/post-house/',data,options)
 
-LIST ALL HOUSES:
+# LIST ALL HOUSES
 	axios.get('/api/property/house/all/')
 
-LIST ALL LANDS:
+# LIST ALL LANDS
 	axios.get('/api/property/land/all/')
 
-GET HOUSE BY ID :
+# GET HOUSE BY ID 
 	axios.get('/api/property/house/<int:pk>/')
 
-GET LAND BY ID:
+# GET LAND BY ID
 	axios.get('/api/property/land/<int:pk>/')
 
-LIST ALL FOREIGN KEYS:
+# LIST ALL FOREIGN KEYS
 	axios.get('/api/list-for-keys/')
 
-LIST USER HOUSE:
+# LIST USER HOUSE
 	options = {
 		headers:{ 'Content-Type':'application/json','Authorization':`Bearer ${res.data.access_token}`}
 	}
 
 	axios.get('/api/list-user-house/',options)
 
-LIST USER LANDS:
+# LIST USER LANDS
 	options = {
 		headers:{ 'Content-Type':'application/json','Authorization':`Bearer ${res.data.access_token}`}
 	}
 
 	axios.get('/api/list-user-land/',options)
 
-RETRIVE USER HOUSE BY ID:
+# RETRIVE USER HOUSE BY ID
 	options = {
 		headers:{ 'Content-Type':'application/json','Authorization':`Bearer ${res.data.access_token}`}
 	}
 
 	axios.get('/api/retrive-user-house-by-id/<int:pk>/',options)
 
-RETRIVE USER LAND BY ID:
+# RETRIVE USER LAND BY ID
 	options = {
 		headers:{ 'Content-Type':'application/json','Authorization':`Bearer ${res.data.access_token}`}
 	}
@@ -290,12 +292,12 @@ RETRIVE USER LAND BY ID:
 	axios.get('/api/retrive-user-land-by-id/<int:pk>/',options)
 
 
-SEARCH HOUSE BY TYPE:
+# SEARCH HOUSE BY TYPE
 		
 	var =[house-for-sale,house-for-rent,top-listing,premium-listing,featured-listing]
 	axios.get('/api/property/house/<var>/',options)
 
-SEARCH LAND BY TYPE:
+# SEARCH LAND BY TYPE
 	var =[top-listing,premium-listing,featured-listing]
 	axios.get('/api/property/land/<var>/',options)
 
@@ -314,4 +316,5 @@ SEARCH LAND BY TYPE:
 
 
 
-	 }
+	 
+
