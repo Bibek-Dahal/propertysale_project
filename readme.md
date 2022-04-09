@@ -164,3 +164,154 @@ Update KYC:
 	}
 	axios.patch('/api/kyc-update/',data,options)
 
+POST LAND:
+	 data = {
+		 "seller":"<id>",
+		 "title":"",
+		 "description":"",
+		 "listing_type":"",
+		 "road_to_property":"Xm from somewhere",
+		 "access_road":"",
+		 "district":"",
+		 "district":"",
+		 "zone":"",
+		 "zip":"",
+		 "landmark":"",
+		 "area":"",
+		 "ropani":"",
+		 "aana":"",
+		 "paisa":"",
+		 "daam":"",
+		 "price_in_number":"",
+		 "price_in_words":"",
+		 "price_negotiable":"",
+		 "face_towards":"",
+		 "main_image":"",
+		 "url":"",
+		 "latitude":"",
+		 "longitude":"",
+		 "additional_land_image":"<multiple>",
+		 "certificate_image":"<multiple>"
+	 }
+
+
+	options = {
+		headers:{ 'Content-Type':'multipart/form-data','Authorization':`Bearer ${res.data.access_token}`}
+	}
+	axios.post('/api/property/post-land/',data,options)
+
+POST HOUSE:
+	data = {
+		 "seller":"<id>",
+		 "title":"",
+		 "description":"",
+		 "listing_type":"",
+		 "road_to_property":"Xm from somewhere",
+		 "access_road":"",
+		 "district":"",
+		 "district":"",
+		 "zone":"",
+		 "zip":"",
+		 "landmark":"",
+		 "area":"",
+		 "ropani":"",
+		 "aana":"",
+		 "paisa":"",
+		 "daam":"",
+		 "price_in_number":"",
+		 "price_in_words":"",
+		 "price_negotiable":"",
+		 "per":"<per month or ...",
+		 "face_towards":"",
+		 "property_type":"",
+		 "condition":"",
+		 "facility":"",
+		 "furnishing":"",
+		 "house_type":"",
+		 "floors":"",
+		 "beds":"",
+		 "kitchen":"",
+		 "living":"",
+		 "parking":"",
+		 "bath":"",
+		 "main_image":"",
+		 "url":"",
+		 "latitude":"",
+		 "longitude":"",
+		 "additional_house_image":"<multiple>",
+		 "certificate_image":"<multiple>"
+	}
+	options = {
+		headers:{ 'Content-Type':'multipart/form-data','Authorization':`Bearer ${res.data.access_token}`}
+	}
+	axios.post('/api/property/post-house/',data,options)
+
+LIST ALL HOUSES:
+	axios.get('/api/property/house/all/')
+
+LIST ALL LANDS:
+	axios.get('/api/property/land/all/')
+
+GET HOUSE BY ID :
+	axios.get('/api/property/house/<int:pk>/')
+
+GET LAND BY ID:
+	axios.get('/api/property/land/<int:pk>/')
+
+LIST ALL FOREIGN KEYS:
+	axios.get('/api/list-for-keys/')
+
+LIST USER HOUSE:
+	options = {
+		headers:{ 'Content-Type':'application/json','Authorization':`Bearer ${res.data.access_token}`}
+	}
+
+	axios.get('/api/list-user-house/',options)
+
+LIST USER LANDS:
+	options = {
+		headers:{ 'Content-Type':'application/json','Authorization':`Bearer ${res.data.access_token}`}
+	}
+
+	axios.get('/api/list-user-land/',options)
+
+RETRIVE USER HOUSE BY ID:
+	options = {
+		headers:{ 'Content-Type':'application/json','Authorization':`Bearer ${res.data.access_token}`}
+	}
+
+	axios.get('/api/retrive-user-house-by-id/<int:pk>/',options)
+
+RETRIVE USER LAND BY ID:
+	options = {
+		headers:{ 'Content-Type':'application/json','Authorization':`Bearer ${res.data.access_token}`}
+	}
+
+	axios.get('/api/retrive-user-land-by-id/<int:pk>/',options)
+
+
+SEARCH HOUSE BY TYPE:
+		
+	var =[house-for-sale,house-for-rent,top-listing,premium-listing,featured-listing]
+	axios.get('/api/property/house/<var>/',options)
+
+SEARCH LAND BY TYPE:
+	var =[top-listing,premium-listing,featured-listing]
+	axios.get('/api/property/land/<var>/',options)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	 }
