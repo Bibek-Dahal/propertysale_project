@@ -103,6 +103,7 @@ class HouseSerializer(serializers.ModelSerializer):
     parking = serializers.CharField(default=0,max_length=2,validators=[check_int])
     bath = serializers.CharField(default=0,max_length=2,validators=[check_int])
     province = serializers.ChoiceField(choices=choices_type.Choice.province,required=True)
+    per = serializers.CharField(max_length=30,required=True)
     class Meta:
         model = House
         fields = '__all__'

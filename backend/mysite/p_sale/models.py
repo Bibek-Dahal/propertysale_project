@@ -189,6 +189,7 @@ class House(Property):
     property type indicates whether house is for sale or house is for rent
     if house for rent is true for_sale field should be false else True
     """
+    per = models.CharField(max_length=30,null=True)
     property_type = models.ForeignKey(PropertyType,on_delete=models.CASCADE)
     condition = models.ForeignKey(ListingConditioin,on_delete=models.PROTECT)
     facility = models.ManyToManyField(Facility,related_name='facilities',blank=True)
