@@ -313,7 +313,7 @@ class ListLandByKwarg(ListAPIView):
         search = self.kwargs.get('lis_type')
         try:
             if search == 'top-listing':
-                return q.filter(listing_type=ListingType.objects.get_object_or_404(listing_type='Top Listing'))
+                return q.filter(listing_type=ListingType.objects.get(listing_type='Top Listing'))
             elif search == 'premimum-listing':
                 return q.filter(listing_type=ListingType.objects.get(listing_type='Premium Listing'))
             elif search == 'featured-listing':
