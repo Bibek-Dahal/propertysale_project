@@ -194,7 +194,6 @@ class House(Property):
     condition = models.ForeignKey(ListingConditioin,on_delete=models.PROTECT)
     facility = models.ManyToManyField(Facility,related_name='facilities',blank=True)
     furnishing = models.ForeignKey(FurnishingType,on_delete=models.PROTECT)
-    on_sale = models.BooleanField(default=True) #determines whether to show onsale tag or not and if property is for rent this field should be saved as false
     house_type = models.ForeignKey(HouseType,on_delete=models.PROTECT,blank=True,null=True)
     floors = models.CharField(default=1,max_length=3)
     beds = models.CharField(default=1,max_length=3)

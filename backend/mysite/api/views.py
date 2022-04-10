@@ -119,15 +119,6 @@ class PostHouseView(APIView):
         if house_serializer.is_valid():
             if house_img_serializer.is_valid():
                 obj = house_serializer.save()
-                print(obj.property_type)
-                print(obj.on_sale)
-                if obj.property_type.type == 'House For Rent':
-                    print('inside house for rent')
-                    obj.on_sale = False
-                    obj.save()
-                else:
-                    obj.on_sale=True
-                    obj.save()
                 if images:
                     for img in images:
                        addtional_img = AdditionalHouseImage(house=obj,image=img)
