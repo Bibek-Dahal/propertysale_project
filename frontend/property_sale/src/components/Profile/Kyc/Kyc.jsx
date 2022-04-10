@@ -82,6 +82,8 @@ export default function Kyc({setLoading,setIsLoading}) {
         setIsLoading(0);
         // navigate('/');
       }catch(err){
+        setIsLoading(0);
+        showPopup(`error occured`,'error')
         console.log(err)
       }
     }
@@ -174,8 +176,16 @@ export default function Kyc({setLoading,setIsLoading}) {
               Authorization : `Bearer ${state.access_token}`
             }
           })
+          const mobile_num_arrays = res.data.contact_nums.map(item => item.mobile_num) 
+
           setKycData(prev => {
             return res.data;
+          })
+          setKycData(prev => {
+            return{
+              ...prev,
+              mobile_num : mobile_num_arrays.toString()
+            }
           })
           console.log(res.data)
         }
@@ -191,7 +201,7 @@ export default function Kyc({setLoading,setIsLoading}) {
       <h1>KYC</h1>
       <form onSubmit={kycExists ? updateKyc : createKyc}  ref = {formRef}>
         <FileField 
-          className = "profile-images"
+          className = {`profild-pic ${kycExists ? "" : "full_width" }`}
           kycData = {kycData}
           newkycData = {newkycData}
           setnewKycData = {setnewKycData}
@@ -199,7 +209,7 @@ export default function Kyc({setLoading,setIsLoading}) {
           label = "Profile pic"
         />
         <FileField 
-          className = "citizenship-back"
+          className = {`citizenship-back ${kycExists ? "" : "full_width" }`}
           kycData = {kycData}
           newkycData = {newkycData}
           setnewKycData = {setnewKycData}
@@ -207,7 +217,7 @@ export default function Kyc({setLoading,setIsLoading}) {
           label = "Citizenship Photo Back"
         />
          <FileField 
-          className = "citizenship-front"
+          className = {`citizenship-front ${kycExists ? "" : "full_width" }`}
           kycData = {kycData}
           newkycData = {newkycData}
           setnewKycData = {setnewKycData}
@@ -223,10 +233,10 @@ export default function Kyc({setLoading,setIsLoading}) {
         />
         <Input
             type = "text"
-            value = {kycData.mobile_num}
             name = "mobile_num"
             onChange = {onChangeHandler}
             label = "Mobile number"
+            value = {kycData.mobile_num}
         />
         <Input
             type = "text"

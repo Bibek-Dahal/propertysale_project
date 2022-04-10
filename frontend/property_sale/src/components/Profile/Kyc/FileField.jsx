@@ -1,8 +1,24 @@
 import React from 'react'
 import DropZone from '../DropZone'
 import getImage from '../../../impLinks'
+import './FileField.css';
 
 export default function FileField({label,name,className,kycData,newkycData,setnewKycData}) {
+
+    const onChangeHandler = (e) => {
+        console.log(e);
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            setnewKycData(prev => {
+            return{
+                ...prev,
+                [name] : reader.result
+            }
+            })
+        }
+        reader.readAsDataURL(e.target.files[0]);
+        console.log(newkycData)
+    }
 
     const onDropHandler = (e) => {
         console.log(e.dataTransfer.files[0]);
@@ -32,9 +48,6 @@ export default function FileField({label,name,className,kycData,newkycData,setne
     
     return (
         <div className={className}>
-            {
-                console.log(kycData)
-            }
             <label>{label}</label>
                 {kycData[name] && 
                     <div className="old">
@@ -47,15 +60,18 @@ export default function FileField({label,name,className,kycData,newkycData,setne
                         </div>
                     </div>
                 }
-            <div className={`new ${kycData[name] ? "" : "full_width"}`}>
-                {
-                    !newkycData[name]  ?
-                        <DropZone name = {name} onDropHandler={onDropHandler}/>:
-                        <div data-name = {name} className="img" onClick = {removeImageHandler}>
-                            <img src={newkycData[name]} alt="" />
-                        </div>
-                }
-            </div>
+           <label htmlFor={`upload${name}`}>
+                <div className={`new ${kycData[name] ? "" : "full_width"}`}>
+                    {
+                        !newkycData[name]  ?
+                            <DropZone name = {name} onDropHandler={onDropHandler}/>:
+                            <div data-name = {name} className="img" onClick = {removeImageHandler}>
+                                <img src={newkycData[name]} alt="" />
+                            </div>
+                    }
+                </div>
+           </label>
+           <input id = {`upload${name}`} type="file" name = {name} onChange = {onChangeHandler} style = {{display:"none"}}/>
             </div>
     )
 }

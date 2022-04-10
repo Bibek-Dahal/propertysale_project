@@ -23,6 +23,7 @@ import {
 import PrivateRoute from './components/utils/PrivateRoute';
 import Logout from './components/Auth/Logout';
 import ProtectedRoute from './components/utils/ProtectedRoute';
+import {PpContextProvider} from './context/PpContext';
 
 function App() {
   const {PopupVisible} = usePopup();
@@ -35,11 +36,7 @@ function App() {
           <Route path = "/" element = {
               <Home />
           } />
-          <Route path = "/user" element = {
-            <PrivateRoute>
-              <User />
-            </PrivateRoute>
-          } />
+         
           <Route path = "/login" element = {
             <ProtectedRoute>
               <Login />
@@ -62,7 +59,11 @@ function App() {
           }>
             <Route path = "profile" element = {<Profile />} />
             <Route path = "my-properties" element = {<MyProperties />} />
-            <Route path = "post-properties" element = {<PostProperties />} />
+            <Route path = "post-properties" element = {
+             <PpContextProvider>
+                <PostProperties />
+             </PpContextProvider>
+            } />
             <Route path = "change-password" element = {<ChangePassword />} />
           </Route>
           <Route path = "/password-reset" element = {<PasswordReset />} />
@@ -74,3 +75,5 @@ function App() {
 }
 
 export default App;
+
+

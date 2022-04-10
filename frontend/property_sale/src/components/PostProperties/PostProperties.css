@@ -1,0 +1,85 @@
+.post-properties .sections{
+    display:flex;
+    flex-direction: column;
+    gap:0;
+    /* border:1px solid red; */
+    transition:all 450ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+.post-properties .sections >*{
+    background-color: white;
+    border:1px solid rgba(75, 74, 74, 0.13);
+    transition:all 450ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    position:relative;
+}
+
+.post-properties .sections >*:first-child{
+    margin-top:0 !important;
+}
+.post-properties .sections >*:hover{
+    box-shadow:0px 1px 6px rgba(185, 185, 185, 0.294);
+    transform:Scale(1.01);
+}
+
+.post-properties .sections >* h1{
+    padding: 1em 1.5em ;
+    font-size:var(--fs-xxl);
+    cursor:pointer;
+}
+
+.post-properties .sections >* > div{
+    line-height:1.4;
+    height:0;
+    overflow: hidden;
+    transition:all 450ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    margin:0;
+    padding:0 2em;
+}
+
+.post-properties .sections >* .form{
+    /* border:1px solid red; */
+    display:flex;
+    flex-direction: column;
+    gap:1em;
+}
+
+
+
+.post-properties .sections >* .form label{
+    font-size:var(--fs-xl);
+    text-transform:capitalize;
+}
+
+.post-properties .sections >* .form >* >*{
+    display:block;
+    width:100%;
+    margin:.8em 0;
+}
+
+.post-properties .sections >* .form input{
+    padding:.5em ;
+    border:1px solid rgba(134, 134, 134, 0.575);
+}
+
+.post-properties .sections >* .arrow{
+    position:absolute;
+    top:1em;
+    right:1em;
+    height:fit-content;
+    pointer-events: none;
+}
+
+.post-properties .sections >* .arrow svg{
+    font-size:.8rem;
+}
+
+
+.post-properties .sections >* >div[aria-expanded = "true"] ~ .arrow{
+    transform:rotate(180deg);
+}
+
+/* editor ck */
+
+.ck.ck-toolbar.ck-toolbar_grouping>.ck-toolbar__items{
+    flex-wrap:wrap !important;
+}

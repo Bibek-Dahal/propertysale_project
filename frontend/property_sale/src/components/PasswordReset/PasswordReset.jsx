@@ -50,7 +50,7 @@ export default function PasswordReset() {
     function fieldChangeHandler(e){
         setEmail(e.target.value);
     }   
-
+    
     function resendResetMailHandler(e){
         console.log('inside')
         console.log(email)

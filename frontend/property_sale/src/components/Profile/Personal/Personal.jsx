@@ -47,7 +47,6 @@ export default function Personal({setIsLoading}) {
                 })
                 console.log(res);
                 showPopup('Profile Updated successfully')
-                // window.scroll(0,0);
                 setIsLoading(0);
             }catch(err){
                 console.log(err);
@@ -57,6 +56,19 @@ export default function Personal({setIsLoading}) {
     }
 
     useEffect(() => {
+        let ws;
+        ws = new WebSocket(`${axiosLinks.kycStatusWs}${state.user.username}/`)
+        ws.onopen = () => {
+            console.log('connnected')
+        }
+        ws.onmessage = (msg) => {
+           setKycStatus(JSON.parse(msg.data).message)
+           console.log(msg)
+           showPopup(`Your kyc is ${JSON.parse(msg.data).message}`)
+         }
+         ws.onclose = (msg) => {
+             console.log('connection closed')
+         }
         console.log(localStorage.getItem('access_token'))
         async function getUserDetail(){
             try{
@@ -75,12 +87,12 @@ export default function Personal({setIsLoading}) {
                         }
                     })
                 }
-                if(res.data.kyc_status === 'verified' ){
-                    setKycStatus("verified");
-                }else if(res.data.kyc_status === 'pending'){
-                    setKycStatus("pending");
-                }
-
+                // if(res.data.kyc_status === 'verified' ){
+                //     setKycStatus("verified");
+                // }else if(res.data.kyc_status === 'pending'){
+                //     setKycStatus("pending");
+                // }else
+                setKycStatus(res.data.kyc_status);
                 if(res.data.kyc_status !== null){
                     console.log('insdide')
                         axios.get(axiosLinks.retriveKyc,{
@@ -90,6 +102,7 @@ export default function Personal({setIsLoading}) {
                           })
                           .then(res => {
                               setProfileImage(res.data.profile_pic)
+                            
                           })
                           .catch(err => console.log(err))
                 }
@@ -97,12 +110,11 @@ export default function Personal({setIsLoading}) {
                 console.log(err);
             }
         }
-
+        
         getUserDetail();
 
 
-
-
+        // const ws = new WebSocket('ws://127.0.0.1:8000/')
         // async function isKycVerified(){
         //     try{
         //         const res = await axios.get(`${axiosLinks.retriveKyc}`,{
@@ -112,8 +124,8 @@ export default function Personal({setIsLoading}) {
         // }
 
         // isKycVerified();
-    
       return () => {
+          ws.close()
       }
     }, [])
     
@@ -130,11 +142,12 @@ export default function Personal({setIsLoading}) {
                         "no profile image set"
                 }
                  <div className={`icon ${kyc_status}`}>
-                    {kyc_status === null &&  <FontAwesomeIcon icon = {solid('exclamation')} />}
+                    {(kyc_status === null || kyc_status === 'rejected') &&  <FontAwesomeIcon icon = {solid('exclamation')} />}
                     {kyc_status === "pending" &&   <FontAwesomeIcon icon = {solid('question')} />}
                     {kyc_status === "verified" &&   <FontAwesomeIcon icon = {solid('check')} />}
                     {kyc_status === "pending" &&   <div className = "tooltip-info">kyc verification in progress</div>}
-                    {kyc_status === null &&   <div className = "tooltip-info">kyc is not verified</div>}
+                    {kyc_status === null &&   <div className = "tooltip-info">kyc is not filled</div>}
+                    {kyc_status === "rejected" &&   <div className = "tooltip-info">kyc is rejected, please recheck</div>}
                     {kyc_status === "verified" &&   <div className = "tooltip-info">kyc is verified</div>}
                  </div>
             </div>
@@ -176,7 +189,7 @@ export default function Personal({setIsLoading}) {
                 onChange = {fieldChangeHandler}
                 label = "Gender"
             >
-                <option value="select">----------</option>
+                <option value="select">-----------</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
                 <option value="Others">Other</option>

@@ -1,13 +1,98 @@
-import React from 'react'
+import React, {useState,useContext} from 'react'
+import { 
+  AdditionalDetails,
+  Address ,
+  AreaAndRoad,
+  BasicDetails ,
+  Media ,
+  Price 
+} from './index';
+
+import './PostProperties.css';
+import Section  from './Section/Section';
+import formInfo from './formInfo.json';
+import { PpContext } from '../../context/PpContext';
+import { usePopup } from '../../Hooks';
+
 
 export default function PostProperties() {
-    
+  const [choice , setChoice] = useState("");
+  const [formData,setFormData] = useState({
+    title: "",
+    description : "",
+  })
+  const {showPopup} = usePopup();
+  const {formState,formDispatch} = useContext(PpContext)
+
+  const ChoiceHandler = (e) => {
+    setChoice(e.target.dataset.value);
+  }
+
+  const getForm = (name) => {
+    switch(name){
+      case "Basic Details":
+        return <BasicDetails formDispatch = {formDispatch} />
+      
+      case "Address":
+        return <Address  formDispatch = {formDispatch}/>
+     
+      case "Area and Road":
+        return <AreaAndRoad formDispatch = {formDispatch}/>
+      
+      case "Additional Details":
+        return <AdditionalDetails  formDispatch = {formDispatch}/>
+      
+      case "Media":
+        return <Media formDispatch = {formDispatch}/>
+    }
+  }
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    console.log(e.target)
+    console.log('submitted',formState);
+    for(let item in formState){
+      if(formState[item] === ''){
+        console.log(`${item} field is empty`)
+        showPopup(`${item} field is empty`,'errors')
+      }
+    }
+  }
 
   return (
-    <div>PostProperties
-        {/* basic details */}
-        {/* address */}
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque consectetur reprehenderit voluptatem quos ad, nam eaque quae! Quae placeat explicabo natus distinctio dolores tenetur veritatis rerum. Sunt sequi culpa, aliquid sit exercitationem vero aperiam? Magnam adipisci consequatur, consequuntur maiores doloribus, exercitationem incidunt optio placeat ex accusantium rem laudantium in. Quasi soluta distinctio esse amet doloribus possimus voluptatibus sed placeat. Atque neque dicta beatae ducimus impedit, rem distinctio ipsam saepe, itaque velit molestias blanditiis vel debitis deleniti, cumque quis necessitatibus dolore possimus consequatur quisquam tempora libero inventore. Vel animi autem dolorum repellat nihil, quisquam quaerat odio laboriosam recusandae dolores, provident amet sed, minima optio? Aliquid vero corrupti a nam sequi nihil? Repellat ipsa nostrum alias corporis repellendus nam in cumque tenetur beatae nesciunt culpa delectus id nulla ea, eius sequi illo? Facilis aspernatur, voluptatum cupiditate quisquam quidem hic esse doloribus aperiam ipsa, maxime cumque sunt ut dolorem libero necessitatibus numquam temporibus? Dolor sapiente perferendis quasi optio ipsum commodi dolorum sed nesciunt? Facere doloribus consequuntur ipsam maxime, iusto adipisci culpa eum veniam architecto reprehenderit obcaecati voluptatem ducimus provident beatae veritatis quia, tempore vitae accusamus saepe quas. Nihil aut et rerum blanditiis eius pariatur repellat, voluptatibus veritatis maiores sed sapiente in, repudiandae corrupti ad nulla tenetur voluptatum iure dolorum eos consectetur non? Possimus recusandae neque perferendis soluta libero, magni explicabo fuga consectetur provident mollitia quisquam, deserunt voluptatum dolore sunt qui illum suscipit fugiat sapiente perspiciatis! Deserunt unde dolores pariatur illo, nemo error cumque corporis minus voluptates fugit ipsam in accusamus ex, ratione illum quis, omnis similique iure quam libero earum et? Laudantium debitis mollitia reprehenderit nam repellat nemo quo, quidem in dolorum alias, sit excepturi eveniet ipsa est exercitationem eius eligendi quia? Quo, magnam corporis unde distinctio quod rerum facilis nostrum deleniti impedit labore soluta officiis odit sint commodi, provident delectus. Totam, id odio quod suscipit rerum sed facilis nihil, ipsam natus sunt sint sapiente, reiciendis amet sequi atque iste dignissimos! Praesentium voluptatum porro id! Exercitationem, tempora repudiandae deleniti libero eveniet officia quia fuga ab inventore maxime voluptatem sit nemo, cumque similique dolorem architecto doloribus quidem illo excepturi. Repellendus fugiat deleniti dolorem officia consectetur tenetur molestiae, adipisci debitis, cum sit magni nihil. Necessitatibus nisi illum obcaecati, officia aliquid minus accusantium rem alias numquam, corrupti asperiores natus, sed doloribus eius recusandae quisquam dolores quasi laboriosam eveniet. Quisquam asperiores, voluptatum doloremque totam aperiam laudantium iste at dolorum adipisci quasi architecto debitis nihil nostrum impedit voluptatibus optio quibusdam! Voluptatibus vero repellat iste laborum. Voluptate facere excepturi error amet qui mollitia impedit eum aliquam suscipit tempora ab beatae adipisci facilis, quasi dicta deserunt neque minima! Asperiores sapiente nesciunt odio quod rem porro iusto? Eveniet consequatur hic repellat. Assumenda ab eveniet quis nisi natus magnam libero delectus quaerat ex aliquid praesentium quisquam eum nesciunt maiores distinctio, quam asperiores ad accusamus tempore sit blanditiis voluptates totam cum. Placeat cum reprehenderit eveniet accusantium ab accusamus esse quis, nostrum officia voluptates doloribus quidem asperiores quod natus amet modi totam aut eaque incidunt, veritatis vitae enim. Earum eum officia, repellat aperiam doloremque accusamus ratione ipsam a dicta dignissimos corporis facere, neque suscipit cupiditate omnis nostrum sit iusto beatae excepturi in saepe dolores unde nobis? Sequi possimus architecto ratione magnam. Iure molestias quae quasi fuga eaque vitae est eum dolore veniam non sint a, voluptas ut itaque. Odio perspiciatis pariatur mollitia neque sunt fugit! Adipisci, iusto voluptatibus alias dolorum ad perferendis excepturi odio, quibusdam aut error beatae amet, unde ea cupiditate commodi nisi corrupti voluptate ipsam accusantium? Adipisci blanditiis corporis tempora inventore, recusandae quos. Excepturi facilis dolor exercitationem commodi quaerat modi mollitia laboriosam, dolore aliquid dignissimos eveniet. Accusamus omnis, autem cupiditate blanditiis tempore veniam soluta earum similique laborum libero, iusto dolores qui eos placeat eius inventore. Incidunt explicabo quasi provident velit veritatis quo voluptatem necessitatibus, fuga quidem ipsum aliquid exercitationem illum nulla. Mollitia modi dolore ut laborum quo optio veniam unde ipsam cupiditate, consectetur, corporis deserunt libero sequi tenetur? Quam quas reiciendis fugiat at nostrum ut sit voluptates illum fugit, dignissimos qui ea cum quasi! Aspernatur omnis, asperiores, assumenda doloribus repellendus voluptates, id porro voluptatem rerum quod impedit. Et nostrum veritatis facilis aperiam repudiandae vero libero eaque vel cumque quia dolore odio deleniti facere quas impedit, quo quidem quaerat laborum hic, rerum atque sit? Ea, ex cumque aperiam veritatis excepturi eum explicabo libero, labore recusandae similique nemo consequuntur nostrum eos quibusdam ad vel nihil. Possimus quasi eius ullam, incidunt in error illum assumenda rem ipsam aliquam dolorem amet quisquam sunt veritatis alias tenetur nostrum nam architecto provident. Doloribus, dolorum animi, voluptas eius odit inventore iste, ad totam error laudantium qui blanditiis nesciunt ipsam eos sequi reprehenderit fugiat quibusdam cupiditate tenetur? Eveniet, laborum nobis. In cum porro veniam dolore. Consequuntur, tempora. Eius aliquam voluptatum aut totam ex veniam incidunt vitae laborum beatae corrupti! Ducimus hic quasi voluptas qui laudantium repellendus illum consequuntur doloremque facilis animi eos vel optio recusandae in corporis voluptatem a quae atque, suscipit ex debitis quaerat. Iure, impedit minima suscipit provident modi cumque id hic dolores, eveniet tempora ad voluptate. Quis ullam perspiciatis aliquam reiciendis voluptatum, ratione, eligendi alias culpa optio totam nisi esse, ab voluptatibus voluptate dolorum natus impedit soluta iusto! Recusandae consequatur ab, reiciendis unde aut molestiae laborum rerum esse voluptatibus voluptatem officia minus sapiente earum accusantium impedit placeat deleniti, sequi eligendi incidunt! Similique impedit placeat repellat nam nemo assumenda, illo voluptatum beatae rem aliquid corrupti cumque debitis sequi magni odio optio qui odit possimus distinctio. Itaque minima iste quod aut? Quas officia facere delectus repellat, tempora velit excepturi asperiores. Quae praesentium veniam impedit est, harum totam alias laborum et cumque, nesciunt itaque porro sunt, dolorem rem! Porro molestias sed dolorum. Provident non nostrum recusandae magni vero, doloribus ipsa quibusdam eius placeat soluta itaque obcaecati reiciendis dolores fugiat, cumque debitis unde a quisquam hic veniam necessitatibus dolorem optio autem! Dicta facere quisquam beatae placeat a corporis perferendis quam nemo dolorem maiores non, expedita sit aspernatur quidem velit quia, molestias, mollitia dignissimos! Saepe assumenda odit ullam quasi. Laudantium enim, recusandae eius vitae rerum laboriosam quaerat praesentium neque similique ipsum cumque.
+    <div className='post-properties'>
+      {/* {
+        choice === "" &&
+            <div className="choices">
+                <button className="btn land-btn" data-value = "land" onClick = {ChoiceHandler}>
+                  Land
+                </button>
+                <button className="btn house-btn" data-value = "house" onClick = {ChoiceHandler}>
+                  House
+                </button>
+            </div>
+      } */}
+      {/* basic details */}
+      {/* address */}
+      {/* area and road */}
+      {/* additional details */}
+      {/* media */}
+      {/* price */}
+      <form onSubmit = {submitHandler}>
+        <div className="sections">
+          {
+            formInfo.sections.map(section => {
+                return (
+                  <Section  className = "section" key = {section.name} title = {section.name}>
+                    {getForm(section.name)}
+                  </Section>
+                )
+            })
+          }
+        </div>
+        <input type="submit" />
+      </form>
+
     </div>
     
   )

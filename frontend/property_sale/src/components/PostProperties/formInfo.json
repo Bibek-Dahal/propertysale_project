@@ -1,0 +1,49 @@
+{
+    "sections" : [
+        {
+            "name":"Basic Details",
+            "fields" : [
+                {
+                    "label" : "title",
+                    "type"  : "string",
+                    "element"   : "input"
+                },
+                {
+                    "label" : "description",
+                    "type"  : "string",
+                    "element"   : "textarea"
+                }
+            ]
+        },
+        {
+            "name":"Address",
+            "fields" : [
+                
+            ]
+        },
+        {
+            "name":"Area and Road",
+            "fields" : [
+                
+            ]
+        },
+        {
+            "name":"Additional Details",
+            "fields" : [
+                
+            ]
+        },
+        {
+            "name":"Media",
+            "fields" : [
+                
+            ]
+        },
+        {
+            "name":"Price",
+            "fields" : [
+                
+            ]
+        }
+    ]
+}

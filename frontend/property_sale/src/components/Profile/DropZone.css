@@ -11,13 +11,13 @@
 }
 
 .dropzone:before{
-    content : "drop an image here to change";
+    content : "click or drop to image";
     position:absolute;
     left:0;
     top:0;
     height:100%;
+    font-size:.9rem;
     width:100%;
-    /* display:none; */
     justify-content: center;
     align-items: center;
     opacity:.5;    

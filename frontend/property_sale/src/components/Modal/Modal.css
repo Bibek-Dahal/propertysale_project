@@ -22,6 +22,7 @@
     box-shadow: var(--box-shadow-properties) #c0c0c061;
     gap:1em;
     transform:translateX(100%);
+    z-index:1000;
 }
 
 .popup.hide{
@@ -114,5 +115,9 @@
 }
 
 .popup.error:before{
-    background:var(--);
+    background:red;
+}
+.popup.error{
+    background:red;
+    font-weight:bold;
 }
