@@ -3,10 +3,15 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {solid} from '@fortawesome/fontawesome-svg-core/import.macro';
 
 
-export default function Section({className , title, onChange, children}) {
+export default function Section({className , title, onChange,i, children}) {
 
   const h1 = useRef(null);
   const div = useRef(null);
+
+  function expandListener(){
+      console.log('transition ended')
+      div.current.style.height = "auto";
+  }
 
   const toggle = () => {
     if(div.current.getAttribute('aria-expanded') === 'false'){
@@ -17,11 +22,13 @@ export default function Section({className , title, onChange, children}) {
     if(div.current.getAttribute('aria-expanded') === 'false'){
       div.current.style.height = 0;
       div.current.style.margin = " 0";
-      // div.current.parentElement.parentElement.style.gap = "0";
       div.current.parentElement.style.margin = "0";
       div.current.parentElement.style.padding = "0";
+      div.current.removeEventListener('transitionend',expandListener)
     }else{
       div.current.style.height = div.current.scrollHeight + 'px';
+
+      div.current.addEventListener('transitionend',expandListener) 
       div.current.style.margin = "1em 0";
       // div.current.parentElement.parentElement.style.gap = "1em";
       div.current.parentElement.style.margin = "1em 0";
@@ -33,15 +40,25 @@ export default function Section({className , title, onChange, children}) {
       )
     }
   }
+  function getIcon(){
+    return i
+  }
 
   return (
       <div className={className}>
-          <h1 ref = {h1} onClick = {toggle}>{title}</h1>
+          <div className="header" onClick = {toggle}>
+              {
+                  console.log(i)
+
+              }
+            {/* <FontAwesomeIcon icon = {} /> */}
+            <h1 ref = {h1} >{title}</h1>
+          </div>
           <div ref = {div} aria-expanded = "false">
             {children}
           </div>
           <div className="arrow">
-            <FontAwesomeIcon icon = {solid('chevron-down')} />
+              <FontAwesomeIcon icon = {solid('chevron-down')} />
           </div>
       </div>
   )

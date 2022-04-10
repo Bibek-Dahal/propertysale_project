@@ -4,6 +4,8 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import './BasicDetails.css';
 import { useState } from 'react';
 import Input from '../Input/Input';
+
+
 export default function BasicDetails({formDispatch}) {
 
   const [data,setData] = useState({

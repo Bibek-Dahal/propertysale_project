@@ -1,6 +1,7 @@
 {
     "sections" : [
         {
+            "icon" : "circle-info",
             "name":"Basic Details",
             "fields" : [
                 {
@@ -16,30 +17,36 @@
             ]
         },
         {
+
+            "icon" : "location-crosshairs",
             "name":"Address",
             "fields" : [
                 
             ]
         },
         {
+            "icon" : "scribble",
             "name":"Area and Road",
             "fields" : [
                 
             ]
         },
         {
+            "icon":"asterisk",
             "name":"Additional Details",
             "fields" : [
                 
             ]
         },
         {
+            "icon" : "image",
             "name":"Media",
             "fields" : [
                 
             ]
         },
         {
+            "icon" : "dollar-sign",
             "name":"Price",
             "fields" : [
                 

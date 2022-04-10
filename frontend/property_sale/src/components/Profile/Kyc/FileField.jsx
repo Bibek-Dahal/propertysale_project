@@ -64,7 +64,7 @@ export default function FileField({label,name,className,kycData,newkycData,setne
                 <div className={`new ${kycData[name] ? "" : "full_width"}`}>
                     {
                         !newkycData[name]  ?
-                            <DropZone name = {name} onDropHandler={onDropHandler}/>:
+                            <DropZone name = {name} placeholder = "Drop or click to upload" onDropHandler={onDropHandler}/>:
                             <div data-name = {name} className="img" onClick = {removeImageHandler}>
                                 <img src={newkycData[name]} alt="" />
                             </div>

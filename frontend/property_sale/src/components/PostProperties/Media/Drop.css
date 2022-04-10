@@ -1,0 +1,124 @@
+.media-dropzone-container{
+    display:flex;
+    flex-direction: column;
+    gap:2em;
+    /* border:1px solid red; */
+    margin-bottom:2em;
+}
+
+.media-dropzone-container .drop-zone{
+    /* min-height:200px; */
+    /* box-shadow:inset 1px 1px 10px rgb(207, 207, 207),
+                inset 1px 1px 5px white; */
+    position:relative;
+    box-shadow: rgba(0, 0, 0, 0.41) 0px 1px 3px 0px inset;
+    color:var(--blue-dark);
+    background : rgba(244, 244, 245, .9);
+}
+
+.media-dropzone-container .drop-zone:before{
+    /* content : "";
+    height:90%;
+    width:97%;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    position:absolute;
+    border:2px dashed var(--blue-dark);
+    opacity:.5;
+    cursor:pointer; */
+}
+
+.media-dropzone-container .drop-zone:hover:before,
+.media-dropzone-container .drop-zone:hover .placeholder,
+.media-dropzone-container .drop-zone.active:before,
+.media-dropzone-container .drop-zone.active .placeholder{
+    opacity:1;
+}
+
+.media-dropzone-container .drop-zone .placeholder{
+    position:absolute;
+    height : calc(100% - 1em);
+    width : calc(100% - 1em);
+    border:2px dashed var(--blue-dark);
+    left:50%;
+    top:50%; 
+    transform:translate(-50%,-50%);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size:var(--fs-xxl);
+    gap:.5em;
+    pointer-events: none;
+    opacity:.5;
+}
+
+input[id^=dropInput]{
+    display:none;
+}
+
+
+.media-container{
+    /* border:1px solid red; */
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap:1em;
+    transition:all .5s ease;
+    position:relative;
+}
+
+.media-container .img{
+    width:100%;
+    height:100px;
+    width:100px;
+    /* border:2px solid rgba(129, 128, 128, 0.219); */
+    position:relative;
+    /* border-radius:5px; */
+    box-shadow:1px 1px 10px rgb(211, 211, 211);
+    transition:all .5s ease;
+}
+
+.media-container .img >*{
+    /* border:1px solid red; */
+}
+
+.media-container .img img{
+    height:100%;
+    width: 100%;
+    object-fit: cover;
+    /* border-radius:5px; */
+}
+
+.media-container .img .utilities{
+    position:absolute;
+    bottom:0;
+    font-size:var(--fs-xxl);
+    background:white;
+    width:100%;
+    display:flex;
+    justify-content: end;
+    align-items: center;
+    padding:.2em .5em;
+}
+
+.media-container .img .utilities .remove{
+    padding:0 1em;
+}
+
+
+.media-container .img .utilities .remove:hover{
+    color:red;
+    cursor:pointer;
+}
+
+.media-container .img .utilities .remove svg{
+    pointer-events: none;
+}
+
+.confirmDataBtn{
+    position:absolute;
+    right:0;
+    bottom:0;
+}

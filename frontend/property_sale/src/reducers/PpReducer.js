@@ -1,6 +1,9 @@
 export const defaultFormState = {
     title : "",
-    description : ""
+    description : "",
+    main_image : "",
+    otherImages : "",
+    certificate_image : ""
 }
 
 export const PpReducer = (state,action) => {
@@ -11,8 +14,8 @@ export const PpReducer = (state,action) => {
             // console.log('state',state)
             // console.log('data',data)
             // console.log('action',action)
-            // const newt = {...state,...data}
-            // console.log(newt)
+            const newt = {...state,...data}
+            console.log(newt)
             return {
                 ...state,
                 ...data
