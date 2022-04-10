@@ -107,6 +107,7 @@ class HouseSerializer(serializers.ModelSerializer):
         model = House
         fields = '__all__'
         extra_fields = ['images']
+        ordering = ['-created_at']
         
         """
         here i have given related name in foreign key of additional images so i have used related name in extra_fields

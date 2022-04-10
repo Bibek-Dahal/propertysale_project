@@ -159,6 +159,9 @@ class Land(Property):
     """
     Model Manager
     """
+    class Meta:
+        ordering = ['-created_at']
+        
     class PropertyManager(models.Manager):
         def get_queryset(self):
             return super().get_queryset().filter(status='Up',is_active=True)
@@ -201,6 +204,9 @@ class House(Property):
     living = models.CharField(default=1,max_length=3)
     parking = models.CharField(default=0,max_length=2)
     bath = models.CharField(default=0,max_length=2)
+
+    class Meta:
+        ordering = ['-created_at']
 
     objects = models.Manager()
     """
