@@ -1,5 +1,8 @@
-from .serializer import  UserSerializer,KycSerializer,UpdateKycSerializer,UserContactSerializer
-from rest_framework.generics import ListAPIView
+from django.http import Http404
+from requests import request
+from api.custom_permission import PostPropertyPermission
+from .serializer import *
+from rest_framework.generics import ListAPIView,RetrieveAPIView
 from user_account.models import MyUser as User
 from rest_framework.permissions import IsAuthenticated,AllowAny
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -7,8 +10,10 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework import filters
 from rest_framework.parsers import FormParser,MultiPartParser,JSONParser
-from p_sale.models import KYC
+from p_sale.models import *
+
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -67,7 +72,6 @@ class CreateKycView(APIView):
         if kyc_serializer.is_valid():
             if contact_serializer.is_valid():
                 kyc_obj = kyc_serializer.save()
-                print(kyc_obj)
                 contact_serializer.save(kyc_id=kyc_obj)
                 return Response(kyc_serializer.data,status=status.HTTP_201_CREATED)
             return Response(contact_serializer.errors,status=status.HTTP_400_BAD_REQUEST)
@@ -99,3 +103,271 @@ class UpdateUserKycView(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         except:
             return Response({"detail":"KYC doesnot exists."},status=status.HTTP_404_NOT_FOUND)
+
+class PostHouseView(APIView):
+    parser_classes = [MultiPartParser,FormParser]
+    permission_classes = [IsAuthenticated,PostPropertyPermission]
+
+    def post(self,request,*args,**kwargs):
+        house_serializer = HouseSerializer(data=request.data,context={'user':request.user})
+        house_img_serializer = HouseOwnerCertificateSerializer(data=request.data)
+        images = request.FILES.getlist('additional_house_image')
+        certificate_images = request.FILES.getlist('certificate_image')
+        print(certificate_images)
+        
+        print(images)
+        if house_serializer.is_valid():
+            if house_img_serializer.is_valid():
+                obj = house_serializer.save()
+                print(obj.property_type)
+                print(obj.on_sale)
+                if obj.property_type.type == 'House For Rent':
+                    print('inside house for rent')
+                    obj.on_sale = False
+                    obj.save()
+                else:
+                    obj.on_sale=True
+                    obj.save()
+                if images:
+                    for img in images:
+                       addtional_img = AdditionalHouseImage(house=obj,image=img)
+                       addtional_img.save()
+                # print(house_img_serializer.data)
+                for i in certificate_images:
+                    addtional_cert_img = HouseOwnerCertificate(house=obj,certificate_image=i)
+                    addtional_cert_img.save()
+                return Response(house_serializer.data,status = status.HTTP_201_CREATED)
+            return Response(house_img_serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+        return Response(house_serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+
+class PropertyListView(ListAPIView):
+    queryset = Land.properties.all()
+    serializer_class = LandSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['title']
+
+class PostLandView(APIView):
+    parser_classes = [MultiPartParser,FormParser]
+    permission_classes = [IsAuthenticated,PostPropertyPermission]
+
+    def post(self,request,*args,**kwargs):
+        land_serializer = LandSerializer(data=request.data,context={'user':request.user})
+        land_img_serializer = LandOwnerCertificateSerializer(data=request.data)
+        images = request.FILES.getlist('additional_land_image')
+        certificate_images = request.FILES.getlist('certificate_image')
+        print(images)
+        if land_serializer.is_valid():
+            if land_img_serializer.is_valid():
+                obj = land_serializer.save()
+                print(obj)
+                obj.save()
+                """check if additional images is present"""
+                if images:
+                    for img in images:
+                       addtional_img = AdditionalLandImage(land=obj,image=img)
+                       addtional_img.save()
+                for i in certificate_images:
+                    addtional_cert_img = LandOwnerCertificate(land=obj,certificate_image=i)
+                    addtional_cert_img.save()
+                return Response(land_serializer.data,status = status.HTTP_201_CREATED)
+            return Response(land_img_serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+        return Response(land_serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+
+class HouseListView(ListAPIView):
+    queryset = House.properties.all()
+    serializer_class = HouseSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['title', 'longitude','latitude']
+    # ordering_fields = ['price_in_number']
+
+    def get_queryset(self):
+        q = self.request.query_params.get('ordering')
+        if q:
+            if q == 'price':
+                return super().get_queryset().order_by('price_in_number')
+            elif q == '-price':
+                return super().get_queryset().order_by('-price_in_number')
+        return super().get_queryset()
+            
+
+class LandListView(ListAPIView):
+    queryset = Land.properties.all()
+    serializer_class = LandSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['title', 'longitude','latitude']
+
+    def get_queryset(self):
+        q = self.request.query_params.get('ordering')
+        if q:
+            if q == 'price':
+                return super().get_queryset().order_by('price_in_number')
+            elif q == '-price':
+                return super().get_queryset().order_by('-price_in_number')
+        return super().get_queryset()
+        
+class RetriveHouseView(RetrieveAPIView):
+    queryset = House.properties.all()
+    serializer_class = HouseSerializer
+
+class RetriveLandView(RetrieveAPIView):
+    queryset = Land.properties.all()
+    serializer_class = LandSerializer
+
+class ListHouseTypeView(APIView):
+    def get(self,request):
+        """
+        instead of keeping separate url for all simply making one url
+        """
+        try:
+            house_type_queryset = HouseType.objects.all()
+            property_type_queryset = PropertyType.objects.all()
+            facility_queryset = Facility.objects.all()
+            area_type_queryset = AreaType.objects.all()
+            listing_type_queryset = ListingType.objects.all()
+            listing_condition_queryset = ListingConditioin.objects.all()
+            furnishing_type_queryset = FurnishingType.objects.all()
+            face_towards_queryset = FaceTowards.objects.all()
+
+            house_type = [house.house_type for house in house_type_queryset]
+            property_type = [ptype.type for ptype in property_type_queryset]
+            facility = [facility.facility for facility in facility_queryset]
+            area_type = [area.area for area in area_type_queryset]
+            listing_type = [listype.listing_type for listype in listing_type_queryset]
+            listing_condition = [lis_con.listing_condition for lis_con in listing_condition_queryset]
+            furnishing_type = [fur_type.furnishing_type for fur_type in furnishing_type_queryset]
+            face_towards = [f_towards.face_towards for f_towards in face_towards_queryset]
+            print(house_type)
+
+            context = {
+                'house_type':house_type,
+                'property_type':property_type,
+                'facility':facility,
+                'area_type':area_type,
+                'listing_type':listing_type,
+                'listing_condition':listing_condition,
+                'furnishing_type':furnishing_type,
+                'face_towards':face_towards
+            }
+            return Response(context,status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({"error":"something went wrong"},status=status.HTTP_400_BAD_REQUEST)
+
+class ListUserHouseView(ListAPIView):
+    permision_classes = [IsAuthenticated]
+    queryset = House.objects.all()
+    serializer_class = HouseSerializer
+
+    def get_queryset(self):
+        return super().get_queryset().filter(seller=self.request.user)
+
+
+class ListUserLandView(ListUserHouseView):
+    permision_classes = [IsAuthenticated]
+    queryset = Land.objects.all()
+    serializer_class = LandSerializer
+
+    def get_queryset(self):
+        return super().get_queryset().filter(seller=self.request.user)
+
+"""
+I am using This extra two views because of different model manager handeling different views
+"""
+class RetriveUserHouseView(RetrieveAPIView):
+    permision_classes = [IsAuthenticated]
+    # queryset = House.objects.all()
+    serializer_class = HouseSerializer
+
+    def get_queryset(self):
+        print(type(self.kwargs.get('pk')))
+        pk = self.kwargs.get('pk')
+        try:
+            obj = House.objects.get(id=pk)
+            if obj.seller == self.request.user:
+                return House.objects.filter(id=pk)
+            raise Http404
+        except:
+            raise Http404
+
+class RetriveUserLandView(RetrieveAPIView):
+    permision_classes = [IsAuthenticated]
+    serializer_class = LandSerializer
+
+    def get_queryset(self):
+        print(type(self.kwargs.get('pk')))
+        pk = self.kwargs.get('pk')
+        try:
+            obj = Land.objects.get(id=pk)
+            if obj.seller == self.request.user:
+                return Land.objects.filter(id=pk)
+            raise Http404
+        except:
+            raise Http404
+
+
+class ListLandByKwarg(ListAPIView):
+    queryset = Land.properties.all()
+    serializer_class = LandSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['title', 'longitude','latitude']
+
+    def get_queryset(self):
+        q = super().get_queryset()
+        query = self.request.query_params.get('ordering')
+        if query:
+            if query == 'price':
+                q = super().get_queryset().order_by('price_in_number')
+            elif query == '-price':
+                q =  super().get_queryset().order_by('-price_in_number')
+
+        search = self.kwargs.get('lis_type')
+        try:
+            if search == 'top-listing':
+                return q.filter(listing_type=ListingType.objects.get_object_or_404(listing_type='Top Listing'))
+            elif search == 'premimum-listing':
+                return q.filter(listing_type=ListingType.objects.get(listing_type='Premium Listing'))
+            elif search == 'featured-listing':
+                return q.filter(listing_type=ListingType.objects.get(listing_type='Featured Listing'))
+            raise Http404
+        except:
+            raise Http404
+
+        
+class ListHouseByKwarg(ListAPIView):
+    queryset = House.properties.all()
+    serializer_class = HouseSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['title', 'longitude','latitude']
+
+    def get_queryset(self):
+        q = super().get_queryset()
+        query = self.request.query_params.get('ordering')
+        if query:
+            if query == 'price':
+                q = super().get_queryset().order_by('price_in_number')
+            elif query == '-price':
+                q =  super().get_queryset().order_by('-price_in_number')
+
+        search = self.kwargs.get('lis_type')
+        try:
+            if search == 'house-for-sale':
+                return q.filter(property_type=PropertyType.objects.get(type='House For Sale'))
+            elif search == 'house-for-rent':
+                return q.filter(property_type=PropertyType.objects.get(type='House For Rent'))
+            elif search == 'top-listing':
+                return q.filter(listing_type=ListingType.objects.get(listing_type='Top Listing'))
+            elif search == 'premimum-listing':
+                return q.filter(listing_type=ListingType.objects.get(listing_type='Premium Listing'))
+            elif search == 'featured-listing':
+                return q.filter(listing_type=ListingType.objects.get(listing_type='Featured Listing'))
+            raise Http404
+        except:
+            raise Http404
+
+        
+        
+
+
+        
+
+
+
