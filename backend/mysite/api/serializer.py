@@ -4,43 +4,22 @@ from rest_framework import serializers
 from user_account.models import MyUser as User
 import re
 from django.utils.translation import gettext_lazy as _
-from .validators import check_pswd,custom_check_pswd,check_mobile_num
+from .validators import check_int, check_pswd,custom_check_pswd,check_mobile_num
 from dj_rest_auth.registration.serializers import RegisterSerializer
 from dj_rest_auth.serializers import PasswordResetConfirmSerializer
 from p_sale.choices_type import Choice
-from p_sale.models import KYC,KYCStatus,ContactNum
-
-# class UserSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = User
-#         fields = ('username','email','first_name','last_name')
-
-
-# class ChangePasswordSerializer(serializers.ModelSerializer):
-#     password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
-#     password2 = serializers.CharField(write_only=True, required=True)
-#     old_password = serializers.CharField(write_only=True, required=True)
-
-#     class Meta:
-#         model = User
-#         fields = ('old_password', 'password', 'password2')
-
-#     def validate(self, attrs):
-#         if attrs['password'] != attrs['password2']:
-#             raise serializers.ValidationError({"password": "Password fields didn't match."})
-
-#         return(check_pswd(attrs))
-
-#     def validate_old_password(self, value):
-#         user = self.context['request'].user
-#         if not user.check_password(value):
-#             raise serializers.ValidationError("Old password is not correct")
-#         return value
-
-#     def update(self, instance, validated_data):
-#         instance.set_password(validated_data['password'])
-#         instance.save()
-#         return instance
+from p_sale.models import (
+    KYC,
+    KYCStatus,
+    ContactNum,
+    HouseOwnerCertificate,
+    AdditionalHouseImage,
+    AdditionalLandImage,
+    House,
+    Land,
+    LandOwnerCertificate,
+    )
+from p_sale import choices_type
 
 class UserRegistreSeriliazer(RegisterSerializer):
     password1 = serializers.CharField(write_only=True,validators = [custom_check_pswd])
@@ -70,13 +49,18 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('id','username','email','first_name','last_name','date_of_birth','gender')
         read_only_fields = ('id','email',)
 
+class UserContactSerializer(serializers.ModelSerializer):
+    mobile_num = serializers.CharField(max_length=10,validators=[check_mobile_num])
+    class Meta:
+        model = ContactNum
+        fields = ('id','kyc_id','mobile_num')
+        read_only_fields = ('kyc_id',)
+
 class KycSerializer(serializers.ModelSerializer):
+    contact_nums = UserContactSerializer(many=True,read_only=True)
     class Meta:
         model = KYC
-        fields = ('user','profile_pic','citizenship_photo_front','citizenship_photo_back','occupation','citizenship_num','status')
-        
-    # def create(self, validated_data):
-    #     return KYC.objects.create(**validated_data)
+        fields = ('user','profile_pic','citizenship_photo_front','citizenship_photo_back','occupation','contact_nums','citizenship_num','status')
 
 class UpdateKycSerializer(serializers.ModelSerializer):
     class Meta:
@@ -91,11 +75,56 @@ class UpdateKycSerializer(serializers.ModelSerializer):
         instance.profile_pic = validated_data.get('profile_pic', instance.profile_pic)
         instance.save()
         return instance
+
+class AdditionalLandImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AdditionalLandImage
+        fields = ('id','land','image')
         
 
-class UserContactSerializer(serializers.ModelSerializer):
-    mobile_num = serializers.CharField(max_length=10,validators=[check_mobile_num])
+class AdditionalHouseImageSerializer(serializers.ModelSerializer):
     class Meta:
-        model = ContactNum
-        fields = ('id','user','mobile_num')
+        model = AdditionalHouseImage
+        fields = ('id','house','image')
+
+class HouseOwnerCertificateSerializer(serializers.ModelSerializer):
+    certificate_name = serializers.CharField(max_length=30,required=True)
+    class Meta:
+        model = HouseOwnerCertificate
+        fields = ('id','house','certificate_name','certificate_image')
+        read_only_fields = ('house',)
+
+class HouseSerializer(serializers.ModelSerializer):
+    images = AdditionalHouseImageSerializer(many=True,read_only = True)
+    floors = serializers.CharField(default=0,max_length=3,validators=[check_int])
+    beds = serializers.CharField(default=0,max_length=3,validators=[check_int])
+    kitchen = serializers.CharField(default=0,max_length=3,validators=[check_int])
+    living = serializers.CharField(default=0,max_length=3,validators=[check_int])
+    parking = serializers.CharField(default=0,max_length=2,validators=[check_int])
+    bath = serializers.CharField(default=0,max_length=2,validators=[check_int])
+    province = serializers.ChoiceField(choices=choices_type.Choice.province,required=True)
+    per = serializers.CharField(max_length=30,required=True)
+    class Meta:
+        model = House
+        fields = '__all__'
+        extra_fields = ['images']
         
+        """
+        here i have given related name in foreign key of additional images so i have used related name in extra_fields
+        if related name was not provided the extra fields would be additionalhouseimage_set
+        """
+class LandOwnerCertificateSerializer(serializers.ModelSerializer):
+    certificate_name = serializers.CharField(max_length=30,required=True)
+    class Meta:
+        model = LandOwnerCertificate
+        fields = ('id','land','certificate_name','certificate_image')
+        read_only_fields = ('land',)
+
+class LandSerializer(serializers.ModelSerializer):
+    images = AdditionalLandImageSerializer(many=True,read_only=True)
+    province = serializers.ChoiceField(choices=choices_type.Choice.province,required=True)
+    
+    class Meta:
+        model = Land
+        fields = '__all__'
+        extra_fields = ['images']

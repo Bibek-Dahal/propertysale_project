@@ -56,7 +56,8 @@
 .profile-image .icon.verified{
     background:var(--blue);
 }
-.profile-image .icon.null{
+.profile-image .icon.null,
+.profile-image .icon.rejected{
     background:red;
 }
 .profile-image .icon.pending{
@@ -77,7 +78,8 @@
     transition:transform .2s ease-in;
 }
 
-.profile-image .icon.null .tooltip-info{
+.profile-image .icon.null .tooltip-info,
+.profile-image .icon.rejected .tooltip-info{
     background:red;
 }
 
@@ -144,6 +146,7 @@
     color:white;
     border-radius:var(--input-border-radius);
     cursor:pointer;
+    justify-self: start;
 }
 
 

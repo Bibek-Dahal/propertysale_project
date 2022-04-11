@@ -12,7 +12,7 @@ import FileField from './FileField';
 import Input from '../Input/Input';
 import { useNavigate } from 'react-router-dom';
 
-export default function Kyc() {
+export default function Kyc({setLoading,setIsLoading}) {
   const {state} = useAuth();
   const [kycExists,setKycExists] = useState(0);
   const formRef = useRef(null);
@@ -42,7 +42,7 @@ export default function Kyc() {
   const updateKyc = (e) => {
     e.preventDefault();
     console.log('updating kyc',newkycData)
-
+    setIsLoading(1);
     const formData = new FormData();
     for(let i in newkycData){
       if(newkycData[i] === ""){
@@ -79,8 +79,11 @@ export default function Kyc() {
         })
         console.log(res)
         showPopup(`kyc updated successfully`)
-        navigate('/');
+        setIsLoading(0);
+        // navigate('/');
       }catch(err){
+        setIsLoading(0);
+        showPopup(`error occured`,'error')
         console.log(err)
       }
     }
@@ -106,6 +109,7 @@ export default function Kyc() {
     e.preventDefault();
     console.log('creating kyc')
     const formData = new FormData();
+    setIsLoading(1);
     for(let i in newkycData){
       if(
         i === 'profile_pic' || 
@@ -131,7 +135,7 @@ export default function Kyc() {
         console.log('submitted kyc')
         console.log(res);
         showPopup('kyc submitted successfully')
-        navigate('/');
+        setIsLoading(0);
       }catch(err){
         console.log(err)
       }
@@ -172,8 +176,16 @@ export default function Kyc() {
               Authorization : `Bearer ${state.access_token}`
             }
           })
+          const mobile_num_arrays = res.data.contact_nums.map(item => item.mobile_num) 
+
           setKycData(prev => {
             return res.data;
+          })
+          setKycData(prev => {
+            return{
+              ...prev,
+              mobile_num : mobile_num_arrays.toString()
+            }
           })
           console.log(res.data)
         }
@@ -189,7 +201,7 @@ export default function Kyc() {
       <h1>KYC</h1>
       <form onSubmit={kycExists ? updateKyc : createKyc}  ref = {formRef}>
         <FileField 
-          className = "profile-images"
+          className = {`profild-pic ${kycExists ? "" : "full_width" }`}
           kycData = {kycData}
           newkycData = {newkycData}
           setnewKycData = {setnewKycData}
@@ -197,7 +209,7 @@ export default function Kyc() {
           label = "Profile pic"
         />
         <FileField 
-          className = "citizenship-back"
+          className = {`citizenship-back ${kycExists ? "" : "full_width" }`}
           kycData = {kycData}
           newkycData = {newkycData}
           setnewKycData = {setnewKycData}
@@ -205,7 +217,7 @@ export default function Kyc() {
           label = "Citizenship Photo Back"
         />
          <FileField 
-          className = "citizenship-front"
+          className = {`citizenship-front ${kycExists ? "" : "full_width" }`}
           kycData = {kycData}
           newkycData = {newkycData}
           setnewKycData = {setnewKycData}
@@ -221,10 +233,10 @@ export default function Kyc() {
         />
         <Input
             type = "text"
-            value = {kycData.mobile_num}
             name = "mobile_num"
             onChange = {onChangeHandler}
             label = "Mobile number"
+            value = {kycData.mobile_num}
         />
         <Input
             type = "text"

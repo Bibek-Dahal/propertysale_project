@@ -1,7 +1,10 @@
 import React from 'react'
 import './DropZone.css';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {solid} from '@fortawesome/fontawesome-svg-core/import.macro'
 
-export default function DropZone({name,onDropHandler}) {
+
+export default function DropZone({name,onDropHandler,placeholder}) {
     function DragEnterHandler(e){
         e.preventDefault();
         console.log('drag entered')
@@ -31,6 +34,10 @@ export default function DropZone({name,onDropHandler}) {
             onDragLeave = {DragleaveHandler}
             onDragOver = {DragOverHandler}
         >
+            <div className="placeholder">
+                <FontAwesomeIcon icon = {solid('cloud-arrow-up')}/>
+                <p>{placeholder}</p>
+            </div>
         </div>
     )
 }

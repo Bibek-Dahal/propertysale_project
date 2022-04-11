@@ -18,5 +18,6 @@ export default function Home() {
             state.user && <h1>{state.user.username} is logged in</h1>
           }
           <h1>Other stuffs which any user can see</h1> */}
+          <div className="sticky"></div>
       </React.Fragment>)
 }

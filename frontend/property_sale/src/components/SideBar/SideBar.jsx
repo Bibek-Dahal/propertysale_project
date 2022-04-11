@@ -38,6 +38,7 @@ export default function SideBar() {
                     <span>Logout</span>
                 </NavLink>
             </li>
+            
         </ul>
 
     </div>

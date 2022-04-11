@@ -20,6 +20,7 @@ html{
     --fs-xxxl:1.8rem;
 
     --blue : #008cff;
+    --blue-dark : #01589e;
     --box-shadow-blue:#3752d852;
     --box-shadow-blue-dark:#2136a1b0;
     --box-shadow-properties:0px 21px 71px -7px;
@@ -35,7 +36,9 @@ html{
     --nav-height:10vh;
     /* --body-bg: rgb(241, 241, 241); */
     /* --body-bg: rgb(255, 255, 255); */
-    --body-bg : rgba(241, 241, 241, 0.808);
+    /* --body-bg : rgba(241, 241, 241, 0.808); */
+    --body-bg : rgba(241, 239, 239, 0.808);
+
     /* --nav-margin-top : 2em; */
     
     --error-form-field:red;
@@ -73,14 +76,14 @@ input:-webkit-autofill:active{
 }
 
 .wrapper-2{
-    max-width:1300px;
+    max-width:1000px;
     width:80%;
     margin-left:auto;
     margin-right:auto;
-    /* border:1px solid red; */
 }
 
 .wrapper-3{
+    /* border:1px solid red; */
     max-width:1300px;
     width:90%;
     margin-left:auto;
@@ -88,16 +91,21 @@ input:-webkit-autofill:active{
 }
 
 #root{
-    overflow-x:hidden;
+    /* overflow-x:hidden; */
     min-height:100vh;
 }
+
 
 li{
     list-style: none;
 }
 
+#root{
+    /* height:200vh;; */
+}
+
 html{
-    font-size:14px;
+    font-size:13px;
 }
 
 a{
@@ -141,7 +149,7 @@ nav a{
     }
 
     html{
-        /* font-size:12px; */
+        font-size:13px;
     }
 
     .wrapper-3{

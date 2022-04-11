@@ -15,13 +15,14 @@
     border-radius: var(--input-border-radius);
     background: white;
     color: rgb(49, 49, 49);
-    font-size: var(--fs-xl);
+    font-size: var(--fs-xxl);
     display:flex;
     justify-content: center;
     align-items: center;
     box-shadow: var(--box-shadow-properties) #c0c0c061;
     gap:1em;
     transform:translateX(100%);
+    z-index:1000;
 }
 
 .popup.hide{
@@ -88,7 +89,7 @@
 }
 
 .popup .icon .close{
-    font-size: var(--fs-xl);
+    font-size: var(--fs-xxl);
     position: absolute;
     right: 0;
     top: 0;
@@ -109,10 +110,14 @@
     }
 }
 
-.popup.error{
+.popup.errors{
     color:var(--fc-white);
 }
 
-.popup.error:before{
-    background:var(--);
+.popup.errors:before{
+    background:red;
+}
+.popup.errors{
+    background:red;
+    font-weight:bold;
 }

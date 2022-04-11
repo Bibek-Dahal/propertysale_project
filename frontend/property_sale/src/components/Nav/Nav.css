@@ -8,7 +8,10 @@ nav{
     /* border:1px solid red; */
     box-shadow:0px 2px 5px rgb(241, 241, 241);
     margin-bottom:2em;
-    background:white;
+    background:rgba(255, 255, 255, 0.924);
+    position:sticky;
+    top:0;
+    z-index:999;
 }
 
 .desktopNav{
@@ -45,12 +48,12 @@ nav{
 
 .mobileNav{
     position:fixed;
-    top:1em;
+    bottom:.3em;
     left:50%;
-    transform:translate(-50%,-120%);
+    transform:translate(-50%,120%);
     background:white;
     border-radius:5px;
-    width:calc(100vw - 2em);
+    width:calc(100vw - .3em);
     /* border-radius:0 0 var(--input-border-radius) var(--input-border-radius); */
     min-height:50vh;
     transition-delay: 1800ms;
@@ -197,9 +200,6 @@ nav >*:last-child{
     .nav_wrapper{
         margin-bottom:2em;
     }
-
-   
-   
 
     #burger{
         /* border:1px solid red; */

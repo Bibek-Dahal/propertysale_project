@@ -77,6 +77,9 @@ input.disabled{
 .kyc form .new.full_width{
     grid-column: 1/-1;
 }
+.kyc form .new.full_width .dropzone{
+    width:100%;
+}
 
 .kyc form .new .img {
     position:relative;
@@ -120,7 +123,7 @@ input.disabled{
     }
     .kyc form{
         grid-template-columns:repeat(2,1fr);
-        grid-gap:5em;
+        grid-gap:2em;
 
     }
     .kyc form >*:not(.userField):not([type="submit"]){
