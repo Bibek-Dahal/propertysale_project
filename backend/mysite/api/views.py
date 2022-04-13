@@ -69,13 +69,13 @@ class CreateKycView(APIView):
         kyc_serializer = KycSerializer(data = request.data)
         contact_serializer = UserContactSerializer(data=request.data)
         
-        if kyc_serializer.is_valid():
-            if contact_serializer.is_valid():
+        if kyc_serializer.is_valid(raise_exception=True) and contact_serializer.is_valid(raise_exception=True):
+            # if contact_serializer.is_valid():
                 kyc_obj = kyc_serializer.save()
                 contact_serializer.save(kyc_id=kyc_obj)
                 return Response(kyc_serializer.data,status=status.HTTP_201_CREATED)
-            return Response(contact_serializer.errors,status=status.HTTP_400_BAD_REQUEST)
-        return Response(kyc_serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+            # return Response(contact_serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+        # return Response(kyc_serializer.errors,status=status.HTTP_400_BAD_REQUEST)
         
 class RetriveKycView(APIView):
     permission_classes = [IsAuthenticated]
