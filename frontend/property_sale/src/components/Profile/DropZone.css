@@ -1,0 +1,28 @@
+.dropzone{
+    height:100%;
+    min-height:150px;
+    position:relative;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    opacity:.5;
+    box-shadow: rgba(0, 0, 0, 0.41) 0px 1px 3px 0px inset;
+    position: relative;
+}
+
+.dropzone .placeholder{
+    position:absolute;
+    height:calc(100% - 1em);
+    width:calc(100% - 1em);
+    border:2px dashed var(--blue-dark);
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:1em;
+    color:var(--blue-dark);
+}
+
+.dropzone:hover{
+    opacity:1;
+}

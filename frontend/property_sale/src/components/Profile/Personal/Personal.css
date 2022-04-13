@@ -1,0 +1,206 @@
+
+.profile-image.large img,
+.profile-image .image{
+    /* border:1px solid red;     */
+    /* border-radius:50%; */
+}
+
+.profile-image img{
+    height:var(--profile-image-large);
+    width:var(--profile-image-large);
+    object-fit:contain;
+}
+
+.profile-image .image{
+    width:fit-content;
+    height:fit-content;
+    padding:.8em;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    background:rgb(255, 255, 255);
+    box-shadow:0px 2px 20px rgb(221, 221, 221);
+    position:relative;
+    /* border:1px solid red; */
+}
+
+.profile-image{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap:1em;
+}
+
+.profile-image .icon{
+    position:absolute;
+    bottom:0;
+    right:0;
+    font-size:var(--fs-xxxl);
+    height:30px;
+    width:30px;
+    background:white;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    padding:.7em;
+    color:white;
+    /* border:1px solid red; */
+    border-radius:50%;
+    cursor:pointer;
+    transition:transform .1s ease-in;
+}
+
+
+
+.profile-image .icon.verified{
+    background:var(--blue);
+}
+.profile-image .icon.null,
+.profile-image .icon.rejected{
+    background:red;
+}
+.profile-image .icon.pending{
+    background:rgb(141, 0, 118);
+}
+.profile-image .icon .tooltip-info{
+    position:absolute;
+    font-size:var(--fs-xl);
+    padding:1em;
+    min-width:200px;
+    border-radius:5px;
+    bottom:100%;
+    font-weight:bold;
+    right:100%;
+    line-height:1.5;
+    transform-origin:right bottom;
+    transform:scale(0);
+    transition:transform .2s ease-in;
+}
+
+.profile-image .icon.null .tooltip-info,
+.profile-image .icon.rejected .tooltip-info{
+    background:red;
+}
+
+.profile-image .icon:hover .tooltip-info{
+    transform:scale(1);
+}
+
+.profile-image .icon:hover{
+    transform:scale(.9)
+}
+
+.profile-image .icon.verified .tooltip-info{
+    background:rgb(26, 170, 0);
+}
+.profile-image .icon.pending .tooltip-info{
+    background:rgb(141, 0, 118);
+}
+.profile-image h2{
+    text-align: center;
+    /* border:1px solid red; */
+    text-decoration: underline;
+    color:var(--blue);
+}
+
+.profile-container{
+    background:var(--body-bg) !important;
+    padding:0 !important;
+}
+
+.personal{
+    display:grid;
+    grid-template-columns:1fr;
+    background:white;
+    
+    grid-column-gap:3em;
+    grid-row-gap:4em;
+    place-items:center center;
+    border-radius:var(--input-border-radius);
+}
+
+.personal >*{
+    /* border:1px solid red; */
+}
+
+
+.personal form{
+    display:grid;
+    grid-template-columns: 1fr;
+    /* border:1px solid red; */
+    gap:1.5em;
+    width:100%;
+    max-width:500px;
+    /* margin-top:2em; */
+}
+
+.personal form input[type = "submit"],
+.kyc input[type="submit"]{
+    margin:2em 0 ;
+    padding:1em 2.5em;
+    font-size:var(--fs-xl);
+    font-weight:bold;
+    border:none;
+    background:var(--blue);
+    color:white;
+    border-radius:var(--input-border-radius);
+    cursor:pointer;
+    justify-self: start;
+}
+
+
+
+@media only screen and (min-width : 600px){
+    .personal form{
+        /* max-width:300px; */
+    }
+}
+
+
+
+@media only screen and (min-width : 1000px){
+    .profile-container > .personal{
+        grid-template-columns:3fr 1fr;
+        /* grid-gap:2em; */
+    }
+
+    .personal form{
+        justify-self: start;
+        /* grid-template-columns: repeat(2,1fr); */
+        max-width:unset;
+    }
+
+    .personal form input[type = "submit"]{
+        grid-column:1/2;
+        justify-self: start;
+    }
+
+    .personal .profile-image{
+        grid-column:2/2;
+        align-self: start;
+        justify-self: start;
+        /* align-self:end; */
+        /* justify-self: start; */
+    }
+
+    .personal h1{
+        grid-column:1/-1;
+    }
+
+    .personal form{
+        grid-row:2/3;
+    }
+
+    .personal >*{
+        width:100%;
+    }
+}
+
+@media only screen and (min-width : 1200px){
+    .personal form{
+        grid-template-columns: repeat(2,1fr);
+    }
+
+
+}

@@ -6,6 +6,7 @@ from dj_rest_auth.views import PasswordResetView
 from rest_framework.routers import DefaultRouter
 
 app_name = 'api'
+
 urlpatterns = [
     #retrive all user
     path('user/',views.UserListView.as_view(),name="user_all"),

@@ -1,0 +1,90 @@
+.socialAuthContainer{
+    /* border:1px solid red; */
+    margin-top:3.5rem;
+}
+
+.socialAuthContainer .continue-with{
+    color:rgb(134, 134, 134);
+    position:relative;
+    font-size:var(--fs-xxs);
+    text-align: center;
+}
+
+
+.socialAuthContainer .continue-with:before,
+.socialAuthContainer .continue-with:after{
+    content:"";
+    position:absolute;
+    height:2px;
+    width:27%;
+    background:rgb(144, 144, 144);
+    top:50%;
+    transform:translatey(-50%);
+}
+
+.socialAuthContainer .continue-with:before{
+    left:0;
+}
+
+.socialAuthContainer .continue-with:after{
+    right:0;
+}
+
+.socialAuthContainer .auth-icons{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    gap:1em;
+    margin-top:1.8em;
+}
+
+.socialAuthContainer .auth-icons >*{
+    display:inline-flex;
+    font-size:var(--fs-xl);
+    padding:.6em .8em;
+    width:100%;
+    border-radius:.7em;
+    transition:all 150ms ease-in-out;
+    cursor:pointer;
+    gap:1em;
+    align-items: center;
+    justify-content: center;
+}
+
+.socialAuthContainer .auth-icons >* .text{
+    font-size:var(--fs-xl);
+    font-weight:bold;
+}
+
+.socialAuthContainer .auth-icons >*:not(.fa-spin){
+    border:2px solid rgba(207, 207, 207, 0.507);
+    background:var(--fc-white);
+}
+
+
+.socialAuthContainer .auth-icons .fa-spin{
+    font-size:2rem;
+}
+.socialAuthContainer .auth-icons >* >*{
+    pointer-events: none;
+}
+
+.socialAuthContainer .auth-icons >*:hover{
+    border:2px solid transparent;
+    box-shadow:var(--box-shadow-properties) rgba(138, 138, 138, 0.507);
+    transform:Scale(1.01);
+}
+
+.socialAuthContainer .auth-icons >*:first-child{
+    color:var(--form-field-focus)
+}
+
+.socialAuthContainer .timer{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    gap:1em;
+    font-size:var(--fs-xxl);
+    color:red;
+    margin:2em 0;
+}

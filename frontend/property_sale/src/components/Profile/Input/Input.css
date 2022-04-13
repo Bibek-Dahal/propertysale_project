@@ -1,0 +1,41 @@
+.userField{
+    /* border:1px solid red; */
+    display:flex;
+    flex-direction: column;
+    width:100%;
+    /* max-width:350px; */
+    gap:1em;
+}
+
+.userField >*{
+    /* display:block; */
+}
+
+.userField input,
+.userField select{
+    padding:.7em 1em ;
+    font-size:var(--fs-xxl);
+    background:#F0F2FC;
+    outline:none;
+    border:none;
+    border-radius:var(--input-border-radius);
+    border:2px solid transparent;
+    width:100%;
+}
+.userField input:focus{
+    border:2px solid var(--blue);
+}
+
+.userField label{
+    color:rgb(88, 88, 88)
+}
+
+.userField input[type="date"] {
+    padding: 0.6em 1em;
+}
+
+@media only screen and (min-width : 1000px){
+    .userField{
+        max-width:380px;
+    }
+}

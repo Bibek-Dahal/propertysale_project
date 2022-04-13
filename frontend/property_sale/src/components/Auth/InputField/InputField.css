@@ -1,0 +1,106 @@
+.field{
+    background:var(--form-field-bg);
+    position:relative;
+    padding:.7em 0 0 0;
+    border:2px solid transparent;
+}
+
+.field.error{
+    border:1px solid var(--error-form-field);
+}
+
+.field.error input,
+.field.error label{
+    color:var(--error-form-field);
+}
+
+.field.focus{
+    border:2px solid var(--form-field-focus);
+}
+
+.field,
+.field input{
+    border-radius: var(--input-border-radius);
+}
+
+.field label{
+    position:absolute;
+    margin-left:1em;
+    top:50%;
+    transform:translateY(-50%);
+    color:#62676bc5;
+    pointer-events: none;
+    transition:transform 100ms ease-in-out;
+}
+
+.field input{
+    width:100%;
+    padding:.8em 1.5em .5em;
+    font-size:var(--fs-xl);
+    background: transparent;
+    border:none;
+    /* border:1px solid red; */
+    outline:none;
+}
+
+.field label.move{
+    transform:translate(-.2em,-2.8em);
+    /* border:1px solid red; */
+    font-size:var(--fs-xs);
+    padding:0 .5em;
+    font-weight:normal;
+    /* background-color:var(--form-bg-color); */
+    background:var(--body-bg);
+}
+
+.field{
+    position:relative;
+    border:2px solid rgb(238, 238, 238);
+    padding:.5em 0;
+}
+
+/* form.loginForm .eye{ */
+form .eye{
+    position:absolute;
+    top:50%;
+    right:.5em;
+    transform:translateY(-50%);
+    font-size:var(--fs-xxl);
+}
+
+.error-tooltip {
+    position:absolute;
+    right:4em;
+    top:50%;
+    transform:translateY(-50%);
+    cursor: pointer;
+}
+
+.error-tooltip .msg{
+    position:absolute;
+    min-width:250px;
+    max-width:300px;
+    right:100%;
+    /* top:-3.4em; */
+    padding:1em;
+    background-color:rgb(190, 58, 58);
+    color:var(--fc-white);
+    font-weight:bold;
+    border-radius:3px;
+    line-height:1.5;
+    transform:scale(0);
+    transform-origin:right bottom;
+    transition:transform .2s cubic-bezier(.51,-0.09,.61,1.66);
+    bottom:100%;
+    /* z-index:1; */
+}
+
+.error-tooltip svg{
+    font-size: 1.5rem;
+    color:rgb(255, 0, 0);
+    /* border:1px solid red; */
+}
+
+.error-tooltip svg:hover ~ .msg{
+    transform:scale(1);
+}
