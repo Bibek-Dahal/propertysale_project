@@ -7,8 +7,8 @@ export default function Home() {
   const {state,checkAndRemoveToken} = useAuth();
 
   useEffect(() => {
-    console.log('Home');
-    checkAndRemoveToken();
+    // console.log('Home');
+    // checkAndRemoveToken();
   },[])
   
   return (

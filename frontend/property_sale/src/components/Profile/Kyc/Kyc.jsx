@@ -167,10 +167,10 @@ export default function Kyc({setLoading,setIsLoading}) {
             Authorization : `Bearer ${state.access_token}`
           }
         })
-        console.log('required',res);
+        // console.log('required',res);
         if(res.data.kyc_status !== null){
           setKycExists(1);
-          console.log('kyc exists')
+          // console.log('kyc exists')
           const res = await axios.get(axoisLinks.retriveKyc,{
             headers : {
               Authorization : `Bearer ${state.access_token}`
@@ -187,7 +187,7 @@ export default function Kyc({setLoading,setIsLoading}) {
               mobile_num : mobile_num_arrays.toString()
             }
           })
-          console.log(res.data)
+          // console.log(res.data)
         }
       }catch(err){
         console.log('error : ',err);

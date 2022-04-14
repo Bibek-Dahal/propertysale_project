@@ -2,14 +2,14 @@
     /* border:1px solid red; */
     display: flex;
     flex-direction: column;
-    gap:1em;
-    margin-bottom:1em;
+    /* gap:1em; */
+    gap:1em !important;
+    /* margin-bottom:1em; */
 }
 
 
 .Input >*{
     display:block;
-    width:100%;
 }
 
 .Input input{
@@ -19,5 +19,13 @@
 
 .Input label{
     text-transform:capitalize;
-    font-weight:500;
+    /* font-weight:500; */
+}
+
+.Input.error input{
+    border:1px solid red;
+}
+
+.basic_details .Input >*{
+    width:100%;
 }

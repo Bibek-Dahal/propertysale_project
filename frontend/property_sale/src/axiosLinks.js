@@ -1,5 +1,5 @@
 // const baseURL = 'http://192.168.1.70:8000';
-const baseURL = 'http://127.0.0.1:8000';
+export const baseURL = 'http://127.0.0.1:8000';
 const wsURL = 'ws://127.0.0.1:8000';
 // const wsURL = 'ws://192.168.1.70:8000';
 
@@ -21,7 +21,9 @@ const links = {
     retriveKyc : `${baseURL}/api/kyc-retrive`,
     createKyc : `${baseURL}/api/kyc-create/`,
     updateKyc : `${baseURL}/api/kyc-update/`,
-    kycStatusWs : `${wsURL}/ws/status/`
+    kycStatusWs : `${wsURL}/ws/status/`,
+    foreignKeys : `${baseURL}/api/list-for-keys`,
+    post : `${baseURL}/api/property/post-`
 }
 
 export default links;

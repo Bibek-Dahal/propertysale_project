@@ -9,10 +9,10 @@ export default function MobileNav() {
     const {state} = useAuth();
 
     useEffect(() => {
-      console.log('mounted')
+    //   console.log('mounted')
     
       return () => {
-        console.log('unmounted')
+        // console.log('unmounted')
       }
     }, [])
     

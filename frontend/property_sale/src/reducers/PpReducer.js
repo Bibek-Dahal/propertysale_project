@@ -1,9 +1,5 @@
 export const defaultFormState = {
-    title : "",
-    description : "",
-    main_image : "",
-    otherImages : "",
-    certificate_image : ""
+    
 }
 
 export const PpReducer = (state,action) => {
@@ -20,7 +16,6 @@ export const PpReducer = (state,action) => {
                 ...state,
                 ...data
             };
-
 
         default:
             throw(`unknown action type ${action.type}`)

@@ -1,9 +1,9 @@
 import React, { useRef } from 'react'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {solid} from '@fortawesome/fontawesome-svg-core/import.macro';
+import './Section.css';
 
-
-export default function Section({className , title, onChange,i, children}) {
+export default function Section({className , title, onChange,i, keys,children}) {
 
   const h1 = useRef(null);
   const div = useRef(null);
@@ -24,20 +24,19 @@ export default function Section({className , title, onChange,i, children}) {
       div.current.style.margin = " 0";
       div.current.parentElement.style.margin = "0";
       div.current.parentElement.style.padding = "0";
-      div.current.removeEventListener('transitionend',expandListener)
+      // div.current.removeEventListener('transitionend',expandListener)        
     }else{
-      div.current.style.height = div.current.scrollHeight + 'px';
-
-      div.current.addEventListener('transitionend',expandListener) 
+      // div.current.style.height = div.current.scrollHeight + 'px';
+      div.current.style.height = "auto";
       div.current.style.margin = "1em 0";
-      // div.current.parentElement.parentElement.style.gap = "1em";
       div.current.parentElement.style.margin = "1em 0";
       div.current.parentElement.style.padding = "1em 0";
-      const totalSections = Array.from(div.current.parentElement.parentElement.children);
-      const index = totalSections.forEach((section,index) => {
-          if(section === div.current.parentElement) return index;
-        }
-      )
+      // const totalSections = Array.from(div.current.parentElement.parentElement.children);
+      // const index = totalSections.forEach((section,index) => {
+      //   if(section === div.current.parentElement) return index;
+      // }
+      // )
+      // div.current.addEventListener('transitionend',expandListener)
     }
   }
   function getIcon(){
@@ -45,16 +44,14 @@ export default function Section({className , title, onChange,i, children}) {
   }
 
   return (
-      <div className={className}>
-          <div className="header" onClick = {toggle}>
-              {
-                  console.log(i)
-
-              }
+      <div className={`${className} ${title.split(" ").join("_").toLowerCase()}`}>
+          <div className="header" 
+              onClick = {toggle}
+              >
             {/* <FontAwesomeIcon icon = {} /> */}
             <h1 ref = {h1} >{title}</h1>
           </div>
-          <div ref = {div} aria-expanded = "false">
+          <div ref = {div} aria-expanded = "false" className='form'>
             {children}
           </div>
           <div className="arrow">

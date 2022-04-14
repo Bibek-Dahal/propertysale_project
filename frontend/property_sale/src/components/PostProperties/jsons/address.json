@@ -1,10 +1,5 @@
 {
     "provinces":[
-        "Province No.1",
-    	"Madhesh Province",
-    	"Bagmati Province",
-    	"Gandaki Province",
-    	"Lumbini Province",
-    	"Karnali Province"
+        1,2,3,4,5
     ]
 }

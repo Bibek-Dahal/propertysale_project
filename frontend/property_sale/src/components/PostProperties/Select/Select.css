@@ -1,0 +1,18 @@
+.select{
+    /* border:1px solid red; */
+    display:flex;
+    flex-direction: column;
+    gap:1em;
+}
+
+.select select{
+    padding:.5em;
+}
+
+.select >*{
+}
+
+.select label{
+    /* font-weight: bold; */
+    text-transform: capitalize;
+}

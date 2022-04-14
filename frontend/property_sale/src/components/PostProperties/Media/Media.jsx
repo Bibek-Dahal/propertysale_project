@@ -4,14 +4,13 @@ import Input from '../Input/Input';
 
 export default function Media({formDispatch}) {
   const [data,setData] = useState({
-    mainImage : "",
-    otherImages : ""
+    
   })
 
 
   const onConfirmImages = (images,name) => {
-    console.log('confirmen images')
-    console.log(images,name)
+    // console.log('confirmen images')
+    // console.log(images,name)
     setData(prev => {
       return{
         ...prev,
@@ -31,9 +30,7 @@ export default function Media({formDispatch}) {
 
   return (
         <div>
-          {
-            data && console.log('inside media.jsx so final images = ',data)
-          }
+          
           <Input 
             label = "Main Image"
           >
@@ -68,7 +65,7 @@ export default function Media({formDispatch}) {
               onConfirmImages = {onConfirmImages}
           />
           </Input>
-          <button onClick = {clickHandler}>confirm</button>
+          <button className = "confirm" onClick = {clickHandler}>confirm</button>
         </div>
   )
 }

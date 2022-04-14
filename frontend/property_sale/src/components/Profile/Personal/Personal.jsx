@@ -32,9 +32,10 @@ export default function Personal({setIsLoading}) {
             }
         })
     }
+    
     function onSubmitHandler(e){
         e.preventDefault();
-        console.log(info)
+        // console.log(info)
         setIsLoading(1);
         async function update(){
             try{
@@ -45,7 +46,7 @@ export default function Personal({setIsLoading}) {
                             Authorization : `Bearer ${state.access_token}`
                     }
                 })
-                console.log(res);
+                // console.log(res);
                 showPopup('Profile Updated successfully')
                 setIsLoading(0);
             }catch(err){
@@ -69,7 +70,7 @@ export default function Personal({setIsLoading}) {
          ws.onclose = (msg) => {
              console.log('connection closed')
          }
-        console.log(localStorage.getItem('access_token'))
+        // console.log(localStorage.getItem('access_token'))
         async function getUserDetail(){
             try{
                 const res = await axios.get(axiosLinks.retriveUser,{
@@ -77,7 +78,7 @@ export default function Personal({setIsLoading}) {
                         Authorization : `Bearer ${localStorage.getItem('access_token')}`
                     }
                 })
-                console.log(res);
+                // console.log(res);
                 const data = res.data;
                 for(let i in data){
                     setInfo(prev => {
@@ -94,7 +95,7 @@ export default function Personal({setIsLoading}) {
                 // }else
                 setKycStatus(res.data.kyc_status);
                 if(res.data.kyc_status !== null){
-                    console.log('insdide')
+                    // console.log('insdide')
                         axios.get(axiosLinks.retriveKyc,{
                             headers : {
                               Authorization : `Bearer ${state.access_token}`
@@ -156,35 +157,35 @@ export default function Personal({setIsLoading}) {
         <form onSubmit = {onSubmitHandler}>
             <Input
                 type = "text"
-                value = {info.first_name}
+                value = {info.first_name ? info.first_name : ""}
                 name = "first_name"
                 onChange = {fieldChangeHandler}
                 label = "First name"
             />
               <Input
                 type = "text"
-                value = {info.last_name}
+                value = {info.last_name ? info.last_name : ""}
                 name = "last_name"
                 onChange = {fieldChangeHandler}
                 label = "Last name"
             />
              <Input
                 type = "text"
-                value = {info.username}
+                value = {info.username ? info.username : ""}
                 name = "username"
                 onChange = {fieldChangeHandler}
                 label = "Username"
             />
             <Input
                 type = "date"
-                value = {info.date_of_birth}
+                value = {info.date_of_birth ? info.date_of_birth : ""}
                 name = "date_of_birth"
                 onChange = {fieldChangeHandler}
                 label = "Date of Birth"
             />
             <Input 
                 type = "select"
-                value = {info.gender}
+                value = {info.gender ? info.gender : ""}
                 name = "gender"
                 onChange = {fieldChangeHandler}
                 label = "Gender"

@@ -24,8 +24,11 @@ import PrivateRoute from './components/utils/PrivateRoute';
 import Logout from './components/Auth/Logout';
 import ProtectedRoute from './components/utils/ProtectedRoute';
 import {PpContextProvider} from './context/PpContext';
+import {ForeignKeyContextProvider} from './context/ForeignKeyContext';
+import PublicRoute from './components/utils/PublicRoute';
 
 function App() {
+
   const {PopupVisible} = usePopup();
   
   return (
@@ -34,9 +37,10 @@ function App() {
       <Router>
         <Routes>
           <Route path = "/" element = {
+            <PublicRoute>
               <Home />
+            </PublicRoute>
           } />
-         
           <Route path = "/login" element = {
             <ProtectedRoute>
               <Login />
@@ -57,14 +61,20 @@ function App() {
               <User />
             </PrivateRoute>
           }>
-            <Route path = "profile" element = {<Profile />} />
-            <Route path = "my-properties" element = {<MyProperties />} />
-            <Route path = "post-properties" element = {
-             <PpContextProvider>
-                <PostProperties />
-             </PpContextProvider>
-            } />
-            <Route path = "change-password" element = {<ChangePassword />} />
+              <Route path = "profile" element = {
+                  <Profile />
+              } />
+              <Route path = "my-properties" element = {
+                  <MyProperties />
+               } />
+              <Route path = "post-properties" element = {
+                    <PpContextProvider>
+                      <ForeignKeyContextProvider>
+                          <PostProperties />
+                      </ForeignKeyContextProvider>
+                   </PpContextProvider>
+              } />
+              <Route path = "change-password" element = {<ChangePassword />} />
           </Route>
           <Route path = "/password-reset" element = {<PasswordReset />} />
           <Route path = "/password-reset/confirm/:uid/:token" element = {<PasswordResetConfirm />} />

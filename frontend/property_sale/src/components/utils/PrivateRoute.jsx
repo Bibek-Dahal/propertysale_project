@@ -8,9 +8,9 @@ export default function PrivateRoute({children}) {
     // console.log(location);
 
     useEffect(() => {
+      console.log('inside private route')
       console.log('checked and removed token');
       checkAndRemoveToken();
-      
     },[])
 
 

@@ -34,6 +34,7 @@ export const authReducer = (state,action) => {
 
         case "updateAccessToken":
             localStorage.setItem('access_token',action.token)
+            console.log('setting acces tokjen new')
             return {
                 ...state,
                 access_token:action.token

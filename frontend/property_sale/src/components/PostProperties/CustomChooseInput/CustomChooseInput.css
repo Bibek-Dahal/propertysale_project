@@ -1,0 +1,11 @@
+.facilitys{
+    /* border:1px solid red; */
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap:.5em;
+}
+
+.facilitys >*:first-child{
+    flex:1 0 100%;
+}
