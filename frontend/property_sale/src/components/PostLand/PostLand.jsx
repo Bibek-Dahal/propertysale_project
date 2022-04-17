@@ -1,8 +1,8 @@
 import React,{useState,useEffect} from 'react'
-import Input from '../PostProperties/Input/Input'
+import Input from '../postProperties/Input/Input'
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import Select from '../PostProperties/Select/Select';
+import Select from '../postProperties/Select/Select';
 import axiosInstance from '../utils/axiosInstance';
 import axiosLinks from '../../axiosLinks';
 import Drop from '../postProperties/Drop';

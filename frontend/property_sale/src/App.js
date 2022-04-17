@@ -25,8 +25,6 @@ import {
 import PrivateRoute from './components/utils/PrivateRoute';
 import Logout from './components/Auth/Logout';
 import ProtectedRoute from './components/utils/ProtectedRoute';
-import {PpContextProvider} from './context/PpContext';
-import {ForeignKeyContextProvider} from './context/ForeignKeyContext';
 import PublicRoute from './components/utils/PublicRoute';
 
 function App() {
@@ -69,9 +67,7 @@ function App() {
                   <MyProperties />
                } />
               <Route path = "post-properties/" element = {
-                    <PpContextProvider>
-                        <PostProperties />
-                   </PpContextProvider>
+                  <PostProperties />
               }/>
               <Route path = "post-properties/post-land" element = {<PostLand />} />
               <Route path = "post-properties/post-house" element = {<PostLand />} />

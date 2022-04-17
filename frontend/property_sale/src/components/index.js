@@ -12,7 +12,7 @@ import PostProperties from './postProperties/PostProperties';
 import MyProperties from './MyProperties/MyProperties';
 import ChangePassword from './ChangePassword/ChangePassword';
 import InputField from './Auth/InputField/InputField';
-import EmptyFormInfo from './PostProperties/EmptyFormInfo/EmptyFormInfo';
+// import EmptyFormInfo from './PostProperties/EmptyFormInfo/EmptyFormInfo';
 import PostLand from './PostLand/PostLand';
 import PostHouse from './PostHouse/PostHouse';
 
@@ -30,7 +30,7 @@ export {
     PostProperties,
     MyProperties,
     ChangePassword,
-    EmptyFormInfo,
+    // EmptyFormInfo,
     PostLand,
     PostHouse
 }
