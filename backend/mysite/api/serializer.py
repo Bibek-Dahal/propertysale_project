@@ -126,3 +126,13 @@ class LandSerializer(serializers.ModelSerializer):
         model = Land
         fields = '__all__'
         extra_fields = ['images']
+
+class UpdateHouseStatusSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = House
+        fields = ('status',)
+
+class UpdateLandStatusSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Land
+        fields = ('status',)
