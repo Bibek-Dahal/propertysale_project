@@ -17,7 +17,9 @@ import {
   Profile,
   PostProperties,
   MyProperties,
-  ChangePassword
+  ChangePassword,
+  PostLand,
+  PostHouse
 } from './components/index'
 
 import PrivateRoute from './components/utils/PrivateRoute';
@@ -28,7 +30,6 @@ import {ForeignKeyContextProvider} from './context/ForeignKeyContext';
 import PublicRoute from './components/utils/PublicRoute';
 
 function App() {
-
   const {PopupVisible} = usePopup();
   
   return (
@@ -67,13 +68,13 @@ function App() {
               <Route path = "my-properties" element = {
                   <MyProperties />
                } />
-              <Route path = "post-properties" element = {
+              <Route path = "post-properties/" element = {
                     <PpContextProvider>
-                      <ForeignKeyContextProvider>
-                          <PostProperties />
-                      </ForeignKeyContextProvider>
+                        <PostProperties />
                    </PpContextProvider>
-              } />
+              }/>
+              <Route path = "post-properties/post-land" element = {<PostLand />} />
+              <Route path = "post-properties/post-house" element = {<PostLand />} />
               <Route path = "change-password" element = {<ChangePassword />} />
           </Route>
           <Route path = "/password-reset" element = {<PasswordReset />} />

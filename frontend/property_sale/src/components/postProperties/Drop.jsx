@@ -2,14 +2,14 @@ import React, { useState } from 'react'
 import './Drop.css';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {solid} from '@fortawesome/fontawesome-svg-core/import.macro'
-import {usePopup} from '../../../Hooks/index';
+import { usePopup } from '../../Hooks';
 
-export default function Drop({name,placeholder,multiple,height,onConfirmImages}) {
+export default function Drop({name,placeholder,multiple,height,onChangeImages}) {
   
   // const [images,setImages] = useState([]);
   const [preview,setPreview] = useState([])
-
-  const {showPopup} = usePopup();
+  const [images,setImages] = useState([])
+  const {showPopup} = usePopup()
 
 
   const onDragEnter = (e) => {
@@ -26,6 +26,18 @@ export default function Drop({name,placeholder,multiple,height,onConfirmImages})
     console.log('drag leave')
     e.target.classList.remove('active');
   }
+
+
+  function decodeURI(dataURI) {
+    let binary = atob(dataURI.split(',')[1]);
+    const mimeType = dataURI.split(',')[0].split(":")[1].split(";")[0];
+
+    let array = [];
+    for(let i = 0; i < binary.length; i++) {
+        array.push(binary.charCodeAt(i));
+    }
+    return new Blob([new Uint8Array(array)], {type: mimeType});
+}
 
 
   const showImage = (image) => {
@@ -45,22 +57,31 @@ export default function Drop({name,placeholder,multiple,height,onConfirmImages})
     let validImages = [...files].filter((file) =>
         ['image/jpeg', 'image/png'].includes(file.type)
     );
+    const temp = [...preview];
+    const finalTemp = [];
 
-    validImages.forEach(showImage);
+    temp.forEach(img => {
+      console.log('inside finaltemp img = ',img)
+      finalTemp.push(decodeURI(img))
+    })
+
+    validImages.forEach(img => {
+      showImage(img);
+      finalTemp.push(img);
+    });
+  
+    setImages(prev => {
+      return validImages;
+    })
+
+    
+
+    onChangeImages(finalTemp,name)
+
 
     // uploadImages(validImages);
   }
 
-  function decodeURI(dataURI) {
-      let binary = atob(dataURI.split(',')[1]);
-      const mimeType = dataURI.split(',')[0].split(":")[1].split(";")[0];
-
-      let array = [];
-      for(let i = 0; i < binary.length; i++) {
-          array.push(binary.charCodeAt(i));
-      }
-      return new Blob([new Uint8Array(array)], {type: mimeType});
-  }
 
   const onDrop = (e) => {
     e.preventDefault();
@@ -77,28 +98,32 @@ export default function Drop({name,placeholder,multiple,height,onConfirmImages})
   }
 
   const removeImageHandler  = (e) => {
-    console.log(e.target.dataset.imgurl)
+    // console.log(e.target.dataset.imgurl)
+    const currentImages = [...preview]
+
+    const afterRemoval = currentImages.filter(img => img != e.target.dataset.imgurl)
+    const temp = [];
+    afterRemoval.forEach(img => {
+      temp.push(decodeURI(img))
+    })
+    
+    console.log(afterRemoval)
+    console.log(temp)
+    onChangeImages(temp,name);
     setPreview(prev => {
       return prev.filter(img => img != e.target.dataset.imgurl)
     })
   }
 
-  const confirmImages = (e) => {
-    console.log('inside confirm image')
-    e.preventDefault();
-    // setImages(prev => [])
-    let images = []
-    preview.forEach(uri => {
-      // setImages(prev =>{
-      //   return [
-      //     ...prev,
-      //     decodeURI(uri)
-      //   ]
-      // })
-      images.push(decodeURI(uri))
-    })
-    onConfirmImages(images,name)
-  }
+  // const confirmImages = (e) => {
+  //   console.log('inside confirm image')
+  //   e.preventDefault();
+  //   let images = []
+  //   preview.forEach(uri => {
+  //     images.push(decodeURI(uri))
+  //   })
+  //   onConfirmImages(images,name)
+  // }
 
   return (
     <div className = "media-dropzone-container">
@@ -136,9 +161,6 @@ export default function Drop({name,placeholder,multiple,height,onConfirmImages})
               }):
               null
           }
-          
-         
-        <button onClick={confirmImages} className = "confirmDataBtn">confirm</button>
         </div>
     </div>
   )

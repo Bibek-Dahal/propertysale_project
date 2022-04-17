@@ -17,6 +17,11 @@ export const PpReducer = (state,action) => {
                 ...data
             };
 
+            case "reset":
+                console.log('resetting data in ocntest');
+                return {
+                    ...defaultFormState
+                };
         default:
             throw(`unknown action type ${action.type}`)
     }

@@ -7,10 +7,14 @@ import Nav from './Nav/Nav';
 import PasswordReset from './PasswordReset/PasswordReset';
 import PasswordResetConfirm from './PasswordReset/PasswordResetConfirm';
 import Profile from './Profile/Profile';
-import PostProperties from './PostProperties/PostProperties';
+// import PostProperties from './PostProperties/PostProperties';
+import PostProperties from './postProperties/PostProperties';
 import MyProperties from './MyProperties/MyProperties';
 import ChangePassword from './ChangePassword/ChangePassword';
 import InputField from './Auth/InputField/InputField';
+import EmptyFormInfo from './PostProperties/EmptyFormInfo/EmptyFormInfo';
+import PostLand from './PostLand/PostLand';
+import PostHouse from './PostHouse/PostHouse';
 
 export {
     InputField,
@@ -25,5 +29,8 @@ export {
     Profile,
     PostProperties,
     MyProperties,
-    ChangePassword
+    ChangePassword,
+    EmptyFormInfo,
+    PostLand,
+    PostHouse
 }

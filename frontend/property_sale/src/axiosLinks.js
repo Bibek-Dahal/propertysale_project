@@ -23,7 +23,8 @@ const links = {
     updateKyc : `${baseURL}/api/kyc-update/`,
     kycStatusWs : `${wsURL}/ws/status/`,
     foreignKeys : `${baseURL}/api/list-for-keys`,
-    post : `${baseURL}/api/property/post-`
+    postLand : `${baseURL}/api/property/post-land/`,
+    postHouse : `${baseURL}/api/property/post-house/`,
 }
 
 export default links;
