@@ -127,13 +127,13 @@ class Property(models.Model):
     district = models.CharField(max_length=30)
     province = models.CharField(max_length=1,choices=Choice.province,null=True)
     zone = models.CharField(max_length=30)
-    zip = models.PositiveIntegerField(default=0,blank=True)
-    landmark = models.CharField(max_length=200,blank=True)
+    zip = models.PositiveIntegerField()
+    landmark = models.CharField(max_length=200)
     area = models.ForeignKey(AreaType,on_delete=models.PROTECT)
-    ropani = models.PositiveSmallIntegerField(default=0)
-    aana = models.PositiveSmallIntegerField(default=0)
-    paisa = models.PositiveSmallIntegerField(default=0)
-    daam = models.PositiveSmallIntegerField(default=0)
+    ropani = models.PositiveSmallIntegerField()
+    aana = models.PositiveSmallIntegerField()
+    paisa = models.PositiveSmallIntegerField()
+    daam = models.PositiveSmallIntegerField()
     price_in_number = models.PositiveIntegerField()
     price_in_words = models.CharField(max_length=200)
     price_negotiable =  models.CharField(max_length=3,choices=Choice.negotiable_type,default='No')
@@ -159,6 +159,9 @@ class Land(Property):
     """
     Model Manager
     """
+    class Meta:
+        ordering = ['-created_at']
+        
     class PropertyManager(models.Manager):
         def get_queryset(self):
             return super().get_queryset().filter(status='Up',is_active=True)
@@ -194,7 +197,6 @@ class House(Property):
     condition = models.ForeignKey(ListingConditioin,on_delete=models.PROTECT)
     facility = models.ManyToManyField(Facility,related_name='facilities',blank=True)
     furnishing = models.ForeignKey(FurnishingType,on_delete=models.PROTECT)
-    on_sale = models.BooleanField(default=True) #determines whether to show onsale tag or not and if property is for rent this field should be saved as false
     house_type = models.ForeignKey(HouseType,on_delete=models.PROTECT,blank=True,null=True)
     floors = models.CharField(default=1,max_length=3)
     beds = models.CharField(default=1,max_length=3)
@@ -202,6 +204,9 @@ class House(Property):
     living = models.CharField(default=1,max_length=3)
     parking = models.CharField(default=0,max_length=2)
     bath = models.CharField(default=0,max_length=2)
+
+    class Meta:
+        ordering = ['-created_at']
 
     objects = models.Manager()
     """

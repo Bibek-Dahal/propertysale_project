@@ -69,13 +69,13 @@ class CreateKycView(APIView):
         kyc_serializer = KycSerializer(data = request.data)
         contact_serializer = UserContactSerializer(data=request.data)
         
-        if kyc_serializer.is_valid():
-            if contact_serializer.is_valid():
+        if kyc_serializer.is_valid(raise_exception=True) and contact_serializer.is_valid(raise_exception=True):
+            # if contact_serializer.is_valid():
                 kyc_obj = kyc_serializer.save()
                 contact_serializer.save(kyc_id=kyc_obj)
                 return Response(kyc_serializer.data,status=status.HTTP_201_CREATED)
-            return Response(contact_serializer.errors,status=status.HTTP_400_BAD_REQUEST)
-        return Response(kyc_serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+            # return Response(contact_serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+        # return Response(kyc_serializer.errors,status=status.HTTP_400_BAD_REQUEST)
         
 class RetriveKycView(APIView):
     permission_classes = [IsAuthenticated]
@@ -119,15 +119,6 @@ class PostHouseView(APIView):
         if house_serializer.is_valid():
             if house_img_serializer.is_valid():
                 obj = house_serializer.save()
-                print(obj.property_type)
-                print(obj.on_sale)
-                if obj.property_type.type == 'House For Rent':
-                    print('inside house for rent')
-                    obj.on_sale = False
-                    obj.save()
-                else:
-                    obj.on_sale=True
-                    obj.save()
                 if images:
                     for img in images:
                        addtional_img = AdditionalHouseImage(house=obj,image=img)
@@ -322,7 +313,7 @@ class ListLandByKwarg(ListAPIView):
         search = self.kwargs.get('lis_type')
         try:
             if search == 'top-listing':
-                return q.filter(listing_type=ListingType.objects.get_object_or_404(listing_type='Top Listing'))
+                return q.filter(listing_type=ListingType.objects.get(listing_type='Top Listing'))
             elif search == 'premimum-listing':
                 return q.filter(listing_type=ListingType.objects.get(listing_type='Premium Listing'))
             elif search == 'featured-listing':

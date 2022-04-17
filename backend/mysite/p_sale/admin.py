@@ -52,7 +52,7 @@ class PropertyTypeAdmin(admin.ModelAdmin):
 
 @admin.register(House)
 class PropertyAdmin(admin.ModelAdmin):
-    list_display = ('id','title','slug','on_sale','description','listing_type','property_type')
+    list_display = ('id','title','slug','description','listing_type','property_type')
     fieldsets = (
         (None, {
             'fields': ('seller','title', 'description', 'listing_type','house_type','property_type','condition','road_to_property','access_road')
@@ -76,7 +76,7 @@ class PropertyAdmin(admin.ModelAdmin):
             'fields': ('face_towards',),
         }),
         ('Floors&Rooms', {
-            'fields': ('floors','beds','kitchen','living','bath'),
+            'fields': ('floors','beds','kitchen','living','parking','bath'),
         }),
         (None, {
             'fields': ('main_image','url','no_of_views','longitude','latitude','is_active','status'),

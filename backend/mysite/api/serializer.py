@@ -88,10 +88,9 @@ class AdditionalHouseImageSerializer(serializers.ModelSerializer):
         fields = ('id','house','image')
 
 class HouseOwnerCertificateSerializer(serializers.ModelSerializer):
-    certificate_name = serializers.CharField(max_length=30,required=True)
     class Meta:
         model = HouseOwnerCertificate
-        fields = ('id','house','certificate_name','certificate_image')
+        fields = ('id','house','certificate_image')
         read_only_fields = ('house',)
 
 class HouseSerializer(serializers.ModelSerializer):
@@ -103,21 +102,20 @@ class HouseSerializer(serializers.ModelSerializer):
     parking = serializers.CharField(default=0,max_length=2,validators=[check_int])
     bath = serializers.CharField(default=0,max_length=2,validators=[check_int])
     province = serializers.ChoiceField(choices=choices_type.Choice.province,required=True)
-    per = serializers.CharField(max_length=30,required=True)
     class Meta:
         model = House
         fields = '__all__'
         extra_fields = ['images']
+        
         
         """
         here i have given related name in foreign key of additional images so i have used related name in extra_fields
         if related name was not provided the extra fields would be additionalhouseimage_set
         """
 class LandOwnerCertificateSerializer(serializers.ModelSerializer):
-    certificate_name = serializers.CharField(max_length=30,required=True)
     class Meta:
         model = LandOwnerCertificate
-        fields = ('id','land','certificate_name','certificate_image')
+        fields = ('id','land','certificate_image')
         read_only_fields = ('land',)
 
 class LandSerializer(serializers.ModelSerializer):
