@@ -88,10 +88,9 @@ class AdditionalHouseImageSerializer(serializers.ModelSerializer):
         fields = ('id','house','image')
 
 class HouseOwnerCertificateSerializer(serializers.ModelSerializer):
-    certificate_name = serializers.CharField(max_length=30,required=True)
     class Meta:
         model = HouseOwnerCertificate
-        fields = ('id','house','certificate_name','certificate_image')
+        fields = ('id','house','certificate_image')
         read_only_fields = ('house',)
 
 class HouseSerializer(serializers.ModelSerializer):
@@ -114,10 +113,9 @@ class HouseSerializer(serializers.ModelSerializer):
         if related name was not provided the extra fields would be additionalhouseimage_set
         """
 class LandOwnerCertificateSerializer(serializers.ModelSerializer):
-    certificate_name = serializers.CharField(max_length=30,required=True)
     class Meta:
         model = LandOwnerCertificate
-        fields = ('id','land','certificate_name','certificate_image')
+        fields = ('id','land','certificate_image')
         read_only_fields = ('land',)
 
 class LandSerializer(serializers.ModelSerializer):
