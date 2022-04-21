@@ -302,6 +302,29 @@ For Google Login:
 	axios.get('/api/property/land/<var>/',options)
 
 
+# UPDATE HOUSE STATUS
+	options = {
+		headers:{ 'Content-Type':'application/json','Authorization':`Bearer ${res.data.access_token}`}
+	}
+	data = {
+		"status":"Up or Down"
+	}
+
+	axios.put('/api/update-house-status/<pk>/',data,options)
+	Up == Active
+	Down == Inactive
+
+# UPDATE LAND STATUS
+	options = {
+		headers:{ 'Content-Type':'application/json','Authorization':`Bearer ${res.data.access_token}`}
+	}
+	data = {
+		"status":"Up or Down"
+	}
+
+	axios.put('/api/update-land-status/<pk>/',data,options)
+	Up == Active
+	Down == Inactive
 
 
 

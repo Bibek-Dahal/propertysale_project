@@ -37,4 +37,7 @@ urlpatterns = [
     path('property/land/<str:lis_type>/',views.ListLandByKwarg.as_view()),
     path('retrive-user-house-by-id/<int:pk>/',views.RetriveUserHouseView.as_view()),
     path('retrive-user-land-by-id/<int:pk>/',views.RetriveUserLandView.as_view()),
+    ##update property status
+    path('update-house-status/<int:pk>/',views.UpdateHouseStatus.as_view(),name="update_house_status"),
+    path('update-land-status/<int:pk>/',views.UpdateLandStatus.as_view(),name="update_house_status"),
 ]

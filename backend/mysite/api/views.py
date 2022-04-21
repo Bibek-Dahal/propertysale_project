@@ -13,6 +13,7 @@ from rest_framework import status
 from rest_framework import filters
 from rest_framework.parsers import FormParser,MultiPartParser,JSONParser
 from p_sale.models import *
+from django.shortcuts import get_object_or_404
 
 
 
@@ -356,9 +357,26 @@ class ListHouseByKwarg(ListAPIView):
 
         
         
-
-
+class UpdateHouseStatus(APIView):
+    permission_classes = [IsAuthenticated]
+    def put(self, request,*args,**kwargs):
+        house = get_object_or_404(House,id=self.kwargs.get('pk'))
+        serializer = UpdateHouseStatusSerializer(house,data=request.data)
+        if house.seller == self.request.user:
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
+                return Response(serializer.data,status=status.HTTP_200_OK)
+        raise Http404
         
-
+class UpdateLandStatus(APIView):
+    permission_classes = [IsAuthenticated]
+    def put(self, request,*args,**kwargs):
+        land = get_object_or_404(Land,id=self.kwargs.get('pk'))
+        serializer = UpdateLandStatusSerializer(land,data=request.data)
+        if land.seller == self.request.user:
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
+                return Response(serializer.data,status=status.HTTP_200_OK)
+        raise Http404
 
 
