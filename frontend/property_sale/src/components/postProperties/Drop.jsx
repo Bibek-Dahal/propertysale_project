@@ -52,8 +52,9 @@ export default function Drop({name,placeholder,multiple,height,onChangeImages}) 
         })
     });
   }
-
+  
   const handleImage = (files) => {
+    console.log('file',files)
     let validImages = [...files].filter((file) =>
         ['image/jpeg', 'image/png'].includes(file.type)
     );

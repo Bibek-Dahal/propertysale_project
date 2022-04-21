@@ -54,17 +54,14 @@
 @media only screen and (min-width : 700px){
     .sideBar{
         padding-top:0 !important;
-        top: 1.5em;
+        top:calc(var(--nav-height) + 2em);
         z-index:999;
-
     }
 }
 
 @media only screen and (min-width : 900px){
     .sideBar{
         padding-top:0 !important;
-        top: calc(var(--nav-height) + 2em);
-
     }
     .sideBar a{
         width:unset;
@@ -95,8 +92,7 @@
         flex-direction: column;
     }
     .sideBar{
-        top:calc(var(--nav-height) + 2em)
-
+        /* top:calc(var(--nav-height) + 2em) */
     }
 
     .sideBar ul li{

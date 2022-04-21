@@ -10,8 +10,8 @@ export default function PostProperties() {
 
   return (
         <div className="post-properties">
-            <Link to = "post-land">Post Land</Link>
-            <Link to = "post-house">Post House</Link>
+            <Link className = "link-btn" to = "post-land">Post Land</Link>
+            <Link className = "link-btn" to = "post-house">Post House</Link>
         </div>
   )
 }

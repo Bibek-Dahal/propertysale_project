@@ -1,7 +1,7 @@
-// const baseURL = 'http://192.168.1.70:8000';
-export const baseURL = 'http://127.0.0.1:8000';
-const wsURL = 'ws://127.0.0.1:8000';
-// const wsURL = 'ws://192.168.1.70:8000';
+export const baseURL = 'http://192.168.1.70:8000';
+// export const baseURL = 'http://127.0.0.1:8000';
+// const wsURL = 'ws://127.0.0.1:8000';
+const wsURL = 'ws://192.168.1.70:8000';
 
 
 const links = {
@@ -25,6 +25,9 @@ const links = {
     foreignKeys : `${baseURL}/api/list-for-keys`,
     postLand : `${baseURL}/api/property/post-land/`,
     postHouse : `${baseURL}/api/property/post-house/`,
+    getAllHouse : `${baseURL}/api/property/house/all/`,
+    getMyHouse : `${baseURL}/api/list-user-house/`,
+    getMyLand : `${baseURL}/api/list-user-land/`
 }
 
 export default links;

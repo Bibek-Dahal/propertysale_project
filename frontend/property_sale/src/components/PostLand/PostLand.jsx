@@ -12,6 +12,7 @@ import { useLoadScript } from '@react-google-maps/api';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {solid} from '@fortawesome/fontawesome-svg-core/import.macro'
 import { useNavigate } from 'react-router-dom';
+import { FullScreenLoading } from '../shared';
 
 
 export default function PostLand() {
@@ -24,6 +25,8 @@ export default function PostLand() {
     const {state} = useAuth();
 
     const [keys,setKeys] = useState({})
+
+    const [posting,setPosting] = useState(0);
 
     const temp = [1,2,3,4,5]
     const onDescriptionChangeHandler = (event,editor) => {
@@ -93,7 +96,7 @@ export default function PostLand() {
                 const res = await axiosInstance.get(axiosLinks.foreignKeys)
                 console.log(res)
                 setKeys(prev => {
-                return res.data
+                    return res.data
                 })
             }catch(err){
                 console.log(err)
@@ -124,24 +127,35 @@ export default function PostLand() {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        console.log(data);
+        
         const postUrl = isLand ? axiosLinks.postLand : axiosLinks.postHouse;
-
+        console.log(data)
         const temp = {...data};
-        console.log('temp = ',temp)
+        console.log(temp)
         const certificate_image = temp["certificate_image"]
         const otherImages = temp["otherImages"];
+        const main_image = temp["main_image"];
 
-        delete temp["certificate_image"]
-        delete temp["otherImages"]
+        console.log(`main-image = `,main_image)
+
+        delete temp["certificate_image"];
+        delete temp["otherImages"];
+        delete temp["main_image"];
+
+        console.log('deleted ',temp)
 
         let formData = new FormData();
+        
+        if(main_image){
+            formData.append('main_image',main_image[0])
+        }
 
         for(let d in temp){
             formData.append(d,temp[d]);
         }
 
         certificate_image?.forEach(img => {
+            console.log('img = ',img)
             formData.append("certificate_image",img);
         })
         
@@ -149,15 +163,19 @@ export default function PostLand() {
             formData.append(`additional_${isLand ? "land" : "house"}_image`,img);
         })
         formData.append('seller',state.user.user_id);
-        formData.append('status','inactive');
-
+        formData.append('status','Down');
+        // formData.append('main_image',main_image);
+        setPosting(1);
         (
             async function(){
                 try{
                     const res = await axiosInstance.post(postUrl,formData);
                     console.log(res)
+                    setPosting(0);
+                    navigate('/user/my-properties')
                 }catch(err){
                     console.log(err);
+                    setPosting(0);
                 }
             }
 
@@ -364,6 +382,10 @@ export default function PostLand() {
                     </div>
 
                     <div className="section media">
+{/* 
+                        {
+                            console.log('inside postLand',data)
+                        } */}
                         <h1>Media</h1>
                         <Input 
                             label = "Main Image"
@@ -400,7 +422,6 @@ export default function PostLand() {
                         />
                         </Input>
                     </div>
-
                     <div className="section price">
                         <h1>Price</h1>
                         <Input
@@ -436,7 +457,11 @@ w                        >
                     <div className="section map">
                         <Maps onChangeHandler={onMapChangeHandler}/>
                     </div>
-                    <button>submit</button>
+                    {
+                        posting ? 
+                        <FullScreenLoading />:
+                        <button>submit</button>
+                    }
             </form>
         </div>
      )

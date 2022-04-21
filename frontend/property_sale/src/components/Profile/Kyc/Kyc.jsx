@@ -11,14 +11,17 @@ import {solid} from '@fortawesome/fontawesome-svg-core/import.macro';
 import FileField from './FileField';
 import Input from '../Input/Input';
 import { useNavigate } from 'react-router-dom';
+import axiosInstance from '../../utils/axiosInstance';
+import { FullScreenLoading } from '../../shared';
+import Button from '@mui/material/Button';
 
-export default function Kyc({setLoading,setIsLoading}) {
+export default function Kyc({}) {
   const {state} = useAuth();
   const [kycExists,setKycExists] = useState(0);
   const formRef = useRef(null);
   const {showPopup} = usePopup();
   const navigate = useNavigate();
-
+  const [isLoading,setIsLoading] = useState(0);
   const profileRef = useRef(null);
 
   const [kycData,setKycData] = useState({
@@ -160,22 +163,16 @@ export default function Kyc({setLoading,setIsLoading}) {
   }
  
   useEffect(() => {
+    setIsLoading(1);
     (async function(){
       try{
-        const res = await axios.get(axoisLinks.retriveUser,{
-          headers : {
-            Authorization : `Bearer ${state.access_token}`
-          }
-        })
+        const res = await axiosInstance.get(axoisLinks.retriveUser)
         // console.log('required',res);
         if(res.data.kyc_status !== null){
           setKycExists(1);
           // console.log('kyc exists')
-          const res = await axios.get(axoisLinks.retriveKyc,{
-            headers : {
-              Authorization : `Bearer ${state.access_token}`
-            }
-          })
+          const res = await axiosInstance.get(axoisLinks.retriveKyc)
+
           const mobile_num_arrays = res.data.contact_nums.map(item => item.mobile_num) 
 
           setKycData(prev => {
@@ -187,6 +184,7 @@ export default function Kyc({setLoading,setIsLoading}) {
               mobile_num : mobile_num_arrays.toString()
             }
           })
+          setIsLoading(0);
           // console.log(res.data)
         }
       }catch(err){
@@ -195,6 +193,8 @@ export default function Kyc({setLoading,setIsLoading}) {
     })()
 
   },[])
+
+  if(isLoading) return <FullScreenLoading />
 
   return (
     <div className="kyc">
@@ -245,8 +245,7 @@ export default function Kyc({setLoading,setIsLoading}) {
             onChange = {onChangeHandler}
             label = "Occupation"
         />
-        <input type="submit" />
-
+       <Button type = "submit" variant = "contained">Update</Button>
       </form>
     </div>
   )

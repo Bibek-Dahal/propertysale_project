@@ -9,6 +9,7 @@ import Input from '../Input/Input';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {solid} from '@fortawesome/fontawesome-svg-core/import.macro';
 import getImage from '../../../impLinks';
+import Button from '@mui/material/Button';
 
 export default function Personal({setIsLoading}) {
     const {state} = useAuth();
@@ -195,7 +196,7 @@ export default function Personal({setIsLoading}) {
                 <option value="Female">Female</option>
                 <option value="Others">Other</option>
             </Input>
-            <input type="submit" />
+            <Button type = "submit" variant = "contained">Update</Button>
         </form>
     </div>
   )

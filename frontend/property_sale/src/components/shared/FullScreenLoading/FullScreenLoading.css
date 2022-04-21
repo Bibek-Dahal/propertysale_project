@@ -13,9 +13,10 @@
     gap:1em;
     background:white;
     align-items: center;
+    z-index:999;
 }
 
 #full-screen-loading svg{
-    font-size:var(--fs-xxxxl);
+    font-size:var(--fs-xxl);
     color:var(--blue);
 }

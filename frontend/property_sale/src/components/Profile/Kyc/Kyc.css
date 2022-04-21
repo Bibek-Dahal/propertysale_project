@@ -113,25 +113,19 @@ input.disabled{
 
 
 @media only screen and (min-width : 1000px){
-    .kyc form .userField{
-        /* border:1px solid red; */
-        /* max-width:unset !important; */
-        /* grid-column:1/2; */
-    }
+    
+
     .kyc form .userField input{ 
         grid-column: 1/-1;
     }
+
     .kyc form{
         grid-template-columns:repeat(2,1fr);
         grid-gap:2em;
-
     }
-    .kyc form >*:not(.userField):not([type="submit"]){
+    .kyc form >*:not(.userField):not(button){
         grid-column:1/-1;
     }
 
-    .kyc form > input[type = "submit"]{
-        grid-column:1/2;
-    }
     
 }

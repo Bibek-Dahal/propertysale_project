@@ -67,6 +67,23 @@
     color:var(--blue-dark);
     justify-content: center;
     margin-top:3em;
-    /* border:1px solid red; */
     cursor: pointer;
+}
+
+a.link-btn{
+    padding:1em 2em;
+    border-radius:2px;
+    background:var(--blue-dark);
+    /* margin-right:1em; */
+    display:block;
+    margin-bottom:1em;
+    width:200px;
+    text-align: center;
+    color:white;
+    font-weight: 600;
+    transition:background 200ms ease;
+}
+a.link-btn:hover{
+    background:var(--blue);
+
 }

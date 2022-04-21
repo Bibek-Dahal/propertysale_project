@@ -8,6 +8,7 @@
 
 html{
     scroll-behavior: smooth;
+    min-height:100%;
 }
 
 :root{
@@ -18,6 +19,8 @@ html{
     --fs-xxxl:1.3rem;
     --fs-xs : .8rem;
     --fs-xxxl:1.8rem;
+    --fs-xxxxl:2.1rem;
+    --fs-xxxxxl:2.5rem;
 
     --blue : #008cff;
     --blue-dark : #01589e;
@@ -58,6 +61,7 @@ html{
 body{
     font-family:var(--ff);
     position:relative;
+    /* overflow: hidden; */
     background:var(--body-bg);
 }
 
@@ -105,7 +109,7 @@ li{
 }
 
 html{
-    font-size:13px;
+    font-size:15px;
 }
 
 a{
@@ -123,7 +127,7 @@ nav a{
 }
 
 .small-links .link{
-    color:red;
+    /* color:red; */
     cursor:pointer;
 }
 
@@ -134,9 +138,14 @@ nav a{
     text-align:right;
 }
 
+.section-div{
+    margin-bottom:5em;
+}
+
+
 @media only screen and (min-width:1000px){
     html{
-        /* font-size:11px; */
+        /* font-size:15px; */
     }
     :root{
         --profile-image-large:13rem;
@@ -149,7 +158,7 @@ nav a{
     }
 
     html{
-        font-size:13px;
+        /* font-size:13px; */
     }
 
     .wrapper-3{
@@ -157,9 +166,9 @@ nav a{
         /* border:1px solid red; */
     }
     .wrapper-2{
-        position:absolute;
+        /* position:absolute;
         left:50%;
         top:50%;
-        transform:translate(-50%,-50%);
+        transform:translate(-50%,-50%); */
     }
 }
