@@ -1,12 +1,27 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Select from './Select'
+import axiosInstance from '../utils/axiosInstance'
+import axiosLinks from '../../axiosLinks';
+import { usePopup } from '../../Hooks';
 
 export default function HouseItem({info}) {
 
+    const {showPopup} = usePopup()
 
     const onChangeHandler = (e) => {
-        
+        console.log(e.target.value);
+        (   
+            async function(){
+                try{
+                    const res = await axiosInstance.put(`${axiosLinks.updateHouseStatus}${info.id}/`,{status : e.target.value});
+                    console.log(res);
+                    showPopup('status changed successfully');
+                }catch(err){
+                    console.log(err)
+                }
+            }
+        )()
     }
 
 
@@ -25,7 +40,7 @@ export default function HouseItem({info}) {
                 name = "status"
                 options = {["Up","Down"]}
                 value = {info.status}
-                onChangeHandler = {onChangeHandler}
+                onChange= {onChangeHandler}
             />
         </td>
     </tr>

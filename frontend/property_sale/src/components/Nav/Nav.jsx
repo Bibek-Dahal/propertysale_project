@@ -7,6 +7,8 @@ import { useAuth } from '../../Hooks';
 import { useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {solid} from '@fortawesome/fontawesome-svg-core/import.macro';
+import Logo from './logo';
+import { Link } from 'react-router-dom';
 
 export default function Nav() {
     const {state} = useAuth();
@@ -16,9 +18,9 @@ export default function Nav() {
     <div className="nav_wrapper">
         <nav className = "wrapper">
             {/* <a href="#" className = "homeBtn">Home</a> */}
-            <MyLink to = "/" className = "homeBtn">
-                Home
-            </MyLink>
+            <Link to = "/" className = "logo">
+                <Logo />
+            </Link>
             <DesktopNav />
             <input type="checkbox" id = "burgerCheckBox" />
             <MobileNav/>

@@ -12,7 +12,7 @@ export default function User() {
   const {state,checkAndRemoveToken} = useAuth(); 
 
   useEffect(() => {
-    checkAndRemoveToken();
+    // checkAndRemoveToken();
   },[])
   
 

@@ -10,6 +10,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {solid} from '@fortawesome/fontawesome-svg-core/import.macro';
 import getImage from '../../../impLinks';
 import Button from '@mui/material/Button';
+import axiosInstance from '../../utils/axiosInstance';
 
 export default function Personal({setIsLoading}) {
     const {state} = useAuth();
@@ -40,13 +41,9 @@ export default function Personal({setIsLoading}) {
         setIsLoading(1);
         async function update(){
             try{
-                const res = await axios.patch(axiosLinks.updateUser,
-                    info,
-                    {
-                        headers : {
-                            Authorization : `Bearer ${state.access_token}`
-                    }
-                })
+                const res = await axiosInstance.patch(axiosLinks.updateUser,
+                    info
+                )
                 // console.log(res);
                 showPopup('Profile Updated successfully')
                 setIsLoading(0);
@@ -65,7 +62,7 @@ export default function Personal({setIsLoading}) {
         }
         ws.onmessage = (msg) => {
            setKycStatus(JSON.parse(msg.data).message)
-           console.log(msg)
+        //    console.log(msg)
            showPopup(`Your kyc is ${JSON.parse(msg.data).message}`)
          }
          ws.onclose = (msg) => {
@@ -74,11 +71,7 @@ export default function Personal({setIsLoading}) {
         // console.log(localStorage.getItem('access_token'))
         async function getUserDetail(){
             try{
-                const res = await axios.get(axiosLinks.retriveUser,{
-                    headers : {
-                        Authorization : `Bearer ${localStorage.getItem('access_token')}`
-                    }
-                })
+                const res = await axiosInstance.get(axiosLinks.retriveUser)
                 // console.log(res);
                 const data = res.data;
                 for(let i in data){
@@ -97,11 +90,7 @@ export default function Personal({setIsLoading}) {
                 setKycStatus(res.data.kyc_status);
                 if(res.data.kyc_status !== null){
                     // console.log('insdide')
-                        axios.get(axiosLinks.retriveKyc,{
-                            headers : {
-                              Authorization : `Bearer ${state.access_token}`
-                            }
-                          })
+                        axiosInstance.get(axiosLinks.retriveKyc)
                           .then(res => {
                               setProfileImage(res.data.profile_pic)
                             

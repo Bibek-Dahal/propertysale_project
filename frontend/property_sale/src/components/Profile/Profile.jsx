@@ -9,11 +9,11 @@ import { useAuth } from '../../Hooks';
 
 export default function Profile() {
   const [isLoading,setIsLoading] = useState(0);
-  const {checkAndRemoveToken} = useAuth();
+  // const {checkAndRemoveToken} = useAuth();
 
   useEffect(() => {
     console.log('mounted profile')
-    checkAndRemoveToken()
+    // checkAndRemoveToken()
   })
 
   return (

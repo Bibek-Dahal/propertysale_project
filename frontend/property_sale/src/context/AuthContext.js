@@ -3,13 +3,15 @@ import { createContext,useReducer } from "react";
 import usePopup from "../Hooks/usePopup";
 import { authReducer, initial_auth_condition } from "../reducers/authReducer";
 import links from "../axiosLinks";
+// import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext();
 
 export const AuthContextProvider = ({children}) => {
     const [state,dispatch] = useReducer(authReducer,initial_auth_condition);
     const {showPopup} = usePopup();
-    
+    // const navigate = useNavigate();
+
     function verifyRefreshToken(){
         return new Promise((resolve,reject) => {
             console.log('verifuing refresh token');
@@ -63,6 +65,8 @@ export const AuthContextProvider = ({children}) => {
                     dispatch({type:"logoutUser"})
                     showPopup('session expired login again');
                     console.log('session expired login again')
+                    // navigate('/login');
+                    window.location('/login');
                 })
         }
        

@@ -26,8 +26,11 @@ const links = {
     postLand : `${baseURL}/api/property/post-land/`,
     postHouse : `${baseURL}/api/property/post-house/`,
     getAllHouse : `${baseURL}/api/property/house/all/`,
+    getAllLand : `${baseURL}/api/property/land/all/`,
     getMyHouse : `${baseURL}/api/list-user-house/`,
-    getMyLand : `${baseURL}/api/list-user-land/`
+    getMyLand : `${baseURL}/api/list-user-land/`,
+    getHouse : `${baseURL}/api/property/house/`,
+    updateHouseStatus : `${baseURL}/api/update-house-status/`
 }
 
 export default links;

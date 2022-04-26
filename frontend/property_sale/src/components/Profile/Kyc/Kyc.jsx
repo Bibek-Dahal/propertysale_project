@@ -15,13 +15,13 @@ import axiosInstance from '../../utils/axiosInstance';
 import { FullScreenLoading } from '../../shared';
 import Button from '@mui/material/Button';
 
-export default function Kyc({}) {
+export default function Kyc({setIsLoading}) {
   const {state} = useAuth();
   const [kycExists,setKycExists] = useState(0);
   const formRef = useRef(null);
   const {showPopup} = usePopup();
   const navigate = useNavigate();
-  const [isLoading,setIsLoading] = useState(0);
+  // const [isLoading,setIsLoading] = useState(0);
   const profileRef = useRef(null);
 
   const [kycData,setKycData] = useState({
@@ -163,7 +163,6 @@ export default function Kyc({}) {
   }
  
   useEffect(() => {
-    setIsLoading(1);
     (async function(){
       try{
         const res = await axiosInstance.get(axoisLinks.retriveUser)
@@ -194,7 +193,7 @@ export default function Kyc({}) {
 
   },[])
 
-  if(isLoading) return <FullScreenLoading />
+  // if(isLoading) return <FullScreenLoading />
 
   return (
     <div className="kyc">

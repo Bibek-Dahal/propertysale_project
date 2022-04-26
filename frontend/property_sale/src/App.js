@@ -19,7 +19,10 @@ import {
   MyProperties,
   ChangePassword,
   PostLand,
-  PostHouse
+  PostHouse,
+  House,
+  Land,
+  Search
 } from './components/index'
 
 import PrivateRoute from './components/utils/PrivateRoute';
@@ -75,6 +78,19 @@ function App() {
           </Route>
           <Route path = "/password-reset" element = {<PasswordReset />} />
           <Route path = "/password-reset/confirm/:uid/:token" element = {<PasswordResetConfirm />} />
+          <Route path = "/house/:id" element = {
+             <PrivateRoute>
+                <House />
+             </PrivateRoute>
+          }/>
+          <Route path = "/land/:id" element = {
+              <PrivateRoute>
+                <Land />
+              </PrivateRoute>
+          } />
+          <Route path = "/search/" element = {
+              <Search />
+          } />
         </Routes>
       </Router>
     </div>

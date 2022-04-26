@@ -13,6 +13,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {solid} from '@fortawesome/fontawesome-svg-core/import.macro'
 import { useNavigate } from 'react-router-dom';
 import { FullScreenLoading } from '../shared';
+import { TextField } from '@mui/material';
+
 
 
 export default function PostLand() {
@@ -29,6 +31,100 @@ export default function PostLand() {
     const [posting,setPosting] = useState(0);
 
     const temp = [1,2,3,4,5]
+    const zone = [
+        "bagmati",
+        "bheri",
+        "dhawalagiri",
+        "gandaki",
+        "janakpur",
+        "karnali",
+        "koshi",
+        "lumbini",
+        "mahakali",
+        "mechi",
+        "narayani",
+        "rapti",
+        "sagarmatha",
+        "seti"
+    ]
+    const districts = [
+        "achham",
+    "arghakhanchi",
+    "baglung",
+    "baitadi",
+    "bajhang",
+    "bajura",
+    "banke",
+    "bara",
+    "bardiya",
+    "bhaktapur",
+    "bhojpur",
+    "chitwan",
+    "dadeldhura",
+    "dailekh",
+    "dang deukhuri",
+    "darchula",
+    "dhading",
+    "dhankuta",
+    "dhanusa",
+    "dholkha",
+    "dolpa",
+    "doti",
+    "gorkha",
+    "gulmi",
+    "humla",
+    "ilam",
+    "jajarkot",
+    "jhapa",
+    "jumla",
+    "kailali",
+    "kalikot",
+    "kanchanpur",
+    "kapilvastu",
+    "kaski",
+    "kathmandu",
+    "kavrepalanchok",
+    "khotang",
+    "lalitpur",
+    "lamjung",
+    "mahottari",
+    "makwanpur",
+    "manang",
+    "morang",
+    "mugu",
+    "mustang",
+    "myagdi",
+    "nawalparasi",
+    "nuwakot",
+    "okhaldhunga",
+    "palpa",
+    "panchthar",
+    "parbat",
+    "parsa",
+    "pyuthan",
+    "ramechhap",
+    "rasuwa",
+    "rautahat",
+    "rolpa",
+    "rukum",
+    "rupandehi",
+    "salyan",
+    "sankhuwasabha",
+    "saptari",
+    "sarlahi",
+    "sindhuli",
+    "sindhupalchok",
+    "siraha",
+    "solukhumbu",
+    "sunsari",
+    "surkhet",
+    "syangja",
+    "tanahu",
+    "taplejung",
+    "terhathum",
+    "udayapur"
+    ]
+    const province = [1,2,3,4,5,6,7]
     const onDescriptionChangeHandler = (event,editor) => {
         const data = editor.getData();
         setData(prev => {
@@ -59,10 +155,10 @@ export default function PostLand() {
     }
 
 
-    const onChangeHandler = (e) => {
+    const onChangeHandler = (e,name) => {
         console.log(e);
         console.log(`${[e.target.name]} = ${e.target.value}`)
-        if(e.target.name === 'property_type' && e.target.value === 'House for rent'){
+        if(e.target.name ? e.target.name : name === 'property_type' && e.target.value === 'House for rent'){
             setIsRent(1);
         } else if(e.target.name === 'property_type' && e.target.value === 'House for sale'){
             setIsRent(0);
@@ -70,7 +166,7 @@ export default function PostLand() {
         setData(prev => {
             return{
             ...prev,
-            [e.target.name] : e.target.value
+            [e.target.name ? e.target.name : name] : e.target.value
             }
         })
     }
@@ -232,29 +328,35 @@ export default function PostLand() {
                         <h1>Address</h1>
                         <Select 
                             name = "province"
-                            options = {temp}
+                            options = {province}
                             onChange = {onChangeHandler}
+                            width = "20ch"
                         />
                         <Select 
                             name = "district"
-                            options = {temp}
+                            options = {districts}
                             onChange = {onChangeHandler}
+                            width = "20ch"
                         />
                         <Select 
                             name = "zone"
-                            options = {temp}
+                            options = {zone}
                             onChange = {onChangeHandler}
+                            width = "20ch"
                         />
-                        <Input
+                        <TextField 
+                            name = "zip"
                             label = "zip"
-                        >
-                            <input type="text" name = "zip"onChange = {onChangeHandler}/>
-                        </Input>
-                        <Input
-                            label = "landmark"
-                        >
-                            <input type="text" name = "landmark" onChange = {onChangeHandler} />
-                        </Input>
+                            onChange = {onChangeHandler}
+                            width = "20ch"
+                        />
+                        <Input 
+                            name = "landmark"
+                            label = "Landmark"
+                            onChange = {onChangeHandler}
+                            width = "40ch"
+                        />
+                        
                     </div>
 
                     <div className="areaAndRoad section">
@@ -270,37 +372,44 @@ export default function PostLand() {
                                 onChange = {onChangeHandler}
                                 options = {keys?.area_type}
                             />
-                            <Input
-                                label = "ropani"
-                            >
-                                <input name = "ropani" onChange = {onChangeHandler}/>
-                            </Input>
-                            <Input
+                            <Input 
+                                name = "ropani"
+                                label = "Ropani"
+                                onChange = {onChangeHandler}
+                                width = "15ch"
+                            />
+                            <Input 
+                                name = "aana"
                                 label = "aana"
-                            >
-                                <input name = "aana" onChange = {onChangeHandler}/>
-                            </Input>
-                            <Input
-                                label = "Paisa"
-                            >
-                                <input name = "paisa" onChange = {onChangeHandler}/>
-                            </Input>
-                            <Input
+                                onChange = {onChangeHandler}
+                                width = "15ch"
+                            />
+                            <Input 
+                                name = "paisa"
+                                label = "paisa"
+                                onChange = {onChangeHandler}
+                                width = "15ch"
+                            />
+                            <Input 
+                                name = "daam"
                                 label = "daam"
-                            >
-                                <input name = "daam" onChange = {onChangeHandler}/>
-                            </Input>
+                                onChange = {onChangeHandler}
+                                width = "15ch"
+                            />
+                            
                         </div>
-                        <Input
-                            label = "road to property"
-                        >
-                            <input name = "road_to_property" onChange = {onChangeHandler}/>
-                        </Input>
-                        <Input
-                            label = "access road"
-                        >
-                            <input name = "access_road" onChange = {onChangeHandler}/>
-                        </Input>
+                        <Input 
+                                name = "road_to_property"
+                                label = "Road to property"
+                                onChange = {onChangeHandler}
+                                width = "40ch"
+                            />
+                         <Input 
+                                name = "access_road"
+                                label = "Access road"
+                                onChange = {onChangeHandler}
+                                width = "40ch"
+                            />
                     </div>
 
                     <div className="additional-details section">
@@ -341,30 +450,35 @@ export default function PostLand() {
                             !isLand && 
                                 <div className="small-details">
                                     <Input 
-                                        label = "Floors"
-                                    >
-                                        <input name = "floors" type="text" onChange = {onChangeHandler} />
-                                    </Input>
+                                        name = "floors"
+                                        label = "floor"
+                                        onChange = {onChangeHandler}
+                                        width = "20ch"
+                                    />
                                     <Input 
-                                        label = "Beds"
-                                    >
-                                        <input name = "beds" type="text" onChange = {onChangeHandler} />
-                                    </Input>
+                                        name = "beds"
+                                        label = "beds"
+                                        onChange = {onChangeHandler}
+                                        width = "20ch"
+                                    />
+                                     <Input 
+                                        name = "kitchen"
+                                        label = "kitchen"
+                                        onChange = {onChangeHandler}
+                                        width = "20ch"
+                                    />
                                     <Input 
-                                        label = "Kitchen"
-                                    >
-                                        <input name = "kitchen" type="text" onChange = {onChangeHandler} />
-                                    </Input>
-                                    <Input 
-                                        label = "Parking"
-                                    >
-                                        <input name = "parking" type="text" onChange = {onChangeHandler} />
-                                    </Input>
-                                    <Input 
-                                        label = "Bath"
-                                    >
-                                        <input name = "bath" type="text" onChange = {onChangeHandler} />
-                                    </Input>
+                                        name = "bath"
+                                        label = "bath"
+                                        onChange = {onChangeHandler}
+                                        width = "20ch"
+                                    />
+                                     <Input 
+                                        name = "parking"
+                                        label = "parking"
+                                        onChange = {onChangeHandler}
+                                        width = "20ch"
+                                    />
                                 </div>
                         }
                              
@@ -373,12 +487,14 @@ export default function PostLand() {
                             name = "listing_type"
                             options = {keys?.listing_type}
                             onChange = {onChangeHandler}
+                            width = "40ch"
                         />
                         <Input
                             label = "youtube url"
-                        >
-                            <input type="text" name = "url" onChange={onChangeHandler}/>
-                        </Input>
+                            name = "url"
+                            onChange = {onChangeHandler}
+                            width = "50ch"
+                        />
                     </div>
 
                     <div className="section media">
@@ -411,7 +527,7 @@ export default function PostLand() {
                         </Input>
             
                         <Input 
-                        label = "Certificate images"
+                            label = "Certificate images"
                         >
                         <Drop
                             height = "100px"
@@ -425,37 +541,45 @@ export default function PostLand() {
                     <div className="section price">
                         <h1>Price</h1>
                         <Input
-                            label = "price in number"
-w                        > 
-                            <input type="text" name = "price_in_number" onChange = {onChangeHandler}/>
-                        </Input>
-                        <Input
-                            label = "price in words"
-                            
-                        > 
-                            <input type="text" name = "price_in_words" onChange = {onChangeHandler}/>
-                        </Input>
+                            label = "Price in number"
+                            name = "price_in_number"
+                            onChange = {onChangeHandler}
+                            width = "20ch"
+                        />
+                         <Input
+                            label = "Price in words"
+                            name = "price_in_words"
+                            onChange = {onChangeHandler}
+                            width = "50ch"
+                        />
+                         
                         {
                             isRent ?
-                            <Select
-                            options = {
-                                ["month","year"]
-                            }
-                            name = "per"
-                            onChange = {onChangeHandler}
-                            >
-                            </Select>:
+                            <Select 
+                                name = "per"
+                                options = {
+                                    ["month","year"]
+                                }
+                                onChange = {onChangeHandler}
+                                width = "20ch"
+                            />:
                             null
                         }
                         
                         <Input
                             label = "price negotiable"
                         >
-                            <input type="checkbox" value = "Yes" name = "price_negotiable" onChange = {checkboxHandler}/>
+                            <input style = {{
+                                height:"15px",
+                                width:"15px"
+                            }}
+                            type="checkbox" value = "Yes" name = "price_negotiable" onChange = {checkboxHandler}/>
                         </Input>
                     </div>
                     <div className="section map">
-                        <Maps onChangeHandler={onMapChangeHandler}/>
+                        <div className="map-container">
+                            <Maps onChangeHandler={onMapChangeHandler}/>
+                        </div>
                     </div>
                     {
                         posting ? 

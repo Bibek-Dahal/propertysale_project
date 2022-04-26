@@ -74,7 +74,11 @@
 td.is_active .status{
     /* border:1px solid red; */
     width:fit-content;
-    padding:.6em 1em;
+    padding-left:unset;
+    padding-right:unset;
+    padding-top:unset;
+    padding-bottom:unset;
+    padding:.5em;
     border-radius:2px;
     width:80px;
 }

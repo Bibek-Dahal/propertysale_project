@@ -9,6 +9,7 @@
 html{
     scroll-behavior: smooth;
     min-height:100%;
+    -webkit-font-smoothing: antialiased;
 }
 
 :root{
@@ -54,8 +55,16 @@ html{
 
     --profile-image-large:8rem;
     --label-color : #62676bc5;
-}
 
+    --card-width:350px;
+    --card-width-2 : 250px;
+    --card-height-2:150px;
+    --card-height:250px;
+    --light-blue : #00CABE;
+    --inactive : #a1a5a8;
+
+    --black : rgb(63, 59, 59);
+}
 
 
 body{
@@ -63,6 +72,8 @@ body{
     position:relative;
     /* overflow: hidden; */
     background:var(--body-bg);
+    /* overflow-x: hidden; */
+    
 }
 
 input:-webkit-autofill,
@@ -139,7 +150,7 @@ nav a{
 }
 
 .section-div{
-    margin-bottom:5em;
+    /* margin-bottom:5em; */
 }
 
 

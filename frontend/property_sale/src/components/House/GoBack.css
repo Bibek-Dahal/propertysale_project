@@ -1,0 +1,13 @@
+.goBack{
+    /* border:1px solid red; */
+    display:flex;
+    align-items:center;
+    gap:2em;
+    justify-content: center;
+    font-size:var(--fs-xxl);
+    padding:1em 0;
+    margin:3em 0;
+    text-transform: capitalize;
+}
+
+

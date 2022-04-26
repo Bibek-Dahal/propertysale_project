@@ -15,6 +15,9 @@ import InputField from './Auth/InputField/InputField';
 // import EmptyFormInfo from './PostProperties/EmptyFormInfo/EmptyFormInfo';
 import PostLand from './PostLand/PostLand';
 import PostHouse from './PostHouse/PostHouse';
+import House from './House/House';
+import Land from './Land/Land';
+import Search from './Search/Search';
 
 export {
     InputField,
@@ -32,5 +35,8 @@ export {
     ChangePassword,
     // EmptyFormInfo,
     PostLand,
-    PostHouse
+    PostHouse,
+    House,
+    Land,
+    Search
 }

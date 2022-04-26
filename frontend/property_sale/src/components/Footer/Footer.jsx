@@ -1,9 +1,50 @@
 import React from 'react'
+import './Footer.css';
+import Buy from './buy';
+import Sell from './sell';
+import Rent from './rent';
 
 export default function () {
   return (
-    <div>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci aperiam ab dolor officiis facere rerum est quasi voluptates commodi natus maxime voluptas veritatis dolorum assumenda mollitia debitis, accusantium deserunt qui eligendi! Molestiae sint placeat vel! Recusandae quaerat tenetur earum, quod nobis deleniti quam temporibus dignissimos, nisi ab ratione eum aliquid eveniet corporis consectetur molestiae laborum amet optio rem. Incidunt vero cum vitae iusto facere tempore aspernatur, reiciendis, debitis quos unde eligendi ducimus fugiat provident necessitatibus, velit optio natus id aperiam mollitia. Accusantium laudantium, explicabo natus laborum ratione ea distinctio illo! Cumque unde laboriosam dolore beatae aspernatur. Labore ratione autem inventore.
+    <div className = "footer">
+       <div className="wrapper">
+          <div className="buy">
+            <div className="image">
+              <Buy />
+            </div>
+            <div className="info">
+              <h3>Buy a home</h3>
+              <p>Find your place with an immersive photo experience and the most listings, including things you won’t find anywhere else.</p>
+              <div className="link-btn">
+                Search property
+              </div>
+            </div>
+          </div>
+          <div className="sell">
+            <div className="image">
+              <Sell />
+            </div>
+            <div className="info">
+              <h3>Sell your home</h3>
+              <p>Find your place with an immersive photo experience and the most listings, including things you won’t find anywhere else.</p>
+              <div className="link-btn">
+                Sell property
+              </div>
+            </div>
+          </div>
+          <div className="rent">
+            <div className="image">
+              <Rent />
+            </div>
+            <div className="info">
+              <h3>Rent a house</h3>
+              <p>Find your place with an immersive photo experience and the most listings, including things you won’t find anywhere else.</p>
+              <div className="link-btn">
+                Rent house
+              </div>
+            </div>
+          </div>
+       </div>
     </div>
   )
 }
