@@ -380,3 +380,8 @@ class UpdateLandStatus(APIView):
         raise Http404
 
 
+class RetriveUserByIdView(RetrieveAPIView):
+    queryset = User.objects.all()
+    permission_classes = (IsAuthenticated,)
+    serializer_class = UserSerializer
+

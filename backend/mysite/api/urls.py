@@ -10,6 +10,9 @@ app_name = 'api'
 urlpatterns = [
     #retrive all user
     path('user/',views.UserListView.as_view(),name="user_all"),
+
+    #retrive user by id
+    path('retrive-user-by-id/<int:pk>/',views.RetriveUserByIdView.as_view(),name="ret_user_by_id"),
     #Login Logout passwd change
     path('account/', include('dj_rest_auth.urls')),
     #user registration
