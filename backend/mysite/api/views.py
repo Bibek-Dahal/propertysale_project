@@ -314,11 +314,11 @@ class ListLandByKwarg(ListAPIView):
         search = self.kwargs.get('lis_type')
         try:
             if search == 'top-listing':
-                return q.filter(listing_type=ListingType.objects.get(listing_type='Top Listing'))
+                return q.filter(listing_type=ListingType.objects.get(listing_type__icontains='Top Listing'))
             elif search == 'premimum-listing':
-                return q.filter(listing_type=ListingType.objects.get(listing_type='Premium Listing'))
+                return q.filter(listing_type=ListingType.objects.get(listing_type__icontains='Premium Listing'))
             elif search == 'featured-listing':
-                return q.filter(listing_type=ListingType.objects.get(listing_type='Featured Listing'))
+                return q.filter(listing_type=ListingType.objects.get(listing_type__icontains='Featured Listing'))
             raise Http404
         except:
             raise Http404
@@ -342,15 +342,15 @@ class ListHouseByKwarg(ListAPIView):
         search = self.kwargs.get('lis_type')
         try:
             if search == 'house-for-sale':
-                return q.filter(property_type=PropertyType.objects.get(type='House For Sale'))
+                return q.filter(property_type=PropertyType.objects.get(type__icontains='House For Sale'))
             elif search == 'house-for-rent':
-                return q.filter(property_type=PropertyType.objects.get(type='House For Rent'))
+                return q.filter(property_type=PropertyType.objects.get(type__icontains='House For Rent'))
             elif search == 'top-listing':
-                return q.filter(listing_type=ListingType.objects.get(listing_type='Top Listing'))
+                return q.filter(listing_type=ListingType.objects.get(listing_type__icontains='Top Listing'))
             elif search == 'premimum-listing':
-                return q.filter(listing_type=ListingType.objects.get(listing_type='Premium Listing'))
+                return q.filter(listing_type=ListingType.objects.get(listing_type__icontains='Premium Listing'))
             elif search == 'featured-listing':
-                return q.filter(listing_type=ListingType.objects.get(listing_type='Featured Listing'))
+                return q.filter(listing_type=ListingType.objects.get(listing_type__icontains='Featured Listing'))
             raise Http404
         except:
             raise Http404
