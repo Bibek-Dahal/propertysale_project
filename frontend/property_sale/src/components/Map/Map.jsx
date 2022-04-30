@@ -79,6 +79,8 @@ export default function Maps({onChangeHandler}) {
                         style: 'mapbox://styles/mapbox/streets-v11',
                         center: [longitude,latitude],
                         zoom: zoom,
+                        pitch:69,
+                        bearing:-60
                     })
                     map.current.addControl(
                         new MapboxGeocoder({

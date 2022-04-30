@@ -18,6 +18,7 @@
     "dotenv": "^16.0.0",
     "framer-motion": "^6.2.8",
     "google-map-react": "^2.1.10",
+    "html-react-parser": "^1.4.12",
     "jwt-decode": "^3.1.2",
     "mapbox-gl": "^2.8.2",
     "num-extracter": "^1.0.0",

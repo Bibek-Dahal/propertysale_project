@@ -9,6 +9,11 @@ nav{
     justify-content: space-between;
 }
 
+
+nav >*:nth-last-child(2){
+    margin-left:auto;
+}
+
 nav .logo{
 }
 nav .logo img{

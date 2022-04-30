@@ -30,11 +30,14 @@ const links = {
     getMyHouse : `${baseURL}/api/list-user-house/`,
     getMyLand : `${baseURL}/api/list-user-land/`,
     getHouse : `${baseURL}/api/property/house/`,
+    getLand : `${baseURL}/api/property/land/`,
     updateHouseStatus : `${baseURL}/api/update-house-status/`,
     updateLandStatus: `${baseURL}/api/update-land-status/`,
     searchLandByType : `${baseURL}/api/property/land/`,
     searchHouseByType : `${baseURL}/api/property/house/`,
-    changePassword : `${baseURL}/api/account/password/change/`
+    changePassword : `${baseURL}/api/account/password/change/`,
+    noOfViewsHouse : `${wsURL}/ws/house/`,
+    noOfViewsLand : `${wsURL}/ws/land/`
 }
 
 export default links;

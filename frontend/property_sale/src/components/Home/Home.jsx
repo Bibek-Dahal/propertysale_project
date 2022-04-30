@@ -53,12 +53,21 @@ export default function Home() {
       <React.Fragment>
           <Nav />
           <Header />
+          {
+            console.log(properties)
+          }
           {/* {
             state.user && <h1>{state.user.username} is logged in</h1>
           }
           <h1>Other stuffs which any user can see</h1> */}
-          <Listing type = "premium listing" properties = {properties} isLoading = {isLoading}/>
-          <Listing type = "top listing" properties = {properties} isLoading = {isLoading}/>
+          {
+              properties.length > 0 &&
+              <Listing type = "premium listing" properties = {properties} isLoading = {isLoading}/>
+          }
+          {
+              properties.length > 0 &&
+              <Listing type = "top listing" properties = {properties} isLoading = {isLoading}/>
+          }
           <Footer />
       </React.Fragment>)
 }

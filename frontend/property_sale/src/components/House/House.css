@@ -227,6 +227,11 @@
     margin-top:2em;
 }
 
+.propertyDetail .other-info .description p{
+    margin-top:1em;
+    line-height:1.7;
+}
+
 .propertyDetail .other-info .title{
     color:var(--inactive);
     cursor:pointer;
@@ -398,4 +403,29 @@
     min-height:600px;
     border-radius:10px;
     overflow: hidden;
+}
+
+.facility-description{
+    display:flex;
+    flex-direction: column;
+    gap:1em;
+}
+
+.facility-description .facility{
+    /* border:1px solid red; */
+    background:rgb(245, 245, 245);
+    padding:.8em;
+    box-shadow:3px 3px 5px rgb(241, 241, 241);
+    border-radius:5px;
+    font-size:var(--fs-xxl);
+    text-transform: capitalize;
+    color:var(--blue-dark);
+    display:flex;
+    gap:1em;
+    align-items: center;
+}
+
+.facility svg{
+    color:green;
+    font-size:var(--fs-xxxl);
 }

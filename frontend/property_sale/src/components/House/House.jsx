@@ -1,5 +1,5 @@
 import React from 'react'
-import { useEffect,useState } from 'react';
+import { useEffect,useState,useRef } from 'react';
 import { useParams } from 'react-router-dom'
 import axiosInstance from '../utils/axiosInstance';
 import axiosLinks from '../../axiosLinks';
@@ -11,24 +11,36 @@ import {solid} from '@fortawesome/fontawesome-svg-core/import.macro';
 import Nav from '../Nav/Nav';
 import { text } from '@fortawesome/fontawesome-svg-core';
 import Map from './Map';
+import HtmlReactParser from 'html-react-parser';
 
 export default function House() {
+    const description = useRef(null);
     const {id} = useParams();
     const [house,setHouse] = useState({});
     const [active,setActive] = useState("overview");
     const [seller,setSeller] = useState({});
-
-    function toHtml(str){
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(str,'text/html');
-        return doc.body;
-    }
+    const [views,setViews] = useState(0);
 
     const infoToggler = (e) => {
         setActive(e.target.dataset.info);
     }
 
     useEffect(() => {
+        let ws;
+        ws = new WebSocket(`${axiosLinks.noOfViewsHouse}${id}/`);
+        ws.onopen = () => {
+            console.log('connnected')
+        }
+        ws.onmessage = (msg) => {
+            console.log(msg.data)
+            setViews(JSON.parse(msg.data).message);
+            //    console.log(msg)
+        //    showPopup(`Your kyc is ${JSON.parse(msg.data).message}`)
+        }
+        ws.onclose = (msg) => {
+            console.log('connection closed')
+        }
+
         (
             async function(){
                 try{
@@ -37,12 +49,30 @@ export default function House() {
                     setHouse(prev => res.data);
                     // res = await axiosInstance.get(`${axiosLinks.retriveUser}/${res.data.seller}/`);
                     // setSeller(res.data);
+                    res = await axiosInstance.get(``)
                 }catch(err){
                     console.log(err);
                 }      
             }
         )()
+       
+       
+        return () => {
+            ws.close()
+        }
+
+
     },[])
+
+    function toHtml(string){
+        const parser = new DOMParser();
+        const div = document.createElement('div');
+        div.innerHTML = parser.parseFromString(string,'text/html');
+        // description?.current.append(div)
+        description.current.innerHTML = parser.parseFromString(string,'text/html').body.innerHTML;
+    }
+
+
 
     return (
         <div className="propertyDetail house">
@@ -57,7 +87,8 @@ export default function House() {
                         </div>
                         <div className="other-images">
                             {
-                            house?.images?.map(img => {
+                            house?.images?.map((img,index)=> {
+                                if(index > 3) return;
                                 return   <div key = {img.id} className="image">
                                                 <img  src = {`${impLinks}${img.image}`} />
                                             </div>
@@ -86,7 +117,7 @@ export default function House() {
                                 <FontAwesomeIcon  icon = {solid('eye')} />
                             </span>
                             <span className='figure'>
-                                432
+                                {views}
                             </span>
                         </div>
                         <div className={`btn listing-type ${(house?.listing_type)?.split(" ").join("-")}`}>
@@ -115,8 +146,8 @@ export default function House() {
                             <div onClick = {infoToggler} data-info = "contact" className={`title ${active === 'contact' ? "active" : ""}`}>
                                 contact
                             </div>
-                            <div onClick = {infoToggler} data-info = "monetary" className={`title ${active === 'monetary' ? "active" : ""}`}>
-                                monetary
+                            <div onClick = {infoToggler} data-info = "facility" className={`title ${active === 'facility' ? "active" : ""}`}>
+                                facilities
                             </div>
                         </div>
                         <div>
@@ -126,9 +157,14 @@ export default function House() {
                                 <div className="overview-description">
                                     <div className="desc">
                                         <h4>description</h4>
-                                        <p>
-                                            {house?.description}
+                                        {
+                                            typeof house.description === 'string'
+                                            && <p ref = {description}>
+                                                {
+                                                    HtmlReactParser(house.description)
+                                                }
                                         </p>
+                                        }
                                     </div>
                                 </div>
                             }
@@ -244,6 +280,21 @@ export default function House() {
                                 <div className="contact-description">
                                     seller is of id {
                                         house?.seller
+                                    }
+                                </div>
+                            }
+                            {
+                                active === 'facility' &&
+                                <div className="facility-description">
+                                    {
+                                        house?.facility.map(f => {
+                                            return (
+                                                <div className='facility'>
+                                                    <FontAwesomeIcon icon = {solid('circle-check')}/>
+                                                    <span>{f}</span>
+                                                </div>
+                                            )
+                                        })
                                     }
                                 </div>
                             }

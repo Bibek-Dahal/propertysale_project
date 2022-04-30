@@ -83,6 +83,7 @@ export default function Search() {
                {
                    properties.length > 0 && 
                    <div className="result">
+                       <h1>{query}</h1>
                         {
                             properties.map(property => {
                                 return <PropertyCard key = {property.id} property = {property} onClickHandlerForSearch = {onClickHandlerForSearch}/>
