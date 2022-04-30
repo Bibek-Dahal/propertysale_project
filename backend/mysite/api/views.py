@@ -315,7 +315,7 @@ class ListLandByKwarg(ListAPIView):
         try:
             if search == 'top-listing':
                 return q.filter(listing_type=ListingType.objects.get(listing_type__icontains='Top Listing'))
-            elif search == 'premimum-listing':
+            elif search == 'premium-listing':
                 return q.filter(listing_type=ListingType.objects.get(listing_type__icontains='Premium Listing'))
             elif search == 'featured-listing':
                 return q.filter(listing_type=ListingType.objects.get(listing_type__icontains='Featured Listing'))
@@ -347,7 +347,7 @@ class ListHouseByKwarg(ListAPIView):
                 return q.filter(property_type=PropertyType.objects.get(type__icontains='House For Rent'))
             elif search == 'top-listing':
                 return q.filter(listing_type=ListingType.objects.get(listing_type__icontains='Top Listing'))
-            elif search == 'premimum-listing':
+            elif search == 'premium-listing':
                 return q.filter(listing_type=ListingType.objects.get(listing_type__icontains='Premium Listing'))
             elif search == 'featured-listing':
                 return q.filter(listing_type=ListingType.objects.get(listing_type__icontains='Featured Listing'))
