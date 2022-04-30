@@ -28,7 +28,7 @@ export default function Maps({lat,lng}) {
                 }}
                 style={{width: '100%', height: '100%'}}
                 mapStyle="mapbox://styles/ash-ish/cl2dr2khz000715pjqat23url"
-                mapboxAccessToken="pk.eyJ1IjoiYXNoLWlzaCIsImEiOiJjbDIwczA3a2owZXI1M3BtdnhiNnoyc2c3In0.Rj0diRh6RpyK9eyv_Uqxsw"
+                mapboxAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_KEY}
                 
             >
                 <Marker 

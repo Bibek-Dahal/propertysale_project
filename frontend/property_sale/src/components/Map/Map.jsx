@@ -8,7 +8,7 @@ import { Marker } from '@react-google-maps/api';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {solid} from '@fortawesome/fontawesome-svg-core/import.macro';
 
-const accessToken = 'pk.eyJ1IjoiYXNoLWlzaCIsImEiOiJjbDIwczA3a2owZXI1M3BtdnhiNnoyc2c3In0.Rj0diRh6RpyK9eyv_Uqxsw';
+const accessToken = process.env.REACT_APP_MAPBOX_ACCESS_KEY;
 
 mapboxgl.accessToken = accessToken
 

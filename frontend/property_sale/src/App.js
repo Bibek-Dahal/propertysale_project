@@ -33,7 +33,9 @@ import ScrollToTop from './components/utils/ScrollToTop';
 
 function App() {
   const {PopupVisible} = usePopup();
-  
+  {
+    console.log('token = ',process.env)
+  }
   return (
     <div className="App">
       <Modal/>

@@ -43,7 +43,7 @@ export default function Maps({properties:coordinates,centerTo}) {
                 <Map
                     style={{width: '100%', height: '100%'}}
                     mapStyle="mapbox://styles/mapbox/streets-v11"
-                    mapboxAccessToken="pk.eyJ1IjoiYXNoLWlzaCIsImEiOiJjbDIwczA3a2owZXI1M3BtdnhiNnoyc2c3In0.Rj0diRh6RpyK9eyv_Uqxsw"
+                    mapboxAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_KEY}
                     initialViewState={{
                         latitude:coordinates[0]?.latitude,
                         longitude:coordinates[0]?.longitude,
