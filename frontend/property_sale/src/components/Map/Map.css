@@ -1,0 +1,24 @@
+.map-container-wrapper,
+.map-container{
+    height:100%;
+    
+}
+
+.map-container-wrapper{
+    position:relative;
+}
+
+.map-container-wrapper .settingLoad{
+    position:absolute;
+    top:0;
+    bottom:0;
+    width:100%;
+    height:100%;
+    z-index:999;
+    background:rgba(19, 18, 18, 0.438);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    font-size:4rem;
+    color:white;
+}

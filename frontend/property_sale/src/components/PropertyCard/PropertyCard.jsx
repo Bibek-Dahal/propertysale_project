@@ -5,18 +5,23 @@ import getImage from '../../impLinks';
 import './PropertyCard.css';
 import { useNavigate } from 'react-router-dom';
 
-export default function PropertyCard({property}) {
+export default function PropertyCard({property,onClickHandlerForSearch}) {
 
     const navigate = useNavigate();
 
     const onClickHandler = (e) => {
         console.log('clicked',property)
-        navigate(`/${property.type}/${property.id}`)
-    }
+            if(location.pathname.split('/')[1] !== 'search'){
+                navigate(`/${property.type}/${property.id}`)
+            }else{
+                onClickHandlerForSearch({lat:property.latitude,lng:property.longitude})
+            }
+        }
 
-        
     return (
-        <div className="card" onClick = {onClickHandler}>
+        <div 
+            className="card" 
+            onClick = {onClickHandler}>
             <div className="card-image">
                 <img src={`${getImage}${property.main_image}`} alt="" />
             </div>

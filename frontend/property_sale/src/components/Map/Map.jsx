@@ -1,60 +1,114 @@
-import React,{useEffect, useState} from 'react'
+import React,{useEffect, useState, useRef} from 'react'
 // import {GoogleMap,useLoadScript,Marker} from '@react-google-maps/api';
-import Map,{Marker} from 'react-map-gl';
+// import Map,{Marker} from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css'
+import mapboxgl from 'mapbox-gl';
+import './Map.css';
+import { Marker } from '@react-google-maps/api';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {solid} from '@fortawesome/fontawesome-svg-core/import.macro';
+
+const accessToken = 'pk.eyJ1IjoiYXNoLWlzaCIsImEiOiJjbDIwczA3a2owZXI1M3BtdnhiNnoyc2c3In0.Rj0diRh6RpyK9eyv_Uqxsw';
+
+mapboxgl.accessToken = accessToken
 
 
 export default function Maps({onChangeHandler}) {
+    const mapContainer = useRef(null);
+    const map = useRef(null);
+    const [lat,setLat] = useState(27.7008);
+    const [lng,setLng] = useState(85.3002);
+    const [zoom , setZoom] = useState(15);
+    const [marker,setMarker] = useState([]);
+    const [setting,setSetting] = useState(0);
+    // const [data,setData] = useState({
+    //     lat:"",
+    //     lng:""
+    // })
+    const [loading,setLoading] = useState(0);
 
-    let [viewport,setViewPort] = useState({
-        longitude : 85.300140,
-        latitude : 27.700769,
-        zoom: 14
+    const getLocation = () => {
+        return new Promise((resolve,reject) => {
+            if(!navigator.geolocation) reject('no navigator found');
+            navigator.geolocation.getCurrentPosition(position => {
+                resolve({msg : 'navigator found',coords :position.coords})
+            })
+        })
+    }
+
+    const addMarker = (coords) => {
+        // map.current.addMarker({
+
+        // })
+        const prevMarker = marker.pop();
+        if(prevMarker) prevMarker.remove();
+
+        const m = new mapboxgl.Marker({
+            color: "red",
+            draggable: true
+        }).setLngLat([coords.lng, coords.lat])
+          .addTo(map.current)
+        marker.push(m);
+        onChangeHandler(marker[0]._lngLat)
+    }
+    
+    useEffect(() => {
+        console.log('rendered')
+        if(!map.current) return;
+        map.current.on('click',(e) => {
+            addMarker(e.lngLat);
+        })
     })
 
     useEffect(() => {
-        // function setPosition(position){
-        //     console.log('position = ',position)
-        //     setViewPort(prev => {
-        //         return{
-        //             ...prev,
-        //             longitude : position?.coords.longitude,
-        //             latitude : position?.coords.latitude
-        //         }
-        //     })
-        // }
-        // function getUserLocation(){
-        //     if (navigator.geolocation) {
-        //         navigator.geolocation.getCurrentPosition(setPosition);
-        //       } 
-        // }
-        // getUserLocation();
-    },[])
+        setLoading(1);
+        (
+            async function(){
+                try{
+                    const res = await getLocation();
+                    console.log(res);
+                    const {latitude,longitude} = res.coords;
+                    setLat(latitude);
+                    setLng(longitude);
+                    // console.log('setting map',longitude,latitude)
+                    //settign map
+                    setLoading(0)
+                    // console.log(mapContainer.current)
+                    map.current = new mapboxgl.Map({
+                        container: mapContainer.current,
+                        style: 'mapbox://styles/mapbox/streets-v11',
+                        center: [longitude,latitude],
+                        zoom: zoom,
+                    })
+                    map.current.addControl(
+                        new MapboxGeocoder({
+                            accessToken:accessToken,
+                            mapboxgl: mapboxgl
+                        })
+                    );
+                }catch(err){
+                    console.log(err);
+                }
+            }
+            )()
+            return () => map.current.remove();
+    },[]);
 
+    if(loading) return '...loading';
 
     return (
-        <>
-                <Map
-                    style={{width: '100%', height: '100%'}}
-                    mapStyle="mapbox://styles/ash-ish/cl2dr2khz000715pjqat23url"
-                    mapboxAccessToken="pk.eyJ1IjoiYXNoLWlzaCIsImEiOiJjbDIwczA3a2owZXI1M3BtdnhiNnoyc2c3In0.Rj0diRh6RpyK9eyv_Uqxsw"
-                    onClick = {(e) => console.log('clicked')}
-                    {...viewport}
-                    onViewportChange = {viewport => setViewPort({viewport})}
-                >
-                    {/* {
-                        // coordinates.length > 0 &&
-                        coordinates.map((coordinate,index) => {
-                            return (
-                                <Marker 
-                                    key = {index}
-                                    latitude = {coordinate?.lat}
-                                    longitude = {coordinate?.lng}
-                                />
-                            )
-                        })
-                    } */}
-            </Map>
-        </>
+        <div className = "map-container-wrapper">
+            {/* <div className="sidebar">
+                Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
+            </div> */}
+            {/* {
+                setting && 
+                <div className="settingLoad">
+                    <FontAwesomeIcon className = "fa-spin" icon = {solid('spinner')} />
+                </div>
+            } */}
+            <div className="map-container" ref = {mapContainer}>
+            </div>
+        </div>
     );
 }

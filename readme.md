@@ -37,8 +37,8 @@ run the command=> npm install
 # 3.Password Change
 	data = {
 		"old_password":"",
-    		"new_password1": "",
-    		"new_password2": ""
+		"new_password1": "",
+		"new_password2": ""
 	}
 	options = {
 		headers:{ 'Content-Type':'application/json','Authorization':`Bearer ${res.data.access_token}`}

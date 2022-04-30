@@ -5,13 +5,15 @@
     background:#FFFEFE;
     cursor:pointer;
     transition:transform 200ms ease-out;
+    box-shadow:2px 2px 20px rgba(0, 0, 0, 0.082);
+
 }
 
 .card{
 }
 
 .card:hover{
-    box-shadow:2px 2px 20px rgba(0, 0, 0, 0.137);
+    box-shadow:2px 2px 20px rgba(0, 0, 0, 0.116);
     transform: scale(1.02);
 }
 

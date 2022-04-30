@@ -151,7 +151,7 @@
 
 .propertyDetail .price .figure{
     font-size:1.5rem;
-    font-weight: bold;
+    font-weight: var(--light-bold);
 }
 
 .propertyDetail .price{
@@ -198,7 +198,7 @@
 
 .propertyDetail .other-info .title{
     font-size:var(--fs-xxl);
-    font-weight:bold;
+    font-weight: var(--light-bold);
     color:var(--light-blue);
     position:relative;
     /* border:1px solid red; */
@@ -252,7 +252,7 @@
     background:white;
     box-shadow: 1px 1px 10px rgba(200, 200, 200, 0.678);
     transition:transform 200ms ease;
-    font-weight: bold;
+    font-weight: var(--light-bold);
     margin-top:.3em;
     /* color:var(--light-blue); */
     color:rgba(0,0,0,.7);
@@ -296,14 +296,14 @@
 }
 
 .propertyDetail .desc h4{
-    font-weight:500;
+    font-weight: var(--light-bold);
     font-size:1.05rem;
     text-transform: capitalize;
     text-decoration: underline;
 }
 
 .propertyDetail .desc p{
-    font-weight:500;
+    font-weight: var(--light-bold);
     color:var(--inactive);
     line-height:1.4;
 }
@@ -329,7 +329,7 @@
     display:flex;
     gap:.5em;
     flex-direction: column;
-    font-weight:bold;
+    font-weight: var(--light-bold);
     text-transform: capitalize;
     opacity:.8;
     background:white;
@@ -369,7 +369,7 @@
 }
 
 .propertyDetail .locations >* >*:first-child{
-    font-weight: bold;
+    font-weight: var(--light-bold);
     position:relative;
 }
 
@@ -396,4 +396,6 @@
 
 .map{
     min-height:600px;
+    border-radius:10px;
+    overflow: hidden;
 }

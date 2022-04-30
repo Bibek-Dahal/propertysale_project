@@ -1,0 +1,47 @@
+.NotVerified .illustration svg{
+    font-size:35rem;
+}
+
+.NotVerified{
+    /* border:1px solid red; */
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.NotVerified .text{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    gap:.5em;
+    color:red;
+    margin-top:-5em;
+}
+
+.NotVerified .text h3{
+    font-size:var(--fs-xxxl);
+}
+
+.NotVerified .text p{
+    /* border:1px solid red; */
+    max-width:400px;
+    opacity:.7;
+}
+
+.NotVerified button{
+    padding:.5em 2em;
+    border:none;
+    background:var(--blue-dark);
+    color:white;
+    font-weight:500;
+    font-size: var(--fs-xxl);
+    border-radius:5px;
+    cursor: pointer;
+    margin-top:1em;
+}
+
+.NotVerified button:hover{
+    background:var(--blue);
+}

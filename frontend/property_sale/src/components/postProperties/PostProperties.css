@@ -87,3 +87,41 @@ a.link-btn:hover{
     background:var(--blue);
 
 }
+
+.facilities{
+    /* border:1px solid red; */
+    display:inline-flex;
+    gap:1em;
+    text-transform: capitalize;
+    width:100%;
+    flex-direction: column;
+}
+
+
+.facilities .contents{
+    display:flex;
+    gap:1em;
+    flex-wrap: wrap;
+}
+
+
+.facilities label{
+    font-size:var(--fs-xxl);
+}
+
+.facilities .facility{
+    border:2px solid rgb(179, 179, 179);
+    padding:.8em 1em;
+    white-space: nowrap;
+    border-radius:5px;
+    flex-wrap: wrap;
+    max-width:250px;
+    cursor: pointer;
+    opacity:.5;
+}
+
+.facility.active{
+    border:2px solid var(--blue);
+    opacity:1;
+    color:var(--blue);
+}

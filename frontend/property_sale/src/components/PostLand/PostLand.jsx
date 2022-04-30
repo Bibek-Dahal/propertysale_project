@@ -24,6 +24,8 @@ export default function PostLand() {
     const [data,setData] = useState({
        
     })
+    const [facility,setFacility] = useState([]);
+
     const {state} = useAuth();
 
     const [keys,setKeys] = useState({})
@@ -125,6 +127,34 @@ export default function PostLand() {
     "udayapur"
     ]
     const province = [1,2,3,4,5,6,7]
+    
+    const removeFromArray = (name,array) => {
+        let toRemoveIndex;
+        array.forEach((a,index) => {
+            if(a === name){
+                toRemoveIndex = index;
+                array.splice(toRemoveIndex,1);
+                return;
+            }
+        })
+    }
+
+    const facilityHandler = (e) => {
+        console.log('setting facility = ',e.target.dataset.name)
+        if(!facility.includes(e.target.dataset.name)){
+            setFacility(prev => [...prev,e.target.dataset.name])
+        }else{
+            let temp = [...facility];
+            removeFromArray(e.target.dataset.name,temp);
+            console.log('after removing = ',temp)
+            setFacility(temp);
+        }
+    }
+
+    const isActive = (name) => {
+        return facility.includes(name);
+    }
+
     const onDescriptionChangeHandler = (event,editor) => {
         const data = editor.getData();
         setData(prev => {
@@ -138,8 +168,8 @@ export default function PostLand() {
     const onTextChangeHandler = (e) => {
         setData(prev => {
             return{
-            ...prev,
-            title : e.target.value
+                ...prev,
+                title : e.target.value
             }
         })
     }
@@ -157,16 +187,18 @@ export default function PostLand() {
 
     const onChangeHandler = (e,name) => {
         console.log(e);
-        console.log(`${[e.target.name]} = ${e.target.value}`)
-        if(e.target.name ? e.target.name : name === 'property_type' && e.target.value === 'House for rent'){
+        console.log(`${[e.target.name]} = ${e.target.value}`,name)
+        if((e.target.name ? e.target.name : name) === 'property_type' && e.target.value === 'House for rent'){
             setIsRent(1);
-        } else if(e.target.name === 'property_type' && e.target.value === 'House for sale'){
+        }
+        if(e.target.name === 'property_type' && e.target.value === 'House for sale'){
             setIsRent(0);
+            console.log('set is rent to 0')
         }
         setData(prev => {
             return{
-            ...prev,
-            [e.target.name ? e.target.name : name] : e.target.value
+                ...prev,
+                [e.target.name ? e.target.name : name] : e.target.value
             }
         })
     }
@@ -223,7 +255,7 @@ export default function PostLand() {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        
+        console.log(data);
         const postUrl = isLand ? axiosLinks.postLand : axiosLinks.postHouse;
         console.log(data)
         const temp = {...data};
@@ -254,13 +286,13 @@ export default function PostLand() {
             console.log('img = ',img)
             formData.append("certificate_image",img);
         })
-        
         otherImages?.forEach(img => {
             formData.append(`additional_${isLand ? "land" : "house"}_image`,img);
         })
         formData.append('seller',state.user.user_id);
         formData.append('status','Down');
         // formData.append('main_image',main_image);
+        facility.forEach(f => formData.append('facility',f))
         setPosting(1);
         (
             async function(){
@@ -276,13 +308,13 @@ export default function PostLand() {
             }
 
         )()
-
-
     }
 
     return (
         <div className="post-container post-properties">
-          
+          {
+              console.log('facility array = ',facility)
+          }
             <form onSubmit={submitHandler}>
                     <div className="title">
                         <div className="go-back" onClick = {() => {
@@ -481,8 +513,7 @@ export default function PostLand() {
                                     />
                                 </div>
                         }
-                             
-                                   
+                       
                         <Select 
                             name = "listing_type"
                             options = {keys?.listing_type}
@@ -495,8 +526,27 @@ export default function PostLand() {
                             onChange = {onChangeHandler}
                             width = "50ch"
                         />
+                        {
+                            !isLand &&
+                            <div className="facilities">
+                                <label htmlFor="">facilities</label>
+                                <div className="contents">
+                                    {
+                                        keys?.facility?.map(f => {
+                                            return (
+                                                <div 
+                                                    data-name = {f}
+                                                    className={`facility ${f.split(" ").join("")} ${isActive(f) ? "active" : ""}`}
+                                                    onClick = {facilityHandler}>
+                                                        {f}
+                                                </div>
+                                            )
+                                        })
+                                    }
+                                </div>
+                            </div>
+                        }
                     </div>
-
                     <div className="section media">
 {/* 
                         {
@@ -552,7 +602,6 @@ export default function PostLand() {
                             onChange = {onChangeHandler}
                             width = "50ch"
                         />
-                         
                         {
                             isRent ?
                             <Select 
@@ -577,8 +626,8 @@ export default function PostLand() {
                         </Input>
                     </div>
                     <div className="section map">
-                        <div className="map-container">
-                            <Maps onChangeHandler={onMapChangeHandler}/>
+                        <div className="">
+                            <Maps onChangeHandler={onMapChangeHandler} setData = {setData}/>
                         </div>
                     </div>
                     {

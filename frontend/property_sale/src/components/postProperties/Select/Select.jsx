@@ -30,8 +30,8 @@ export default function Select({name,options,onChange,error,width}) {
                     
                     {
                         options ? 
-                            options.map(option => {
-                                return <MenuItem value={option}>{option}</MenuItem>;
+                            options.map((option,index) => {
+                                return <MenuItem key = {`${option}-${index}`}value={option}>{option}</MenuItem>;
                             }
                             
                             )

@@ -53,9 +53,10 @@ export default function MyProperties() {
       <table>
         <thead>
           <tr>
-            <th>property name</th>
-            <th>published status</th>
-            <th>property status</th>
+            <th className = "p_name">property name</th>
+            <th className = "visible" width = "20%">visible </th>
+            <th className = "approved" width = "20%">Approved </th>
+            <th className = "status">status</th>
           </tr>
         </thead>
         <tbody>

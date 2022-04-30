@@ -29,6 +29,7 @@ import PrivateRoute from './components/utils/PrivateRoute';
 import Logout from './components/Auth/Logout';
 import ProtectedRoute from './components/utils/ProtectedRoute';
 import PublicRoute from './components/utils/PublicRoute';
+import ScrollToTop from './components/utils/ScrollToTop';
 
 function App() {
   const {PopupVisible} = usePopup();
@@ -36,62 +37,67 @@ function App() {
   return (
     <div className="App">
       <Modal/>
-      <Router>
-        <Routes>
-          <Route path = "/" element = {
-            <PublicRoute>
-              <Home />
-            </PublicRoute>
-          } />
-          <Route path = "/login" element = {
-            <ProtectedRoute>
-              <Login />
-            </ProtectedRoute>
-          }/>
-          <Route path = "/logout" element = {
-            <PrivateRoute>
-                <Logout />
-            </PrivateRoute>
-          }/>
-          <Route path = "/register" element = {
+      <Router >
+        <ScrollToTop>
+          <Routes>
+            <Route path = "/" element = {
+              <PublicRoute>
+                <Home />
+              </PublicRoute>
+            } />
+            <Route path = "/login" element = {
               <ProtectedRoute>
-                <Register />
+                <Login />
               </ProtectedRoute>
-          }/>
-          <Route path = "/user/" element = {
-            <PrivateRoute>
-              <User />
-            </PrivateRoute>
-          }>
-              <Route path = "profile" element = {
-                  <Profile />
-              } />
-              <Route path = "my-properties" element = {
-                  <MyProperties />
-               } />
-              <Route path = "post-properties/" element = {
-                  <PostProperties />
-              }/>
-              <Route path = "post-properties/post-land" element = {<PostLand />} />
-              <Route path = "post-properties/post-house" element = {<PostLand />} />
-              <Route path = "change-password" element = {<ChangePassword />} />
-          </Route>
-          <Route path = "/password-reset" element = {<PasswordReset />} />
-          <Route path = "/password-reset/confirm/:uid/:token" element = {<PasswordResetConfirm />} />
-          <Route path = "/house/:id" element = {
-             <PrivateRoute>
-                <House />
-             </PrivateRoute>
-          }/>
-          <Route path = "/land/:id" element = {
+            }/>
+            <Route path = "/logout" element = {
               <PrivateRoute>
-                <Land />
+                  <Logout />
               </PrivateRoute>
-          } />
-          <Route path = "/search/" element = {
-              <Search />
-          } />
-        </Routes>
+            }/>
+            <Route path = "/register" element = {
+                <ProtectedRoute>
+                  <Register />
+                </ProtectedRoute>
+            }/>
+            <Route path = "/user/" element = {
+              <PrivateRoute>
+                <User />
+              </PrivateRoute>
+            }>
+                <Route path = "profile" element = {
+                    <Profile />
+                } />
+                <Route path = "my-properties" element = {
+                    <MyProperties />
+                } />
+                <Route path = "post-properties/" element = {
+                    <PostProperties />
+                }/>
+                <Route path = "post-properties/post-land" element = {<PostLand />} />
+                <Route path = "post-properties/post-house" element = {<PostLand />} />
+                <Route path = "change-password" element = {<ChangePassword />} />
+            </Route>
+            <Route path = "/password-reset" element = {<PasswordReset />} />
+            <Route path = "/password-reset/confirm/:uid/:token" element = {<PasswordResetConfirm />} />
+            <Route path = "/house/:id" element = {
+              <PrivateRoute>
+                  <House />
+              </PrivateRoute>
+            }/>
+            <Route path = "/land/:id" element = {
+                <PrivateRoute>
+                  <Land />
+                </PrivateRoute>
+            } />
+            <Route path = "/search/" element = {
+                <Search />
+            } />
+            <Route path = "/search/:query" element = {
+                <Search />
+            } />
+          </Routes>
+        </ScrollToTop>
       </Router>
     </div>
   );

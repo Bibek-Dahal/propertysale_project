@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import DesktopNav from './DesktopNav'
 import MyLink from './MyLink';
 import MobileNav from './MobileNav'
@@ -7,19 +7,30 @@ import { useAuth } from '../../Hooks';
 import { useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {solid} from '@fortawesome/fontawesome-svg-core/import.macro';
-import Logo from './logo';
+// import Logo from './logo';
+import Logo from './logo.png';
+
 import { Link } from 'react-router-dom';
 
 export default function Nav() {
     const {state} = useAuth();
     const location = useLocation();
-    
+    const wrapperNav = React.useRef(null);
+
+    window.addEventListener('scroll',(e) => {
+        if(window?.pageYOffset > 0){
+            wrapperNav?.current?.classList.add('white');
+        }else{
+            wrapperNav?.current?.classList.remove('white');
+        }
+    })
+
     return (    
-    <div className="nav_wrapper">
+    <div className="nav_wrapper" ref = {wrapperNav}>
         <nav className = "wrapper">
             {/* <a href="#" className = "homeBtn">Home</a> */}
             <Link to = "/" className = "logo">
-                <Logo />
+                <img src={Logo} alt="" />
             </Link>
             <DesktopNav />
             <input type="checkbox" id = "burgerCheckBox" />
