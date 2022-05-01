@@ -169,7 +169,7 @@ class HouseListView(ListAPIView):
     queryset = House.properties.all()
     serializer_class = HouseSerializer
     filter_backends = [filters.SearchFilter]
-    search_fields = [ 'longitude','latitude','slug']
+    search_fields = [ 'longitude','latitude','slug','title']
     # ordering_fields = ['price_in_number']
 
     def get_queryset(self):
@@ -186,7 +186,7 @@ class LandListView(ListAPIView):
     queryset = Land.properties.all()
     serializer_class = LandSerializer
     filter_backends = [filters.SearchFilter]
-    search_fields = [ 'longitude','latitude','slug']
+    search_fields = [ 'longitude','latitude','slug','title']
 
     def get_queryset(self):
         q = self.request.query_params.get('ordering')
