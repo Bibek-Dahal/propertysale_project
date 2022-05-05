@@ -1,19 +1,16 @@
 import React,{useEffect, useState, useRef} from 'react'
-// import {GoogleMap,useLoadScript,Marker} from '@react-google-maps/api';
-// import Map,{Marker} from 'react-map-gl';
-import 'mapbox-gl/dist/mapbox-gl.css'
-import mapboxgl from 'mapbox-gl';
+import Map from 'react-map-gl';
 import './Map.css';
-import { Marker } from '@react-google-maps/api';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {solid} from '@fortawesome/fontawesome-svg-core/import.macro';
+import mapboxgl from 'mapbox-gl';
+// import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css'
+// import Geocoder from "react-map-gl-geocoder";
 
-const accessToken = process.env.REACT_APP_MAPBOX_ACCESS_KEY;
-
-mapboxgl.accessToken = accessToken
-
+mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_KEY;
 
 export default function Maps({onChangeHandler}) {
+    const markers = []
     const mapContainer = useRef(null);
     const map = useRef(null);
     const [lat,setLat] = useState(27.7008);
@@ -21,10 +18,6 @@ export default function Maps({onChangeHandler}) {
     const [zoom , setZoom] = useState(15);
     const [marker,setMarker] = useState([]);
     const [setting,setSetting] = useState(0);
-    // const [data,setData] = useState({
-    //     lat:"",
-    //     lng:""
-    // })
     const [loading,setLoading] = useState(0);
 
     const getLocation = () => {
@@ -36,79 +29,85 @@ export default function Maps({onChangeHandler}) {
         })
     }
 
-    const addMarker = (coords) => {
-        // map.current.addMarker({
 
-        // })
-        const prevMarker = marker.pop();
-        if(prevMarker) prevMarker.remove();
-
-        const m = new mapboxgl.Marker({
-            color: "red",
-            draggable: true
-        }).setLngLat([coords.lng, coords.lat])
-          .addTo(map.current)
-        marker.push(m);
-        onChangeHandler(marker[0]._lngLat)
+    const createMarker = ({lng,lat}) => {
+        const marker1 = new mapboxgl.Marker()
+            .setLngLat([lng, lat])
+        if(markers.length !== 0){
+            markers.pop().remove();
+        }
+        markers.push(marker1);
+        markers[0].addTo(map.current);
     }
-    
-    useEffect(() => {
-        console.log('rendered')
-        if(!map.current) return;
-        map.current.on('click',(e) => {
-            addMarker(e.lngLat);
-        })
-    })
+
 
     useEffect(() => {
+        console.log('inside map render');
         setLoading(1);
-        (
-            async function(){
-                try{
-                    const res = await getLocation();
-                    console.log(res);
-                    const {latitude,longitude} = res.coords;
-                    setLat(latitude);
-                    setLng(longitude);
-                    // console.log('setting map',longitude,latitude)
-                    //settign map
-                    setLoading(0)
-                    // console.log(mapContainer.current)
-                    map.current = new mapboxgl.Map({
-                        container: mapContainer.current,
-                        style: 'mapbox://styles/mapbox/streets-v11',
-                        center: [longitude,latitude],
-                        zoom: zoom,
-                        pitch:69,
-                        bearing:-60
-                    })
-                    map.current.addControl(
-                        new MapboxGeocoder({
-                            accessToken:accessToken,
-                            mapboxgl: mapboxgl
-                        })
-                    );
-                }catch(err){
-                    console.log(err);
-                }
-            }
-            )()
-            return () => map.current.remove();
+        if(map.current) return;
+        map.current = new mapboxgl.Map({
+            container : mapContainer.current,
+            style : "mapbox://styles/mapbox/streets-v11",
+            center : [lng,lat],
+            zoom : zoom,
+            pitch:69,
+            bearing:-60
+        })
+        map.current.addControl(
+            new MapboxGeocoder({
+                accessToken:mapboxgl.accessToken,
+                mapboxgl: mapboxgl
+            })
+        );
+        map.current.on('click',(e) => {
+            console.log('clicked',e)
+            onChangeHandler(e.lngLat)
+            createMarker(e.lngLat);
+        })
+        setLoading(0);
+
+        // (
+        //     async function(){
+        //         try{
+        //             const res = await getLocation();
+        //             console.log(res);
+        //             const {latitude,longitude} = res.coords;
+        //             setLat(latitude);
+        //             setLng(longitude);
+        //             console.log('setting map',longitude,latitude)
+        //             //settign map
+        //             // console.log(mapContainer.current)
+        //             map.current = new mapboxgl.Map({
+        //                 container: mapContainer.current,
+        //                 style: 'mapbox://styles/mapbox/streets-v11',
+        //                 center: [longitude,latitude],
+        //                 zoom: zoom,
+        //                 pitch:69,
+        //                 bearing:-60
+        //             })
+        //             map.current.addControl(
+        //                 new MapboxGeocoder({
+        //                     accessToken:accessToken,
+        //                     mapboxgl: mapboxgl
+        //                 })
+        //                 );
+        //                 setLoading(0)
+        //             }catch(err){
+        //             console.log(err);
+        //             setLoading(0)
+        //         }
+        //     }
+        //     )()
+        return () => map?.current.remove();
+      
     },[]);
+
+    
 
     if(loading) return '...loading';
 
     return (
         <div className = "map-container-wrapper">
-            {/* <div className="sidebar">
-                Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
-            </div> */}
-            {/* {
-                setting && 
-                <div className="settingLoad">
-                    <FontAwesomeIcon className = "fa-spin" icon = {solid('spinner')} />
-                </div>
-            } */}
             <div className="map-container" ref = {mapContainer}>
             </div>
         </div>

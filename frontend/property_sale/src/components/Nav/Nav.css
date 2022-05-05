@@ -10,7 +10,7 @@ nav{
 }
 
 
-nav >*:nth-last-child(2){
+nav >*:nth-last-child(1){
     margin-left:auto;
 }
 
@@ -149,12 +149,32 @@ a.navBtnStyle{
 a.navBtnStyle:hover{
     box-shadow: var(--box-shadow-properties) rgb(202, 202, 202);
 }
-nav > a{
+nav  a{
     font-size:var(--fs-xl);
     text-decoration: none;
     font-weight:bold;
     margin:0 1em;
     color:var(--blue);
+}
+
+nav .links{
+    /* border:1px solid red; */
+    margin:auto;
+    width:90%;
+    max-width:600px;
+    display:flex;
+    justify-content: space-around;
+    text-transform:capitalize;
+}
+
+nav .links a{
+    opacity:.8;
+}
+
+
+nav .links a:hover{
+    opacity:1;
+    text-decoration: underline;
 }
 
 .mobileNav a{

@@ -13,7 +13,7 @@ export default function Maps({lat,lng}) {
     })
 
     console.log('inside map',lat,lng)
-
+    
     return (
        <>
         {
@@ -27,7 +27,7 @@ export default function Maps({lat,lng}) {
                     bearing:-60
                 }}
                 style={{width: '100%', height: '100%'}}
-                mapStyle="mapbox://styles/ash-ish/cl2dr2khz000715pjqat23url"
+                mapStyle="mapbox://styles/mapbox/streets-v11"
                 mapboxAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_KEY}
                 
             >

@@ -37,25 +37,28 @@ const axiosInstance = axios.create({
    })
 
 axiosInstance.interceptors.request.use(async req => {
-    console.log('interceptor called')
-    console.log('access token = ',accessToken)
-    console.log('acestoen = ',localStorage.getItem('access_token'))
+    // console.log('interceptor called')
+    // console.log('access token = ',accessToken)
+    // console.log('acestoen = ',localStorage.getItem('access_token'))
     if(!accessToken){
         accessToken = localStorage.getItem("access_token") ? localStorage.getItem("access_token") : null;
-        console.log('inside not accessTOken',accessToken)
+        // console.log('inside not accessTOken',accessToken)
         req.headers.Authorization = `Bearer ${accessToken}`
     }   
     const user = jwt_decode(accessToken);
-    console.log('user = ',user)
+    // console.log('user = ',user)
     const isExpired = dayjs.unix(user.exp).diff(dayjs()) < 1;
-    console.log(isExpired)
+    // console.log(isExpired)
     if(isExpired) console.log('expired')
     if(!isExpired) return req;
     
     try{
         let res = await axios.post(`${links.refreshTokenVerify}`,
             {refresh : refreshToken});
-        console.log(res);
+        // console.log(res);
+        localStorage.addItem('access_token',res.data.access);
+        // console.log('added token')
+        // localStorage.removeItem('refresh_token');
     }catch(err){
         localStorage.removeItem('access_token');
         localStorage.removeItem('refresh_token');

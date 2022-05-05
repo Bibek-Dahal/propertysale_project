@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,800;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,800;0,900;1,600&display=swap');
+
 *{
     padding:0;
     margin:0;
@@ -14,7 +16,7 @@ html{
 
 :root{
     --ff : 'Roboto', sans-serif;
-    --ff : 'Open Sans', sans-serif;
+    --ff : 'Poppins', sans-serif;
     --fs-largest : 2.5rem;
     --fs-xl:1rem;
     --fs-xxl:1.2rem;
@@ -58,7 +60,7 @@ html{
     --profile-image-large:8rem;
     --label-color : #62676bc5;
 
-    --card-width:350px;
+    --card-width:400px;
     --card-width-2 : auto;
     --card-img-height-2:150px;
     --card-height-2:fit-content;
@@ -72,6 +74,10 @@ html{
     --light-bold : 500;
 }
 
+
+.bold{
+    font-weight:var(--light-bold);
+}
 
 .sidebar {
     background-color: rgba(35, 55, 75, 0.9);

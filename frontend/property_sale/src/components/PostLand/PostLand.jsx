@@ -31,6 +31,8 @@ export default function PostLand() {
     const [keys,setKeys] = useState({})
 
     const [posting,setPosting] = useState(0);
+    const [errors,setErrors] = useState([]);
+    const [errorKeys,setErrorKeys] = useState([]);
 
     const temp = [1,2,3,4,5]
     const zone = [
@@ -175,6 +177,7 @@ export default function PostLand() {
     }
 
     const onMapChangeHandler = (location) => {
+        console.log('setting',location)
         setData(prev => {
             return{
                 ...prev,
@@ -302,8 +305,11 @@ export default function PostLand() {
                     setPosting(0);
                     navigate('/user/my-properties')
                 }catch(err){
-                    console.log(err);
+                    console.log(err.response.data);
+                    setErrors(Object.values(err.response.data))
+                    setErrorKeys(Object.keys(err.response.data))
                     setPosting(0);
+                    window.scroll(0,0)
                 }
             }
 
@@ -312,10 +318,9 @@ export default function PostLand() {
 
     return (
         <div className="post-container post-properties">
-          {
-              console.log('facility array = ',facility)
-          }
+            .
             <form onSubmit={submitHandler}>
+                
                     <div className="title">
                         <div className="go-back" onClick = {() => {
                             navigate('/user/post-properties/')
@@ -324,6 +329,24 @@ export default function PostLand() {
                         </div>
                         <p>{isLand ? "Land" : "House"}</p>
                     </div>
+                    {
+                        errors.length > 0 &&
+                        <ul className="errors">
+                            <div className="close" onClick={() => {setErrors([])}}>
+                                <FontAwesomeIcon icon = {solid('times')}/>
+                            </div>
+                            {
+                               errors.map((err,index) => {
+                                   return(
+                                       <li>
+                                           <span className = "errorKey">{errorKeys[index]}</span>
+                                            <span className = "errorValue">{err}</span>
+                                        </li>
+                                   )
+                               })
+                            }
+                        </ul>
+                    }
                     <div className="basic_details section">
                         <h1>Basic Details</h1>
                         <Input 

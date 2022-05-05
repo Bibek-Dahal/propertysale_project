@@ -10,7 +10,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axiosInstance from '../utils/axiosInstance';
 import axiosLinks from '../../axiosLinks';
 
-export default function Search() {
+export default function Search({type}) {
     const [coordinates,setCoordinates] = useState([]);
     const [properties,setProperties] = useState([]);
     const navigate = useNavigate();
@@ -21,18 +21,19 @@ export default function Search() {
 
     useEffect(() => {
         console.log('rendede');
+        setSearch(type)
         setProperties(prev => []);
         (
             async function(){
                 try{
                     let ps = [];
-                    let res = await axiosInstance.get(`${axiosLinks.searchHouseByType}${ search !== "" ? search : query}`);
+                    let res = await axiosInstance.get(`${axiosLinks.searchHouses}${ search !== "" ? search : query}`);
                     console.log(res);
                     const houses = res.data;
                     houses.forEach(h => h.type = "house");
                     ps = [...houses];
                     if(query != 'house-for-rent' && query != 'house-for-sale'){
-                        res =  await axiosInstance.get(`${axiosLinks.searchLandByType}${query}`);
+                        res =  await axiosInstance.get(`${axiosLinks.searchLands}${query}`);
                         const lands = res.data;
                         lands.forEach(l => l.type = "land");
                         ps = [...ps,...lands];
@@ -52,7 +53,7 @@ export default function Search() {
                 }
             }
         )()
-    },[query])
+    },[query,search,type])
 
     function submitHandler(e){
         e.preventDefault();
@@ -68,8 +69,8 @@ export default function Search() {
    <>
         <Nav />
         <div className="search">
-               <div className="search-container">
-                    <form className = "wrapper" action="" onSubmit = {submitHandler}>
+               <div className="search-container ">
+                    <form  className = "wrapper" action="" onSubmit = {submitHandler}>
                         <input type="text" placeholder='Enter address, zip, title, type.....' onChange = {(e) => {setSearch(e.target.value.split(" ").join("-"))}}/>
                         <button>
                             <FontAwesomeIcon  icon = {solid('search')} />
@@ -83,7 +84,7 @@ export default function Search() {
                {
                    properties.length > 0 && 
                    <div className="result">
-                       <h1>{query}</h1>
+                       <h1>Search result for : {query}</h1>
                         {
                             properties.map(property => {
                                 return <PropertyCard key = {property.id} property = {property} onClickHandlerForSearch = {onClickHandlerForSearch}/>
@@ -93,6 +94,13 @@ export default function Search() {
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque cum similique ratione ducimus dicta eum officia, esse ipsa dolor quo veniam laboriosam corporis facere deleniti culpa, nesciunt, modi soluta eveniet.
                         </div> */}
                     </div>
+               }
+               {
+                   properties.length === 0 &&
+                   <div className="result">
+                   <h1>Search result for : {query}</h1>
+                   no properties found
+                </div>
                }
         </div>
    </>

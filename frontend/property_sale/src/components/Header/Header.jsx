@@ -19,7 +19,7 @@ export default function Header() {
     <div className="header">
         <header className = "section-div wrapper">
         <div className="text ">
-            <h1>
+            <h1 className='bold'>
                 Find Property and Get Your Dream Space
             </h1>
             <div className="search-box">
