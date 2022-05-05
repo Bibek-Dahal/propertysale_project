@@ -9,7 +9,19 @@
 
 }
 
+.location svg{
+    font-size:1rem !important;
+    margin-right:.3em;
+}
+
 .card{
+}
+
+.card .info >*:first-child{
+    grid-column:1/-1;
+    text-transform: capitalize;
+    font-size:var(--fs-xxl);
+    margin-bottom:1em;
 }
 
 .card:hover{
@@ -45,14 +57,20 @@
 }
 
 .card .info{
-    display:grid;
+    /* display:grid;
     grid-template-columns:repeat(2,1fr);
     padding:1em;
-    grid-column-gap:1em;
-    grid-row-gap:2em;
-    padding-top:1em;
     position:relative;
-    z-index:1;
+    z-index:1; */
+    /* border:1px solid red; */
+    padding:1em;
+    display:grid;
+    grid-template-columns: repeat(2,1fr);
+    gap:.5em;
+}
+
+.card .info >*{
+    /* border:1px solid red; */
 }
 
 .card .details-small{
@@ -66,12 +84,12 @@
 }
 
 .card svg{
-    font-size:var(--fs-xxxl);
+    font-size:var(--fs-xxl);
 }
 
 .card .info .location,
 .card .info .price{
-    font-size:var(--fs-xxl);
+    font-size:var(--fs-xl);
     text-transform: capitalize;
     color:var(--blue-dark);
     font-weight: 500;

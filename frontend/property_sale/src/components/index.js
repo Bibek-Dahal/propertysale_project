@@ -18,6 +18,8 @@ import PostHouse from './PostHouse/PostHouse';
 import House from './House/House';
 import Land from './Land/Land';
 import Search from './Search/Search';
+import ListingPage from './ListingPage/ListingPage';
+import SearchBar from './SearchBar/SearchBar';
 
 export {
     InputField,
@@ -38,5 +40,7 @@ export {
     PostHouse,
     House,
     Land,
-    Search
+    Search,
+    ListingPage,
+    SearchBar
 }

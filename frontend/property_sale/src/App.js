@@ -22,7 +22,8 @@ import {
   PostHouse,
   House,
   Land,
-  Search
+  Search,
+  ListingPage
 } from './components/index'
 
 import PrivateRoute from './components/utils/PrivateRoute';
@@ -33,9 +34,6 @@ import ScrollToTop from './components/utils/ScrollToTop';
 
 function App() {
   const {PopupVisible} = usePopup();
-  {
-    console.log('token = ',process.env)
-  }
   return (
     <div className="App">
       <Modal/>
@@ -97,6 +95,9 @@ function App() {
             } />
             <Route path = "/search/:query" element = {
                 <Search />
+            } />
+            <Route path = "/:listingType" element = {
+              <ListingPage />
             } />
           </Routes>
         </ScrollToTop>

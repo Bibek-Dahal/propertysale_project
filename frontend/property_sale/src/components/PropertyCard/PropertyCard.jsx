@@ -26,26 +26,45 @@ export default function PropertyCard({property,onClickHandlerForSearch}) {
                 <img src={`${getImage}${property.main_image}`} alt="" />
             </div>
             <div className="info">
+                <div className="title">
+                    {property.title}
+                </div>
                 <div className="location">
+                    <FontAwesomeIcon icon = {solid('location-pin')}  />
                     {property.district}
                 </div>
                 <div className="price">
                     {property.price_in_number}
                 </div>
-                <div className="details-small">
-                    <div className="beds">
-                        <FontAwesomeIcon  icon={solid('bed')} />
-                        {property.beds}
+                {
+                    property.type === "house" &&
+                    <div className="details-small">
+                        <div className="beds">
+                            <FontAwesomeIcon  icon={solid('bed')} />
+                            {property.beds}
+                        </div>
+                        <div className="baths">
+                            <FontAwesomeIcon icon = {solid('bath')} />
+                            {property.bath}
+                        </div>
+                        <div className="kitchen">
+                            <FontAwesomeIcon icon = {solid('kitchen-set')} />
+                            {property.kitchen}
+                        </div>
                     </div>
-                    <div className="baths">
-                        <FontAwesomeIcon icon = {solid('bath')} />
-                        {property.bath}
+                }
+                {
+                    property.type === "land" &&
+                    <div className="details-small">
+                        <span className="area">{property.area}</span>
+                        <div className="numbers">
+                            <span className="ropani">{property.ropani}</span>-
+                            <span className="aana">{property.aana}</span>-
+                            <span className="paisa">{property.paisa}</span>-
+                            <span className="daam">{property.daam}</span>
+                        </div>
                     </div>
-                    <div className="kitchen">
-                        <FontAwesomeIcon icon = {solid('kitchen-set')} />
-                        {property.kitchen}
-                    </div>
-                </div>
+                }
             </div>
         </div>
     )

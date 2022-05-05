@@ -1,7 +1,7 @@
 .search{
     /* border:1px solid red; */
     display:grid;
-    grid-template-columns:1fr 600px;
+    grid-template-columns:1fr 700px;
     /* height:calc(100vh - var(--nav-height)); */
     /* background:#F2F4F7; */
     /* position:fixed; */
@@ -22,15 +22,22 @@
     display:flex;
     align-items: center;
     gap:1em;
-    padding-left:1em;
+    padding-left:3em;
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
 }
 
 .search .map{
     height:calc(100vh - var(--nav-height))
 }
 
-.search .search-container{
-    /* grid-column: 2/2; */
+.search .search-container form{
+    /* grid-column: 1/-1; */
+    
+    /* border:1px solid red; */
+    /* align-self: start; */
+    /* justify-self: start; */
 }
 
 .search .result{
@@ -45,8 +52,6 @@
     padding: .5em;
     align-content:start;
 }
-
-
 
 .search .search-container input{
     padding:.8em 1em;
@@ -94,7 +99,7 @@
 .search .result .card{
     border-radius:0 !important;
     /* border:1px solid red; */
-    width:100%;
+    /* width:100%; */
 }
 
 .search .result .card .info{
@@ -126,11 +131,17 @@
     text-transform: capitalize;
     margin:.5em 0 1em;
     padding:.5em;
-    background:var(--blue-dark);
+    /* background:var(--blue-dark); */
     font-weight:500;
-    color:white;
-    border-radius:5px;
-    box-shadow:0 2px 10px rgb(172, 172, 172);
+    /* color:white; */
+    font-size:var(--fs-xxl);
+    /* border-radius:5px; */
+    /* box-shadow:0 2px 10px rgb(172, 172, 172); */
+    border-bottom:1px solid rgba(128, 128, 128, 0.459);
+}
+
+.search .result h1:before{
+
 }
 
 .search .result .card .info >*,
@@ -151,6 +162,15 @@
     grid-column:1/-1;
 }
 
+.mapboxgl-popup-content{
+    /* height:300px; */
+    /* width:300px; */
+    /* width:fit-content; */
+    font-size:1rem;
+    text-align: center;
+    min-width:300px;
+}
+
 .mapboxgl-popup-close-button{
     padding:.5em !important;
     height:30px;
@@ -163,11 +183,13 @@
 
 .mapboxgl-popup-content >*:first-child span{
     display:block;
-    text-align: center;
     text-transform: capitalize;
+    line-height:1.2;
+    margin:1em;
 }
 
 .mapboxgl-popup-content >*:first-child > span.title{
     font-weight:800;
     color:var(--blue-dark);
 }
+

@@ -37,7 +37,10 @@ const links = {
     searchHouseByType : `${baseURL}/api/property/house/`,
     changePassword : `${baseURL}/api/account/password/change/`,
     noOfViewsHouse : `${wsURL}/ws/house/`,
-    noOfViewsLand : `${wsURL}/ws/land/`
+    noOfViewsLand : `${wsURL}/ws/land/`,
+    searchLands : `${baseURL}/api/property/land/all/?search=`,
+    searchHouses : `${baseURL}/api/property/house/all/?search=`,
+    listingNotification : `${wsURL}/ws/property/`
 }
 
 export default links;

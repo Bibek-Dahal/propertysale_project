@@ -51,7 +51,7 @@ export default function Listing({type,properties,isLoading}) {
             className={`listing section-div ${type}`}
         >
             <div className="wrapper" ref = {carousel}>
-                <h2>{type}</h2>
+                <h2 className = "bold"  >{type}</h2>
                 <div className="items" ref = {container}>
                     {
                         properties.map(property => {

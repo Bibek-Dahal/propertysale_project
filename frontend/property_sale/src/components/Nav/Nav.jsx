@@ -41,6 +41,17 @@ export default function Nav() {
                     <FontAwesomeIcon icon = {solid('bars')}/>
                 </label>
             }
+               <div className="links">
+                    <Link to = "/top-listing">
+                        <span>top listing</span>
+                    </Link>
+                    <Link to = "/premium-listing">
+                        <span>premium listing</span>
+                    </Link>
+                    <Link to = "/featured-listing">
+                        <span>featured listing</span>
+                    </Link>
+               </div>
            {
                state.user && 
                     <MyLink to = "/user/profile" className = "profileIcon navBtnStyle">
@@ -49,7 +60,8 @@ export default function Nav() {
                             {state.user.username}
                         </span>
 
-                    </MyLink>}
+                    </MyLink>
+            }
             
             {
                 !state?.user &&
