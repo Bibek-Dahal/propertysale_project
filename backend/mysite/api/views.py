@@ -380,8 +380,23 @@ class UpdateLandStatus(APIView):
         raise Http404
 
 
-class RetriveUserByIdView(RetrieveAPIView):
-    queryset = User.objects.all()
+# class RetriveUserByIdView(RetrieveAPIView):
+#     queryset = User.objects.all()
+#     permission_classes = (IsAuthenticated,)
+#     serializer_class = UserSerializer
+
+class RetriveUserByIdView(APIView):
     permission_classes = (IsAuthenticated,)
-    serializer_class = UserSerializer
+
+    def get(self,request,*args,**kwargs):
+        user = User.objects.get(id=self.kwargs.get('id'))
+        user_serializer = UserSerializer(user)
+        kyc_obj = get_object_or_404(KYC,user=user)
+        # print(kyc_obj)
+        contact_nums = kyc_obj.contact_nums.all()
+        contact_num_serializer = ContactNumSerializer(contact_nums,many=True)
+        new_serializer = user_serializer.data
+        new_serializer['contact_num'] = contact_num_serializer.data
+        return Response(new_serializer)
+    
 
