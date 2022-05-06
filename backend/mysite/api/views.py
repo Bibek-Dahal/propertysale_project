@@ -169,7 +169,7 @@ class HouseListView(ListAPIView):
     queryset = House.properties.all()
     serializer_class = HouseSerializer
     filter_backends = [filters.SearchFilter]
-    search_fields = ['title', 'longitude','latitude']
+    search_fields = [ 'longitude','latitude','slug','title']
     # ordering_fields = ['price_in_number']
 
     def get_queryset(self):
@@ -186,7 +186,7 @@ class LandListView(ListAPIView):
     queryset = Land.properties.all()
     serializer_class = LandSerializer
     filter_backends = [filters.SearchFilter]
-    search_fields = ['title', 'longitude','latitude']
+    search_fields = [ 'longitude','latitude','slug','title']
 
     def get_queryset(self):
         q = self.request.query_params.get('ordering')
@@ -380,8 +380,23 @@ class UpdateLandStatus(APIView):
         raise Http404
 
 
-class RetriveUserByIdView(RetrieveAPIView):
-    queryset = User.objects.all()
+# class RetriveUserByIdView(RetrieveAPIView):
+#     queryset = User.objects.all()
+#     permission_classes = (IsAuthenticated,)
+#     serializer_class = UserSerializer
+
+class RetriveUserByIdView(APIView):
     permission_classes = (IsAuthenticated,)
-    serializer_class = UserSerializer
+
+    def get(self,request,*args,**kwargs):
+        user = User.objects.get(id=self.kwargs.get('id'))
+        user_serializer = UserSerializer(user)
+        kyc_obj = get_object_or_404(KYC,user=user)
+        # print(kyc_obj)
+        contact_nums = kyc_obj.contact_nums.all()
+        contact_num_serializer = ContactNumSerializer(contact_nums,many=True)
+        new_serializer = user_serializer.data
+        new_serializer['contact_num'] = contact_num_serializer.data
+        return Response(new_serializer)
+    
 

@@ -40,7 +40,8 @@ const links = {
     noOfViewsLand : `${wsURL}/ws/land/`,
     searchLands : `${baseURL}/api/property/land/all/?search=`,
     searchHouses : `${baseURL}/api/property/house/all/?search=`,
-    listingNotification : `${wsURL}/ws/property/`
+    listingNotification : `${wsURL}/ws/property/`,
+    retriveUserById : `${baseURL}/api/retrive-user-by-id/`
 }
 
 export default links;

@@ -425,7 +425,40 @@
     align-items: center;
 }
 
+
+
 .facility svg{
     color:green;
     font-size:var(--fs-xxxl);
+}
+
+.contact-description > div{
+    /* background:pink; */
+    display:flex;
+    gap:1em;
+    flex-direction: column;
+}
+
+
+.contact-description > div >*{
+    display:flex;
+    /* gap:1em; */
+}
+
+.contact-description > div >* *:first-child{
+    position:relative;
+    margin-right:2em;
+}
+
+.contact-description > div >* >*:first-child:after{
+    content : ":";
+    position:absolute;
+    right:-1em    
+}
+
+
+
+.contact-description .kycError{
+    font-size:var(--fs-xxl);
+    color:red;
 }

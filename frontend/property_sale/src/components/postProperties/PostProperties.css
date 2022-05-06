@@ -36,6 +36,25 @@
 .ck-toolbar__items > button{
     font-size: .9rem !important;
 }
+
+.post-container label{
+    /* position:absolute; */
+}
+
+.post-container h1{
+    position:relative;
+    width:fit-content !important;
+    /* border:1px solid red; */
+}
+
+.post-container h1:before{
+    content : "*";
+    color:red;
+    position:absolute;
+    left:-.5em;
+    top:-.5em;
+}
+
 .section .area,
 .section .small-details{
     display:flex;

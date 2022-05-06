@@ -8,30 +8,31 @@ import axios from 'axios';
 import Header from '../Header/Header';
 import Listing from '../Listing/Listing';
 import Footer from '../Footer/Footer';
+import { usePopup } from '../../Hooks';
 
 export default function Home() {
   const {state,checkAndRemoveToken} = useAuth();
   const [properties,setProperties] = useState([
   
   ]);
+  const {showPopup} = usePopup();
+
   const [isLoading,setIsLoading] = useState(0);
   useEffect(() => {
-
     let ws;
-        ws = new WebSocket(`${axiosLinks.listingNotification}`);
-        ws.onopen = () => {
-            console.log('connnected')
-        }
-        ws.onmessage = (msg) => {
-          
-            console.log(msg.data)
-            // setViews(JSON.parse(msg.data).message);
-            //    console.log(msg)
-        //    showPopup(`Your kyc is ${JSON.parse(msg.data).message}`)
-        }
-        ws.onclose = (msg) => {
-            console.log('connection closed')
-        }
+      ws = new WebSocket(`${axiosLinks.listingNotification}`);
+      ws.onopen = () => {
+          console.log('connnected')
+      }
+      ws.onmessage = (msg) => {
+        console.log(msg.data)
+        // setViews(JSON.parse(msg.data).message);
+        //    console.log(msg)
+        showPopup(JSON.parse(msg.data).message)
+      }
+      ws.onclose = (msg) => {
+          console.log('connection closed')
+      }
 
     setIsLoading(1);
     (
