@@ -20,6 +20,7 @@ export default function House() {
     const [active,setActive] = useState("overview");
     const [seller,setSeller] = useState({});
     const [views,setViews] = useState(0);
+    const [kycStatus,setKycStatus] = useState("");
 
     const infoToggler = (e) => {
         setActive(e.target.dataset.info);
@@ -43,15 +44,22 @@ export default function House() {
 
         (
             async function(){
+                console.log('getting house')
                 try{
                     let res = await axiosInstance.get(`${axiosLinks.getHouse}${id}`);
-                    console.log(res);
+                    console.log('house = ',res);
                     setHouse(prev => res.data);
                     const house = res.data;
                     // res = await axiosInstance.get(`${axiosLinks.retriveUser}/${res.data.seller}/`);
                     // setSeller(res.data);
                     res = await axiosInstance.get(`${axiosLinks.retriveUserById}${house.seller}`);
-                    console.log(res)
+                    console.log('seller = ',res)
+                    setSeller(res.data);
+                    
+                    res = await axiosInstance.get(`${axiosLinks.retriveKyc}`);
+                    console.log('kyc = ',res)
+                    setKycStatus(res.data.status);
+                    
                 }catch(err){
                     console.log(err);
                 }      
@@ -281,7 +289,38 @@ export default function House() {
                                 active === 'contact' &&
                                 <div className="contact-description">
                                     {
-
+                                        kycStatus === "verified" ? (
+                                                seller &&
+                                                    <div>
+                                                        <div className="name">
+                                                            <div>
+                                                                name
+                                                            </div>
+                                                            <div>
+                                                                    {seller.first_name} {seller.last_name}
+                                                            </div>
+                                                        </div>
+                                                        <ul className="phone">
+                                                            <div>Phone</div>
+                                                            <div>
+                                                            {
+                                                                seller.contact_num?.map(phone => {
+                                                                    return <li>{phone.mobile_num}</li>
+                                                                })
+                                                            }
+                                                            </div>
+                                                        </ul>
+                                                        <div className="email">
+                                                            <span>email</span>
+                                                            <span>{seller.email}</span>
+                                                        </div>
+                                                    </div>
+                                        ):(
+                                            <div className = "kycError">
+                                                kyc not verified. <br/> Wait for it to see this contact info.
+                                            </div>
+                                        )
+                                       
                                     }
                                 </div>
                             }
