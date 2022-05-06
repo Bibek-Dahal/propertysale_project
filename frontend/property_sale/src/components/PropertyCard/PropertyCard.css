@@ -71,6 +71,7 @@
 
 .card .info >*{
     /* border:1px solid red; */
+    text-align:left;
 }
 
 .card .details-small{
@@ -93,12 +94,15 @@
     text-transform: capitalize;
     color:var(--blue-dark);
     font-weight: 500;
+    /* border:1px solid red; */
+    text-align:left;
+
 }
 
 .card .details-small >*{
     display:flex;
     gap:.5em;
-    align-items: center;
+    /* align-items: center; */
 }
 
 .card .details-small {

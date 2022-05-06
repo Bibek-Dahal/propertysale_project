@@ -41,9 +41,9 @@ function App() {
         <ScrollToTop>
           <Routes>
             <Route path = "/" element = {
-              <PublicRoute>
+              <PrivateRoute>
                 <Home />
-              </PublicRoute>
+              </PrivateRoute>
             } />
             <Route path = "/login" element = {
               <ProtectedRoute>

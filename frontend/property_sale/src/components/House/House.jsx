@@ -47,9 +47,11 @@ export default function House() {
                     let res = await axiosInstance.get(`${axiosLinks.getHouse}${id}`);
                     console.log(res);
                     setHouse(prev => res.data);
+                    const house = res.data;
                     // res = await axiosInstance.get(`${axiosLinks.retriveUser}/${res.data.seller}/`);
                     // setSeller(res.data);
-                    res = await axiosInstance.get(``)
+                    res = await axiosInstance.get(`${axiosLinks.retriveUserById}${house.seller}`);
+                    console.log(res)
                 }catch(err){
                     console.log(err);
                 }      
@@ -278,8 +280,8 @@ export default function House() {
                             {
                                 active === 'contact' &&
                                 <div className="contact-description">
-                                    seller is of id {
-                                        house?.seller
+                                    {
+
                                     }
                                 </div>
                             }

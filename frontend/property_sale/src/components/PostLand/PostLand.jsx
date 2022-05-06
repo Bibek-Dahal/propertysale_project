@@ -6,7 +6,7 @@ import Select from '../postProperties/Select/Select';
 import axiosInstance from '../utils/axiosInstance';
 import axiosLinks from '../../axiosLinks';
 import Drop from '../postProperties/Drop';
-import { useAuth } from '../../Hooks';
+import { useAuth, usePopup } from '../../Hooks';
 import Maps from '../Map/Map';
 import { useLoadScript } from '@react-google-maps/api';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -33,6 +33,7 @@ export default function PostLand() {
     const [posting,setPosting] = useState(0);
     const [errors,setErrors] = useState([]);
     const [errorKeys,setErrorKeys] = useState([]);
+    const {showPopup} = usePopup();
 
     const temp = [1,2,3,4,5]
     const zone = [
@@ -223,15 +224,15 @@ export default function PostLand() {
 
         (
             async function(){
-            try{
-                const res = await axiosInstance.get(axiosLinks.foreignKeys)
-                console.log(res)
-                setKeys(prev => {
-                    return res.data
-                })
-            }catch(err){
-                console.log(err)
-            }
+                try{
+                    const res = await axiosInstance.get(axiosLinks.foreignKeys)
+                    console.log(res)
+                    setKeys(prev => {
+                        return res.data
+                    })
+                }catch(err){
+                    console.log(err)
+                }
             }
         )()
             
@@ -255,10 +256,22 @@ export default function PostLand() {
             }
         })
     }
+    
+    const validateForm = (data) => {
+        console.log('validaing',data);
+    }
 
     const submitHandler = (e) => {
         e.preventDefault();
         console.log(data);
+
+        if(validateForm(data) === false){
+            window.scroll(0,0);
+            console.log('error occured');
+            showPopup('some fields are empty','error')
+            return;
+        }
+
         const postUrl = isLand ? axiosLinks.postLand : axiosLinks.postHouse;
         console.log(data)
         const temp = {...data};
@@ -318,7 +331,7 @@ export default function PostLand() {
 
     return (
         <div className="post-container post-properties">
-            .
+            
             <form onSubmit={submitHandler}>
                 
                     <div className="title">
