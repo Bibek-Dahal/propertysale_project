@@ -136,3 +136,8 @@ class UpdateLandStatusSerializer(serializers.ModelSerializer):
     class Meta:
         model = Land
         fields = ('status',)
+
+class ContactNumSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ContactNum
+        fields = ('mobile_num',)
