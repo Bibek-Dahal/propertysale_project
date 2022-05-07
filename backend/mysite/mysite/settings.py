@@ -91,12 +91,43 @@ ASGI_APPLICATION = "mysite.asgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+DB = 'mysql' 
+
+if DB == 'mysql':
+    #Mysql Configurations
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': config('DBNAME'),
+            'USER': config('DBUSER'),
+            'PASSWORD':config('DBPASSWORD'),
+            'HOST': config('DBHOST'),
+            'PORT': config('DBPORT'),
+        }
     }
-}
+elif DB == 'sqlite3':
+        DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+elif DB == 'psql':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': config('DBNAME'),
+            'USER': config('PSQLDBUSER'),
+            'PASSWORD':config('DBPASSWORD'),
+            'HOST': config('DBHOST'),
+            'PORT': config('PSQLDBPORT'),
+        }
+    }
+
+
+
+
+
 
 
 # Password validation

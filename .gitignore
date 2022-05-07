@@ -33,3 +33,4 @@ env/
 
 # django-requirement-for-linux
 requirements_for_only_ashish.txt
+datadump.json
