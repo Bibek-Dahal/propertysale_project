@@ -41,7 +41,8 @@ const links = {
     searchLands : `${baseURL}/api/property/land/all/?search=`,
     searchHouses : `${baseURL}/api/property/house/all/?search=`,
     listingNotification : `${wsURL}/ws/property/`,
-    retriveUserById : `${baseURL}/api/retrive-user-by-id/`
+    retriveUserById : `${baseURL}/api/retrive-user-by-id/`,
+    genAccessToken : `${baseURL}/api/account/token/refresh/`
 }
 
 export default links;

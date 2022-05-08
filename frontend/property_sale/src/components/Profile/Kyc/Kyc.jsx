@@ -74,14 +74,15 @@ export default function Kyc({setIsLoading}) {
       delete data.status
       console.log('final data',data)
       try{
-        const res = await axios.patch(axoisLinks.updateKyc,
+        const res = await axiosInstance.patch(axoisLinks.updateKyc,
           formData,
-          {
-          headers : {
-            'Authorization' : `Bearer ${state.access_token}`
-            // 'Content-Type' : 'multipart/form-data'
-          }
-        })
+          // {
+          // headers : {
+          //   'Authorization' : `Bearer ${state.access_token}`
+          //   // 'Content-Type' : 'multipart/form-data'
+          // }
+        // }
+        )
         console.log(res)
         showPopup(`kyc updated successfully`)
         setIsLoading(0);
@@ -130,13 +131,14 @@ export default function Kyc({setIsLoading}) {
 
     async function create(){
       try{
-        const res = await axios.post(axoisLinks.createKyc,
+        const res = await axiosInstance.post(axoisLinks.createKyc,
           formData,
-          {
-          headers : {
-            'Authorization' : `Bearer ${state.access_token}`
-          }
-        })
+        //   {
+        //   headers : {
+        //     'Authorization' : `Bearer ${state.access_token}`
+        //   }
+        // }
+        )
         console.log('submitted kyc')
         console.log(res);
         showPopup('kyc submitted successfully')
