@@ -1,13 +1,14 @@
 import React,{useState} from 'react'
 import { Link } from 'react-router-dom'
 import Select from './Select'
-import axiosInstance from '../utils/axiosInstance'
+// import axiosInstance from '../utils/axiosInstance'
 import axiosLinks from '../../axiosLinks';
 import { usePopup } from '../../Hooks';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {solid} from '@fortawesome/fontawesome-svg-core/import.macro';
-
+import useAxios from '../../Hooks/useAxios.js'
 export default function HouseItem({info}) {
+    const axiosInstance = useAxios();
 
     const {showPopup} = usePopup()
     const [isVisible,setIsVisible] = useState(info.status && info.status.toLowerCase() === "up");

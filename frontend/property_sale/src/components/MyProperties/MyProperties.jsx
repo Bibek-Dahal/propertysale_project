@@ -3,14 +3,15 @@ import { useState } from 'react';
 import { useEffect } from 'react'
 import { useAuth } from '../../Hooks';
 import { FullScreenLoading } from '../shared';
-import axiosInstance from '../utils/axiosInstance';
+// import axiosInstance from '../utils/axiosInstance';
 import HouseItem from './HouseItem';
 import LandItem from './LandItem';
 import axiosLinks from '../../axiosLinks';
-
+import useAxios from '../../Hooks/useAxios.js';
 import './MyProperties.css';
 
 export default function MyProperties() {
+  const axiosInstance = useAxios();
   const [houses,setHouses] = useState([])
   const [lands,setLands] = useState([])
   const [isLoading,setIsLoading] = useState(0);

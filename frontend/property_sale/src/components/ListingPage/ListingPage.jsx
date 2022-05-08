@@ -1,14 +1,16 @@
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { Nav, SearchBar } from '..'
-import axiosInstance from '../utils/axiosInstance'
+// import axiosInstance from '../utils/axiosInstance'
 import axiosLinks from '../../axiosLinks';
 import { useState } from 'react';
 import PropertyCard from '../PropertyCard/PropertyCard';
 import './ListingPage.css';
 import { FullScreenLoading } from '../shared';
+import useAxios from '../../Hooks/useAxios';
 
 export default function ListingPage() {
+    const axiosInstance = useAxios();
     const {listingType} = useParams();
     const [isLoading,setIsLoading] = useState(0);
     const [houses,setHouses] = useState([]);

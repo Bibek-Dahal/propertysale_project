@@ -11,11 +11,13 @@ import {solid} from '@fortawesome/fontawesome-svg-core/import.macro';
 import FileField from './FileField';
 import Input from '../Input/Input';
 import { useNavigate } from 'react-router-dom';
-import axiosInstance from '../../utils/axiosInstance';
+// import axiosInstance from '../../utils/axiosInstance';
 import { FullScreenLoading } from '../../shared';
 import Button from '@mui/material/Button';
+import useAxios from '../../../Hooks/useAxios.js';
 
 export default function Kyc({setIsLoading}) {
+  const axiosInstance = useAxios();
   const {state} = useAuth();
   const [kycExists,setKycExists] = useState(0);
   const formRef = useRef(null);
@@ -164,7 +166,7 @@ export default function Kyc({setIsLoading}) {
  
   useEffect(() => {
     (async function(){
-      try{
+      
         const res = await axiosInstance.get(axoisLinks.retriveUser)
         // console.log('required',res);
         if(res.data.kyc_status !== null){
@@ -185,9 +187,7 @@ export default function Kyc({setIsLoading}) {
           })
           setIsLoading(0);
           // console.log(res.data)
-        }
-      }catch(err){
-        console.log('error : ',err);
+        
       }
     })()
 

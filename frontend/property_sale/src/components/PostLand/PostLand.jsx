@@ -3,7 +3,7 @@ import Input from '../postProperties/Input/Input'
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import Select from '../postProperties/Select/Select';
-import axiosInstance from '../utils/axiosInstance';
+// import axiosInstance from '../utils/axiosInstance';
 import axiosLinks from '../../axiosLinks';
 import Drop from '../postProperties/Drop';
 import { useAuth, usePopup } from '../../Hooks';
@@ -14,10 +14,11 @@ import {solid} from '@fortawesome/fontawesome-svg-core/import.macro'
 import { useNavigate } from 'react-router-dom';
 import { FullScreenLoading } from '../shared';
 import { TextField } from '@mui/material';
-
+import useAxios from '../../Hooks/useAxios';
 
 
 export default function PostLand() {
+    const axiosInstance = useAxios();
 
     const [isLand,setIsLand] = useState(1);
     const navigate = useNavigate();

@@ -2,12 +2,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react'
 import './ChangePassword.css';
 import {solid} from '@fortawesome/fontawesome-svg-core/import.macro';
-import axiosInstance from '../utils/axiosInstance';
+// import axiosInstance from '../utils/axiosInstance';
 import axiosLinks from '../../axiosLinks';
 import { useAuth, usePopup } from '../../Hooks';
 import Illustration from './Security';
-
+import useAxios from '../../Hooks/useAxios.js'
 export default function ChangePassword() {
+  const axiosInstance = useAxios();
   const [data,setData] = React.useState({
     old_password : "",
     new_password1 : "",
