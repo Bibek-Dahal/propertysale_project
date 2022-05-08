@@ -91,7 +91,7 @@ ASGI_APPLICATION = "mysite.asgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DB = 'mysql' 
+DB = 'sqlite3' 
 
 if DB == 'mysql':
     #Mysql Configurations
