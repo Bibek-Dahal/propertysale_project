@@ -10,9 +10,11 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {solid} from '@fortawesome/fontawesome-svg-core/import.macro';
 import getImage from '../../../impLinks';
 import Button from '@mui/material/Button';
-import axiosInstance from '../../utils/axiosInstance';
+// import axiosInstance from '../../utils/axiosInstance';
+import useAxios from '../../../Hooks/useAxios.js';
 
 export default function Personal({setIsLoading}) {
+    const axiosInstance = useAxios();
     const {state} = useAuth();
     const {showPopup} = usePopup();
 

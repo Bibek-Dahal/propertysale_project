@@ -91,7 +91,7 @@ ASGI_APPLICATION = "mysite.asgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DB = 'mysql' 
+DB = 'sqlite3' 
 
 if DB == 'mysql':
     #Mysql Configurations
@@ -203,7 +203,7 @@ REST_USE_JWT = True
 # JWT_AUTH_COOKIE = 'my-app-auth'
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
+    'ACCESS_TOKEN_LIFETIME': timedelta(seconds=5),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=15),
     'ROTATE_REFRESH_TOKENS': False,
     'BLACKLIST_AFTER_ROTATION': True,

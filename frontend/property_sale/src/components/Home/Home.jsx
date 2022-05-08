@@ -2,15 +2,17 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import useAuth from '../../Hooks/useAuth';
 import {Nav} from '../index';
-import axiosInstance from '../utils/axiosInstance';
+// import axiosInstance from '../utils/axiosInstance';
 import axiosLinks from '../../axiosLinks';
 import axios from 'axios';
 import Header from '../Header/Header';
 import Listing from '../Listing/Listing';
 import Footer from '../Footer/Footer';
 import { usePopup } from '../../Hooks';
+import useAxios from '../../Hooks/useAxios';
 
 export default function Home() {
+  const axiosInstance = useAxios();
   const {state,checkAndRemoveToken} = useAuth();
   const [properties,setProperties] = useState([
   
@@ -19,7 +21,7 @@ export default function Home() {
 
   const [isLoading,setIsLoading] = useState(0);
   useEffect(() => {
-    let ws;
+    /*let ws;
       ws = new WebSocket(`${axiosLinks.listingNotification}`);
       ws.onopen = () => {
           console.log('connnected')
@@ -34,7 +36,7 @@ export default function Home() {
           console.log('connection closed')
       }
 
-    setIsLoading(1);
+    setIsLoading(1);*/
     (
       async function(){
         try{

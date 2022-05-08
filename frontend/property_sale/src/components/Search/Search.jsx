@@ -7,10 +7,12 @@ import Map from './Map';
 import PropertyCard from '../PropertyCard/PropertyCard';
 import {properties} from './properties';
 import { useNavigate, useParams } from 'react-router-dom';
-import axiosInstance from '../utils/axiosInstance';
+// import axiosInstance from '../utils/axiosInstance';
 import axiosLinks from '../../axiosLinks';
+import useAxios from '../../Hooks/useAxios';
 
 export default function Search({type}) {
+    const axiosInstance = useAxios();
     const [coordinates,setCoordinates] = useState([]);
     const [properties,setProperties] = useState([]);
     const navigate = useNavigate();

@@ -4,8 +4,10 @@ import axiosLinks from '../../axiosLinks';
 import axiosInstance from '../utils/axiosInstance';
 import './PostProperties.css';
 import NotVerified from './NotVerified';
+import useAxios from '../../Hooks/useAxios';
 
 export default function PostProperties() {
+  const axiosInstance = useAxios();
 
   const [keys,setKeys] = useState({})
   const [isVerified,setIsVerfied] = useState(0);

@@ -1,5 +1,5 @@
 import React,{useEffect,useState,useRef} from 'react'
-import axiosInstance from '../utils/axiosInstance';
+// import axiosInstance from '../utils/axiosInstance';
 import axiosLinks from '../../axiosLinks';
 import impLinks from '../../impLinks';
 import { Nav } from '..';
@@ -8,8 +8,10 @@ import {solid} from '@fortawesome/fontawesome-svg-core/import.macro';
 import Map from '../House/Map';
 import { useParams } from 'react-router-dom';
 import HtmlReactParser from 'html-react-parser';
+import useAxios from '../../Hooks/useAxios';
 
 export default function Land() {
+    const axiosInstance = useAxios();
   const description = useRef(null);
   const {id} = useParams();
   const [land,setLand] = useState([])

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useEffect,useState,useRef } from 'react';
 import { useParams } from 'react-router-dom'
-import axiosInstance from '../utils/axiosInstance';
+// import axiosInstance from '../utils/axiosInstance';
 import axiosLinks from '../../axiosLinks';
 import GoBack from './GoBack';
 import impLinks from '../../impLinks';
@@ -12,8 +12,10 @@ import Nav from '../Nav/Nav';
 import { text } from '@fortawesome/fontawesome-svg-core';
 import Map from './Map';
 import HtmlReactParser from 'html-react-parser';
+import useAxios from '../../Hooks/useAxios';
 
 export default function House() {
+    const axiosInstance = useAxios();
     const description = useRef(null);
     const {id} = useParams();
     const [house,setHouse] = useState({});

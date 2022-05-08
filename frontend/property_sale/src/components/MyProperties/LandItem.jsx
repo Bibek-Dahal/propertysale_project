@@ -2,12 +2,13 @@ import React,{useState} from 'react'
 import { Link } from 'react-router-dom'
 import Select from './Select'
 import axiosLinks from '../../axiosLinks';
-import axiosInstance from '../utils/axiosInstance';
+// import axiosInstance from '../utils/axiosInstance';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {solid} from '@fortawesome/fontawesome-svg-core/import.macro';
 import { usePopup } from '../../Hooks';
-
+import useAxios from '../../Hooks/useAxios.js';
 export default function LandItem({info}) {
+    const axiosInstance = useAxios();
     const [isVisible,setIsVisible] = useState(info.status && info.status.toLowerCase() === "up");
     const {showPopup} = usePopup();
     
