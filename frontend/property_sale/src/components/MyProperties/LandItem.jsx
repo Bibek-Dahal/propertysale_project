@@ -34,7 +34,7 @@ export default function LandItem({info}) {
     <>
         <tr className="item item-house">
         <td className="title">
-            <Link to = {`${info.id}`}>{info.title}</Link>
+            <Link to = {`/my-properties/land/${info.id}`}>{info.title}</Link>
         </td>
         <td className={`is_visible `}>
             <div className = {`visible ${(info.is_active && isVisible) ? "yes-visible" : "not-visible"}`}>

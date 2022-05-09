@@ -275,6 +275,7 @@ class RetriveUserHouseView(RetrieveAPIView):
         try:
             obj = House.objects.get(id=pk)
             if obj.seller == self.request.user:
+                print('inside try')
                 return House.objects.filter(id=pk)
             raise Http404
         except:

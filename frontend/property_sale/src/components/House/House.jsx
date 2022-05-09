@@ -48,19 +48,37 @@ export default function House() {
             async function(){
                 console.log('getting house')
                 try{
-                    let res = await axiosInstance.get(`${axiosLinks.getHouse}${id}`);
-                    console.log('house = ',res);
-                    setHouse(prev => res.data);
-                    const house = res.data;
-                    // res = await axiosInstance.get(`${axiosLinks.retriveUser}/${res.data.seller}/`);
-                    // setSeller(res.data);
-                    res = await axiosInstance.get(`${axiosLinks.retriveUserById}${house.seller}`);
-                    console.log('seller = ',res)
-                    setSeller(res.data);
+                    console.log(window.location.pathname == `/my-properties/house/${id}`);
+                    if(window.location.pathname == `/my-properties/house/${id}`){
+                        let res = await axiosInstance.get(`${axiosLinks.retUserHouse}${id}/`);
+                        console.log('house = ',res);
+                        setHouse(prev => res.data);
+                        const house = res.data;
+                        // res = await axiosInstance.get(`${axiosLinks.retriveUser}/${res.data.seller}/`);
+                        // setSeller(res.data);
+                        res = await axiosInstance.get(`${axiosLinks.retriveUserById}${house.seller}`);
+                        console.log('seller = ',res)
+                        setSeller(res.data);
+                        
+                        res = await axiosInstance.get(`${axiosLinks.retriveKyc}`);
+                        console.log('kyc = ',res)
+                        setKycStatus(res.data.status);
+                    }else{
+                        let res = await axiosInstance.get(`${axiosLinks.getHouse}${id}`);
+                        console.log('house = ',res);
+                        setHouse(prev => res.data);
+                        const house = res.data;
+                        // res = await axiosInstance.get(`${axiosLinks.retriveUser}/${res.data.seller}/`);
+                        // setSeller(res.data);
+                        res = await axiosInstance.get(`${axiosLinks.retriveUserById}${house.seller}`);
+                        console.log('seller = ',res)
+                        setSeller(res.data);
+                        
+                        res = await axiosInstance.get(`${axiosLinks.retriveKyc}`);
+                        console.log('kyc = ',res)
+                        setKycStatus(res.data.status);
+                    }
                     
-                    res = await axiosInstance.get(`${axiosLinks.retriveKyc}`);
-                    console.log('kyc = ',res)
-                    setKycStatus(res.data.status);
                     
                 }catch(err){
                     console.log(err);

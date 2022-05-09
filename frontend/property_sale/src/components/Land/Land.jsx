@@ -39,12 +39,23 @@ export default function Land() {
     (
         async function(){
             try{
-                let res = await axiosInstance.get(`${axiosLinks.getLand}${id}`);
-                console.log(res);
-                setLand(prev => res.data);
-                // res = await axiosInstance.get(`${axiosLinks.retriveUser}/${res.data.seller}/`);
-                // setSeller(res.data);
-                res = await axiosInstance.get(``)
+                if(window.location.pathname == `/my-properties/land/${id}`){
+                    let res = await axiosInstance.get(`${axiosLinks.retUserLand}${id}`);
+                    console.log(res);
+                    setLand(prev => res.data);
+                    // res = await axiosInstance.get(`${axiosLinks.retriveUser}/${res.data.seller}/`);
+                    // setSeller(res.data);
+                    res = await axiosInstance.get(``)
+
+                }else{
+                    let res = await axiosInstance.get(`${axiosLinks.getLand}${id}`);
+                    console.log(res);
+                    setLand(prev => res.data);
+                    // res = await axiosInstance.get(`${axiosLinks.retriveUser}/${res.data.seller}/`);
+                    // setSeller(res.data);
+                    res = await axiosInstance.get(``)
+                }
+                
             }catch(err){
                 console.log(err);
             }      

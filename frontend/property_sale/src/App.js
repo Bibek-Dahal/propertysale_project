@@ -45,6 +45,16 @@ function App() {
                 <Home />
               </PrivateRoute>
             } />
+            <Route path = "/my-properties/house/:id" element = {
+                <PrivateRoute>
+                  <House />
+                </PrivateRoute>
+            }/>
+            <Route path = "/my-properties/land/:id" element = {
+                <PrivateRoute>
+                  <Land />
+                </PrivateRoute>
+            }/>
             <Route path = "/login" element = {
               <ProtectedRoute>
                 <Login />
@@ -68,9 +78,7 @@ function App() {
                 <Route path = "profile" element = {
                     <Profile />
                 } />
-                <Route path = "my-properties" element = {
-                    <MyProperties />
-                } />
+                <Route path = "my-properties" element = {<MyProperties />}/>
                 <Route path = "post-properties/" element = {
                     <PostProperties />
                 }/>
