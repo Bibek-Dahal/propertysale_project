@@ -55,7 +55,7 @@ export default function Listing({type,properties,isLoading}) {
                 <div className="items" ref = {container}>
                     {
                         properties.map(property => {
-                            if(property.listing_type === type){
+                            if(property.listing_type.toLowerCase() === type.toLowerCase()){
                                 return <PropertyCard key = {property.id} property={property}/>
                             }
                         })
