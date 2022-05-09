@@ -25,12 +25,13 @@ import {
   Search,
   ListingPage
 } from './components/index'
-
+import PgNotFound from './components/page_not_found/PgNotFound';
 import PrivateRoute from './components/utils/PrivateRoute';
 import Logout from './components/Auth/Logout';
 import ProtectedRoute from './components/utils/ProtectedRoute';
 import PublicRoute from './components/utils/PublicRoute';
 import ScrollToTop from './components/utils/ScrollToTop';
+
 
 function App() {
   const {PopupVisible} = usePopup();
@@ -45,6 +46,7 @@ function App() {
                 <Home />
               </PrivateRoute>
             } />
+            <Route path="*" element={<PgNotFound />} />
             <Route path = "/my-properties/house/:id" element = {
                 <PrivateRoute>
                   <House />

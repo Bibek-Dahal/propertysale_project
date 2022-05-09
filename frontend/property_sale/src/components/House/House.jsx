@@ -13,6 +13,7 @@ import { text } from '@fortawesome/fontawesome-svg-core';
 import Map from './Map';
 import HtmlReactParser from 'html-react-parser';
 import useAxios from '../../Hooks/useAxios';
+import PgNotFound from '../page_not_found/PgNotFound';
 
 export default function House() {
     const axiosInstance = useAxios();
@@ -23,6 +24,7 @@ export default function House() {
     const [seller,setSeller] = useState({});
     const [views,setViews] = useState(0);
     const [kycStatus,setKycStatus] = useState("");
+    const [notfound,setNotFound] = useState(false);
 
     const infoToggler = (e) => {
         setActive(e.target.dataset.info);
@@ -81,7 +83,9 @@ export default function House() {
                     
                     
                 }catch(err){
+                    console.log('catch called');
                     console.log(err);
+                    setNotFound(true);
                 }      
             }
         )()
@@ -105,7 +109,8 @@ export default function House() {
 
 
     return (
-        <div className="propertyDetail house">
+        <>{
+            notfound?<PgNotFound/>:<div className="propertyDetail house">
             <Nav />
             {/* <GoBack currentPage = {house.title} /> */}
             {/* <DetailHeader /> */}
@@ -370,5 +375,7 @@ export default function House() {
                 </div>
             </div>
         </div>
+        }
+    </>
   )
 }

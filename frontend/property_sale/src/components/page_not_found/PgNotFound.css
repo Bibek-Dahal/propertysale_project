@@ -1,0 +1,6 @@
+.pgnotfound{
+    background-image: url(../../images/page_not_found.png);
+    background-position: center;
+    height: 550px;
+    width: 100%;
+}

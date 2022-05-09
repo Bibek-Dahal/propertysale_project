@@ -9,6 +9,7 @@ import Map from '../House/Map';
 import { useParams } from 'react-router-dom';
 import HtmlReactParser from 'html-react-parser';
 import useAxios from '../../Hooks/useAxios';
+import PgNotFound from '../page_not_found/PgNotFound';
 
 export default function Land() {
     const axiosInstance = useAxios();
@@ -17,6 +18,7 @@ export default function Land() {
   const [land,setLand] = useState([])
   const [views,setViews] = useState(0)
   const [active,setActive] = useState("overview");
+  const [notfound,setNotFound] = useState(false);
   const infoToggler = (e) => {
     setActive(e.target.dataset.info);
 }
@@ -43,21 +45,19 @@ export default function Land() {
                     let res = await axiosInstance.get(`${axiosLinks.retUserLand}${id}`);
                     console.log(res);
                     setLand(prev => res.data);
-                    // res = await axiosInstance.get(`${axiosLinks.retriveUser}/${res.data.seller}/`);
-                    // setSeller(res.data);
-                    res = await axiosInstance.get(``)
-
+                    
                 }else{
                     let res = await axiosInstance.get(`${axiosLinks.getLand}${id}`);
                     console.log(res);
                     setLand(prev => res.data);
                     // res = await axiosInstance.get(`${axiosLinks.retriveUser}/${res.data.seller}/`);
                     // setSeller(res.data);
-                    res = await axiosInstance.get(``)
+                    // res = await axiosInstance.get(``)
                 }
                 
             }catch(err){
                 console.log(err);
+                setNotFound(true);
             }      
         }
     )()
@@ -81,7 +81,8 @@ function toHtml(string){
 
 
 return (
-    <div className="propertyDetail land">
+    <>
+        {notfound?<PgNotFound/>:<div className="propertyDetail land">
         <Nav />
         {/* <GoBack currentPage = {house.title} /> */}
         {/* <DetailHeader /> */}
@@ -296,7 +297,8 @@ return (
                     }
             </div>
         </div>
-    </div>
+    </div>}
+    </>
 )
 }
 
